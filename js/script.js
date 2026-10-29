@@ -388,28 +388,44 @@
   section.classList.add('is-enhanced');
   outro.inert = true;
 
-  function renderSpiral(amount, retreat) {
+  // ESCALERA CARACOL: los escalones son fotografías dispuestas alrededor
+  // de un eje vertical. Cada fotografía ocupa una altura diferente.
+  // El scroll hace que la cámara ascienda por la escalera, en vez de
+  // girar todas las fotos amontonadas a la misma altura.
+  function renderSpiral(travel, retreat) {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const mobile = width < 768;
-    const radiusX = mobile ? Math.min(width * 0.24, 160) : Math.min(width * 0.28, 410);
-    const radiusY = Math.min(height * (mobile ? 0.15 : 0.18), mobile ? 130 : 175);
-    const depth = mobile ? 150 : 270;
+    const radiusX = mobile ? Math.min(width * 0.28, 118) : Math.min(width * 0.19, 300);
+    const radiusZ = mobile ? 115 : 235;
+    const stepRise = mobile
+      ? Math.min(76, Math.max(54, height * 0.086))
+      : Math.min(110, Math.max(68, height * 0.105));
+    const currentStep = travel * (cards.length - 1);
+    const radiansPerStep = Math.PI / 4; // 45°: una vuelta cada ocho fotos.
 
     cards.forEach((card, index) => {
-      const angle = index * 0.82 - amount * Math.PI * 3.35;
+      const relativeStep = index - currentStep;
+      const angle = relativeStep * radiansPerStep;
+      // Coordenadas cilíndricas: radio + ángulo + altura incremental.
       const x = Math.sin(angle) * radiusX;
-      const y = Math.cos(angle) * radiusY + (index - (cards.length - 1) / 2) * (mobile ? 12 : 18);
-      const z = Math.cos(angle) * depth - (index % 3) * 65 - retreat * 1000;
-      const tiltY = -Math.sin(angle) * 16;
-      const tiltZ = Math.cos(angle) * 8;
-      const scale = 1 - retreat * 0.55;
+      const y = -relativeStep * stepRise;
+      const z = Math.cos(angle) * radiusZ - retreat * 950;
+      const facing = -Math.sin(angle) * 13;
+      const scale = 1 - retreat * 0.58;
+
       card.style.transform =
         'translate3d(calc(-50% + ' + x.toFixed(2) + 'px), calc(-50% + ' +
         y.toFixed(2) + 'px), ' + z.toFixed(2) + 'px) ' +
-        'rotateY(' + tiltY.toFixed(2) + 'deg) rotateZ(' +
-        tiltZ.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+        'rotateY(' + facing.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+
+      // Los escalones más próximos tapan naturalmente los del fondo.
       card.style.zIndex = String(Math.round(z + 1500));
+
+      // Aparecen nuevos escalones a medida que se asciende y desaparecen
+      // los que quedan demasiado lejos del punto de vista.
+      const proximity = clamp(5.25 - Math.abs(relativeStep));
+      card.style.opacity = String(proximity);
     });
   }
 

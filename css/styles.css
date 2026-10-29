@@ -551,13 +551,13 @@ a {
 }
 .caracol.is-enhanced .caracol__scene {
   position: relative; width: 100%; height: 100%;
-  display: block; perspective: 1100px; perspective-origin: 50% 50%;
+  display: block; perspective: 1250px; perspective-origin: 50% 50%;
   transform-style: preserve-3d;
 }
 .caracol.is-enhanced .caracol__card {
   position: absolute; left: 50%; top: 50%;
-  width: clamp(150px,18vw,270px); height: auto;
-  transform-origin: center center; will-change: transform;
+  width: clamp(138px,15vw,235px); height: auto;
+  transform-origin: center center; will-change: transform, opacity;
 }
 .caracol.is-enhanced .caracol__outro {
   z-index: 3; display: flex; flex-direction: column;
@@ -607,13 +607,13 @@ a {
   }
   .caracol__scene { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .caracol.is-enhanced .caracol__card {
-    width: clamp(126px,39vw,184px);
+    width: clamp(116px,34vw,158px);
   }
   .caracol__question { font-size: clamp(1.8rem,7vw,2.8rem); }
 }
 @media (max-height:480px) and (orientation:landscape) {
   .caracol.is-enhanced .caracol__card {
-    width: clamp(105px,15vw,190px);
+    width: clamp(100px,13vw,170px);
   }
   .caracol__heading { font-size: clamp(1.5rem,4.5vw,3rem); }
 }
