@@ -121,8 +121,8 @@ a {
 .menu-toggle[aria-expanded="true"] span span:last-child { transform: rotate(-45deg); }
 
 /* Hero «EL MOMENTO» -----------------------------------------------------
-   Video: 75 % de la altura visible. La franja azul inferior reserva el
-   25 % restante y luego recibirá la entrada de «TU MOMENTO».
+   Video: 75 % del alto visible. La introducción azul de TU MOMENTO
+   aporta el 25 % restante, sin duplicar espacios.
 ------------------------------------------------------------------------ */
 .hero {
   position: relative;
@@ -232,12 +232,6 @@ a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.hero__transition {
-  height: 25vh;
-  height: 25svh;
-  background: var(--color-navy);
-}
-
 @media (max-width: 767px) {
   .hero__title {
     font-size: clamp(1.95rem, 8vw, 3rem);
@@ -322,6 +316,134 @@ a {
   line-height: 1.15;
   text-decoration: none;
   transition: opacity 180ms ease;
+}
+
+/* TU MOMENTO: aparición del video backstage por scroll -------------------
+   El título comienza en una franja azul de 25svh. Al descender,
+   se integra en el video de 75svh que se revela de arriba hacia abajo.
+   No se aplica zoom a este segundo video.
+------------------------------------------------------------------------ */
+.tu-momento {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-navy);
+}
+
+.tu-momento__intro {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25vh;
+  min-height: 25svh;
+  padding-inline: var(--page-gutter);
+  pointer-events: none;
+}
+
+.tu-momento__title {
+  margin: 0;
+  color: var(--color-white);
+  font-size: clamp(2.1rem, 5.4vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+  will-change: transform;
+}
+
+.tu-momento__media {
+  position: relative;
+  z-index: 1;
+  height: 75vh;
+  height: 75svh;
+  overflow: hidden;
+  background: var(--color-navy);
+}
+
+.tu-momento__reveal {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(0);
+}
+
+.tu-momento.is-animated .tu-momento__reveal {
+  clip-path: inset(0 0 100% 0);
+}
+
+.tu-momento__fallback,
+.tu-momento__video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tu-momento__fallback {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 68% 45%, rgba(140, 95, 53, 0.28), transparent 55%),
+    radial-gradient(ellipse at 26% 30%, rgba(30, 47, 107, 0.78), transparent 62%),
+    linear-gradient(160deg, #10153b 0%, var(--color-navy) 100%);
+  transition: opacity 450ms ease;
+}
+
+.tu-momento__placeholder {
+  padding: 0.9rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.35rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.tu-momento__video {
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  transition: opacity 450ms ease;
+}
+
+.tu-momento.has-video .tu-momento__video {
+  opacity: 1;
+}
+
+.tu-momento.has-video .tu-momento__fallback {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .tu-momento__title {
+    font-size: clamp(2rem, 8vw, 3rem);
+    letter-spacing: -0.025em;
+  }
+
+  .tu-momento__video {
+    object-position: 50% 40%;
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .tu-momento__title {
+    font-size: clamp(1.55rem, 4.5vw, 2.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tu-momento__title {
+    will-change: auto;
+  }
+
+  .tu-momento.is-animated .tu-momento__reveal {
+    clip-path: inset(0);
+  }
 }
 
 /* Footer: pendiente de su prompt. */

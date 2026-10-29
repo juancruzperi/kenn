@@ -235,3 +235,82 @@
     updateZoom();
   }
 })();
+
+
+// «TU MOMENTO»: reveal vertical reversible y desplazamiento del título.
+// Mantiene un placeholder visible hasta recibir los MP4 definitivos.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-tu-momento]');
+  if (!section) return;
+
+  const intro = section.querySelector('.tu-momento__intro');
+  const title = section.querySelector('[data-tu-momento-title]');
+  const reveal = section.querySelector('[data-tu-momento-reveal]');
+  const video = section.querySelector('.tu-momento__video');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hasVideo = video.hasAttribute('src') || Boolean(video.querySelector('source[src]'));
+
+  if (hasVideo) {
+    const showVideo = () => section.classList.add('has-video');
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) showVideo();
+    else video.addEventListener('loadeddata', showVideo, { once: true });
+
+    if (reducedMotion.matches) {
+      video.pause();
+    } else if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          video.play().catch(() => { /* Reproducción automática no permitida. */ });
+        } else {
+          video.pause();
+        }
+      }, { threshold: 0.05 });
+      observer.observe(section.querySelector('.tu-momento__media'));
+    }
+  }
+
+  // Movimiento reducido: título en su franja y video completo sin reveal.
+  if (reducedMotion.matches) return;
+
+  section.classList.add('is-animated');
+
+  if (window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    const timeline = window.gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        end: 'top top',
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // Se revela desde arriba hacia abajo. Al retroceder, se oculta de nuevo.
+    timeline.fromTo(reveal,
+      { clipPath: 'inset(0% 0% 100% 0%)' },
+      { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none' }, 0);
+    timeline.fromTo(title,
+      { y: 0 },
+      { y: () => intro.offsetHeight, ease: 'none' }, 0);
+  } else {
+    // Fallback si GSAP no está disponible (p. ej., navegador sin CDN).
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const top = section.getBoundingClientRect().top;
+      const range = Math.max(window.innerHeight * 0.75, 1);
+      const progress = Math.max(0, Math.min(1, (range - top) / range));
+      title.style.transform = `translate3d(0, ${(intro.offsetHeight * progress).toFixed(2)}px, 0)`;
+      reveal.style.clipPath = `inset(0 0 ${(100 * (1 - progress)).toFixed(2)}% 0)`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+  }
+})();

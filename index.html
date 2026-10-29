@@ -52,8 +52,29 @@
             <h1 class="hero__title" id="hero-title">EL MOMENTO</h1>
           </div>
         </div>
-        <!-- Esta transición azul marino enlazará con «TU MOMENTO». -->
-        <div class="hero__transition" aria-hidden="true"></div>
+      </section>
+
+      <!-- TU MOMENTO: la introducción ocupa el espacio azul debajo del Hero.
+           El título avanza sobre el video a medida que este se revela por scroll. -->
+      <section class="tu-momento" id="tu-momento" aria-labelledby="tu-momento-title" data-tu-momento>
+        <div class="tu-momento__intro">
+          <h2 class="tu-momento__title" id="tu-momento-title" data-tu-momento-title>TU MOMENTO</h2>
+        </div>
+
+        <div class="tu-momento__media">
+          <div class="tu-momento__reveal" data-tu-momento-reveal aria-hidden="true">
+            <div class="tu-momento__fallback">
+              <span class="tu-momento__placeholder">VIDEO · TU MOMENTO</span>
+            </div>
+            <video class="tu-momento__video" autoplay muted loop playsinline preload="none">
+              <!-- Cuando tengas el material backstage, guardalo en assets/videos/
+                   y descomentá las dos fuentes de video:
+              <source src="assets/videos/tu-momento-mobile.mp4" type="video/mp4" media="(max-width: 1023px) and (orientation: portrait)">
+              <source src="assets/videos/tu-momento-desktop.mp4" type="video/mp4">
+              -->
+            </video>
+          </div>
+        </div>
       </section>
     </main>
   </body>
