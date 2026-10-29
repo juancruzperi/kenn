@@ -664,6 +664,19 @@ a {
   padding-top: clamp(2.5rem, 4.8vw, 4.5rem);
 }
 
+/* Misma distancia física entre secciones: el resumen permanece invisible
+   durante el cierre PLAY y entra después, al continuar desplazándose.
+   Este velo no altera alturas ni márgenes y se desactiva al abrir PLAY. */
+.servicios.is-delayed-reveal .servicios__inner {
+  transition: opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 840ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.caracol.is-enhanced ~ .experiencia-kenn[hidden] + .servicios.is-delayed-reveal:not(.is-after-play) .servicios__inner {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  pointer-events: none;
+}
+
 .servicios__inner {
   width: min(100%, 1140px);
   margin-inline: auto;

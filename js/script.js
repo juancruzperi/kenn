@@ -347,6 +347,7 @@
   const question = section.querySelector('.caracol__question');
   const play = section.querySelector('[data-caracol-play]');
   const destination = document.querySelector('[data-caracol-destino]');
+  const services = document.querySelector('[data-servicios]');
   const wipe = document.querySelector('[data-caracol-wipe]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, min = 0, max = 1) => Math.max(min, Math.min(max, v));
@@ -362,6 +363,7 @@
     if (!activated) {
       destination.hidden = false;
       activated = true;
+      if (services) services.classList.remove('is-delayed-reveal', 'is-after-play');
       play.setAttribute('aria-expanded', 'true');
       // Al cambiar la altura de la página, GSAP debe recalcular el pin.
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
@@ -402,6 +404,7 @@
   if (reduceMotion || !window.gsap || !window.ScrollTrigger) return;
   window.gsap.registerPlugin(window.ScrollTrigger);
   section.classList.add('is-enhanced');
+  if (services) services.classList.add('is-delayed-reveal');
   outro.inert = true;
 
   // ESCALERA CARACOL: los escalones son fotografías dispuestas alrededor
@@ -499,7 +502,7 @@
   const smoothProgress = { value: 0 };
   const inertiaSeconds = window.innerWidth < 768 ? 0.8 : 1.1;
 
-  window.gsap.to(smoothProgress, {
+  const carouselTween = window.gsap.to(smoothProgress, {
     value: 1,
     ease: 'none',
     onUpdate: () => render(smoothProgress.value),
@@ -517,6 +520,22 @@
   });
   render(smoothProgress.value);
   window.addEventListener('resize', () => render(smoothProgress.value), { passive: true });
+
+  if (services) {
+    // Esperar hasta que PLAY haya terminado Y el usuario avance un poco
+    // más (aprox. 10 % de pantalla). La geometría entre bloques no cambia.
+    const updateServicesEntrance = () => {
+      if (activated) return;
+      const trigger = carouselTween.scrollTrigger;
+      if (!trigger) return;
+      const visibleFrom = trigger.end + Math.max(56, window.innerHeight * 0.10);
+      services.classList.toggle('is-after-play', window.scrollY >= visibleFrom);
+    };
+    window.addEventListener('scroll', updateServicesEntrance, { passive: true });
+    window.addEventListener('resize', updateServicesEntrance);
+    window.ScrollTrigger.addEventListener('refresh', updateServicesEntrance);
+    updateServicesEntrance();
+  }
 })();
 
 
