@@ -77,11 +77,12 @@ a {
 }
 
 .site-header__logo {
-  color: var(--color-white);
-  font-size: clamp(1.25rem, 2vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  display: block;
+  flex-shrink: 0;
+  width: clamp(88px, 9vw, 128px);
+  height: auto;
+  max-height: calc(var(--header-height) - 1rem);
+  object-fit: contain;
 }
 
 .menu-toggle {
