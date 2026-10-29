@@ -168,3 +168,70 @@
 
   initHeader(document.querySelector('[data-header]'));
 })();
+
+
+// Hero «EL MOMENTO»: zoom reversible con GSAP/ScrollTrigger.
+// Sin videos definitivos, conserva un fondo de reserva sin pedir archivos inexistentes.
+(() => {
+  'use strict';
+
+  const hero = document.querySelector('[data-hero]');
+  if (!hero) return;
+
+  const visual = hero.querySelector('[data-hero-visual]');
+  const video = hero.querySelector('.hero__video');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Cuando se incorporen los MP4, el primer fotograma reemplazará al fondo de reserva.
+  const hasSource = video.hasAttribute('src') || Boolean(video.querySelector('source[src]'));
+  if (hasSource) {
+    const showVideo = () => hero.classList.add('has-video');
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) showVideo();
+    else video.addEventListener('loadeddata', showVideo, { once: true });
+
+    if (reducedMotion.matches) video.pause();
+    else if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          video.play().catch(() => { /* Autoplay puede ser restringido por el navegador. */ });
+        } else {
+          video.pause();
+        }
+      }, { threshold: 0.05 });
+      observer.observe(hero.querySelector('.hero__media'));
+    }
+  }
+
+  // Con movimiento reducido, evitamos tanto la reproducción como el zoom.
+  if (reducedMotion.matches) return;
+
+  if (window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    window.gsap.fromTo(visual, { scale: 1 }, {
+      scale: 1.08,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+      },
+    });
+  } else {
+    // Respaldo ligero para vistas sin acceso al CDN de GSAP.
+    let frame = 0;
+    const updateZoom = () => {
+      frame = 0;
+      const progress = Math.max(0, Math.min(1,
+        -hero.getBoundingClientRect().top / Math.max(hero.offsetHeight, 1)));
+      visual.style.transform = `scale(${(1 + progress * 0.08).toFixed(4)})`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(updateZoom);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    updateZoom();
+  }
+})();

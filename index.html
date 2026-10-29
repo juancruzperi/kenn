@@ -6,6 +6,9 @@
     <meta name="theme-color" content="#04082f">
     <title>Kenn</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- GSAP y ScrollTrigger: zoom del video sincronizado con el scroll. -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
     <script src="js/script.js" defer></script>
   </head>
   <body>
@@ -27,7 +30,31 @@
       </ul>
     </nav>
 
-    <!-- El hero y los destinos #servicios y #contacto se agregarán en sus etapas. -->
-    <main id="contenido"></main>
+    <main id="contenido">
+      <!-- HERO / EL MOMENTO: video panorámico y vertical aún pendientes. -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title" data-hero>
+        <div class="hero__media">
+          <div class="hero__visual" data-hero-visual aria-hidden="true">
+            <div class="hero__fallback">
+              <span class="hero__fallback-label">VIDEO · EL MOMENTO</span>
+            </div>
+            <video class="hero__video" autoplay muted loop playsinline preload="none" aria-hidden="true">
+              <!-- Cuando tengas los MP4, movelos a assets/videos/ y descomentá:
+              <source src="assets/videos/el-momento-mobile.mp4" type="video/mp4" media="(max-width: 1023px) and (orientation: portrait)">
+              <source src="assets/videos/el-momento-desktop.mp4" type="video/mp4">
+              -->
+            </video>
+          </div>
+
+          <div class="hero__shade" aria-hidden="true"></div>
+
+          <div class="hero__title-wrap">
+            <h1 class="hero__title" id="hero-title">EL MOMENTO</h1>
+          </div>
+        </div>
+        <!-- Esta transición azul marino enlazará con «TU MOMENTO». -->
+        <div class="hero__transition" aria-hidden="true"></div>
+      </section>
+    </main>
   </body>
 </html>
