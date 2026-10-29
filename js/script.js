@@ -344,26 +344,38 @@
   const gallery = section.querySelector('[data-caracol-gallery]');
   const cards = [...section.querySelectorAll('[data-caracol-card]')];
   const outro = section.querySelector('[data-caracol-outro]');
+  const question = section.querySelector('.caracol__question');
   const play = section.querySelector('[data-caracol-play]');
   const destination = document.querySelector('[data-caracol-destino]');
   const wipe = document.querySelector('[data-caracol-wipe]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, min = 0, max = 1) => Math.max(min, Math.min(max, v));
+  const ease = (value) => {
+    const t = clamp(value);
+    return t * t * (3 - 2 * t);
+  };
   let activated = false;
   let transitionPending = false;
 
-  function goToSecret() {
+  function goToSecret(instant = false) {
     if (!destination) return;
     if (!activated) {
       destination.hidden = false;
       activated = true;
       play.setAttribute('aria-expanded', 'true');
+      // Al cambiar la altura de la página, GSAP debe recalcular el pin.
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     }
     destination.scrollIntoView({
-      behavior: reduceMotion ? 'instant' : 'smooth',
+      // El salto se hace detrás del velo azul, sin mostrar secciones intermedias.
+      behavior: (instant || reduceMotion) ? 'instant' : 'smooth',
       block: 'start',
     });
+    const heading = destination.querySelector('h2');
+    if (heading) {
+      heading.tabIndex = -1;
+      heading.focus({ preventScroll: true });
+    }
   }
 
   play.addEventListener('click', () => {
@@ -375,11 +387,15 @@
     transitionPending = true;
     wipe.classList.add('is-active');
     window.setTimeout(() => {
-      goToSecret();
-      window.setTimeout(() => {
-        wipe.classList.remove('is-active');
-        transitionPending = false;
-      }, 420);
+      goToSecret(true);
+      // Dos cuadros para que el navegador pinte la nueva sección
+      // antes de retirar el velo: no se ven las secciones del medio.
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          wipe.classList.remove('is-active');
+          transitionPending = false;
+        });
+      });
     }, 360);
   });
 
@@ -392,7 +408,7 @@
   // de un eje vertical. Cada fotografía ocupa una altura diferente.
   // El scroll desciende por la escalera: las próximas fotos quedan
   // cada vez más abajo y las ya recorridas pasan por encima.
-  function renderSpiral(travel, retreat) {
+  function renderSpiral(travel, retreat, entrance) {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const mobile = width < 768;
@@ -425,37 +441,54 @@
       // Conservamos un tramo corto de escalones visibles para que no se
       // amontonen en profundidad; el resto se desvanece gradualmente.
       const proximity = clamp(4.5 - Math.abs(relativeStep));
-      card.style.opacity = String(proximity);
+      // Cada escalón se materializa ligeramente después del anterior.
+      const reveal = ease((entrance - index * 0.055) / 0.7);
+      card.style.opacity = String(proximity * reveal);
     });
   }
 
   function render(progress) {
-    // 1. Introducción tipográfica: cada palabra aparece gradualmente.
-    const wordPhase = clamp((progress - 0.015) / 0.235);
+    // 1. Las palabras entran secuencialmente, con una breve pausa
+    // para leer la frase completa antes de pasar a las imágenes.
+    const wordPhase = clamp((progress - 0.015) / 0.205);
     words.forEach((word, index) => {
       const offset = (index / Math.max(words.length - 1, 1)) * 0.8;
-      const visible = clamp((wordPhase - offset) / 0.20);
+      const visible = ease((wordPhase - offset) / 0.20);
       word.style.opacity = String(0.12 + visible * 0.88);
       word.style.transform = 'translateY(' + ((1 - visible) * 22).toFixed(2) + 'px)';
     });
-    // 2. Desaparece la frase mientras las fotos forman la espiral.
-    const introOpacity = 1 - clamp((progress - 0.255) / 0.105);
+
+    // 2. La frase se aleja apenas, mientras los primeros escalones
+    // aparecen de forma escalonada. Sin alterar la hélice aprobada.
+    const textExit = ease((progress - 0.27) / 0.095);
+    const introOpacity = 1 - textExit;
     intro.style.opacity = String(introOpacity);
     intro.style.visibility = introOpacity > 0.005 ? 'visible' : 'hidden';
+    intro.style.transform = 'translateY(' + (-18 * textExit).toFixed(2) + 'px) ' +
+      'scale(' + (1 - 0.035 * textExit).toFixed(4) + ')';
 
-    const entry = clamp((progress - 0.315) / 0.095);
-    const retreat = clamp((progress - 0.775) / 0.125);
-    const galleryOpacity = entry * (1 - retreat);
+    const entry = ease((progress - 0.315) / 0.12);
+    const retreat = ease((progress - 0.775) / 0.125);
+    const galleryOpacity = entry * (1 - ease((progress - 0.79) / 0.11));
     gallery.style.opacity = String(galleryOpacity);
     gallery.style.visibility = galleryOpacity > 0.005 ? 'visible' : 'hidden';
-    renderSpiral(clamp((progress - 0.35) / 0.43), retreat);
+    gallery.style.transform = 'scale(' + (1.04 - 0.04 * entry - 0.06 * retreat).toFixed(4) + ')';
+    renderSpiral(clamp((progress - 0.35) / 0.43), retreat, entry);
 
-    // 3. La espiral se aleja y aparece el llamado a la acción.
-    const outroOpacity = clamp((progress - 0.855) / 0.11);
-    outro.style.opacity = String(outroOpacity);
-    outro.style.transform = 'translateY(' + ((1 - outroOpacity) * 25).toFixed(2) + 'px)';
-    outro.style.visibility = outroOpacity > 0.005 ? 'visible' : 'hidden';
-    const clickable = progress > 0.93;
+    // 3. Se aleja la escalera; primero aparece la pregunta y después PLAY.
+    const outroPhase = ease((progress - 0.855) / 0.085);
+    const questionPhase = ease((progress - 0.855) / 0.075);
+    const playPhase = ease((progress - 0.915) / 0.065);
+    outro.style.opacity = String(outroPhase);
+    outro.style.visibility = outroPhase > 0.005 ? 'visible' : 'hidden';
+    outro.style.transform = 'translateY(' + ((1 - outroPhase) * 18).toFixed(2) + 'px)';
+    question.style.opacity = String(questionPhase);
+    question.style.transform = 'translateY(' + ((1 - questionPhase) * 18).toFixed(2) + 'px)';
+    play.style.opacity = String(playPhase);
+    play.style.setProperty('--play-enter-y', ((1 - playPhase) * 28).toFixed(2) + 'px');
+    play.style.setProperty('--play-enter-scale', (0.94 + 0.06 * playPhase).toFixed(4));
+
+    const clickable = progress >= 0.97;
     outro.classList.toggle('is-clickable', clickable);
     outro.inert = !clickable;
   }
