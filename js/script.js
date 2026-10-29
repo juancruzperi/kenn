@@ -621,7 +621,7 @@
     const height = initial.height + (stage.clientHeight - initial.height) * expand;
     photo.style.width = width.toFixed(2) + 'px';
     photo.style.height = height.toFixed(2) + 'px';
-    photo.style.top = (53 - 3 * expand).toFixed(2) + '%';
+    photo.style.top = (42 + 8 * expand).toFixed(2) + '%';
     photo.style.borderRadius = (7 * (1 - expand)).toFixed(2) + 'px';
     photo.style.borderColor = 'rgba(255, 255, 255, ' + (0.20 * (1 - expand)).toFixed(3) + ')';
   };
