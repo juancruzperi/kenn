@@ -593,6 +593,7 @@
 
   const state = { value: 0 };
   let initial = { width: photo.offsetWidth, height: photo.offsetHeight };
+  let initialTopPercent = 57;
 
   // Medir el tamaño provisional real en CSS; es distinto en desktop,
   // mobile y horizontal. Se recalcula al cambiar el viewport.
@@ -602,6 +603,9 @@
     photo.style.width = '';
     photo.style.height = '';
     initial = { width: photo.offsetWidth, height: photo.offsetHeight };
+    // Lee el inicio responsive desde CSS para no descoordinar CSS y GSAP.
+    const cssTop = parseFloat(getComputedStyle(photo).getPropertyValue('--momento-photo-start'));
+    if (Number.isFinite(cssTop)) initialTopPercent = cssTop;
     photo.style.width = currentWidth;
     photo.style.height = currentHeight;
   };
@@ -621,7 +625,8 @@
     const height = initial.height + (stage.clientHeight - initial.height) * expand;
     photo.style.width = width.toFixed(2) + 'px';
     photo.style.height = height.toFixed(2) + 'px';
-    photo.style.top = (42 + 8 * expand).toFixed(2) + '%';
+    // Conserva el margen con el título al iniciar y acaba centrada en fullscreen.
+    photo.style.top = (initialTopPercent + (50 - initialTopPercent) * expand).toFixed(2) + '%';
     photo.style.borderRadius = (7 * (1 - expand)).toFixed(2) + 'px';
     photo.style.borderColor = 'rgba(255, 255, 255, ' + (0.20 * (1 - expand)).toFixed(3) + ')';
   };

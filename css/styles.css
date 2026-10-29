@@ -914,7 +914,9 @@ a {
 .momento-expand__photo {
   position: absolute;
   z-index: 3;
-  top: 42%;
+  /* La foto queda por debajo del título, con aire en ambos tamaños. */
+  --momento-photo-start: 57%;
+  top: var(--momento-photo-start);
   left: 50%;
   width: min(58vw, 740px);
   height: min(44svh, 540px);
@@ -991,7 +993,7 @@ a {
   }
 
   .momento-expand__photo {
-    top: 42%;
+    --momento-photo-start: 56%;
     width: min(72vw, 360px);
     height: min(44svh, 480px);
     border-radius: 5px;
@@ -1018,7 +1020,7 @@ a {
   .momento-expand__photo {
     width: min(44vw, 530px);
     height: 45svh;
-    top: 42%;
+    --momento-photo-start: 61%;
   }
 }
 
