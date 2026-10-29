@@ -871,6 +871,164 @@ a {
   }
 }
 
+
+/* SEGUNDO «EL MOMENTO» ---------------------------------------------------
+   Una sola fotografía empieza enmarcada y se expande hasta fullscreen.
+   La escena queda fija mientras progresa el scroll; el título se revela
+   desde abajo y se desvanece cuando comienza la expansión.
+   Sin GSAP: se conserva una composición estática y accesible.
+------------------------------------------------------------------------ */
+.momento-expand {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.momento-expand__stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 440px;
+  overflow: hidden;
+  background: var(--color-navy);
+}
+
+.momento-expand__title {
+  position: absolute;
+  z-index: 2;
+  top: clamp(5.5rem, 14svh, 10rem);
+  left: 50%;
+  width: calc(100% - 2 * var(--page-gutter));
+  margin: 0;
+  transform: translate3d(-50%, 0, 0);
+  font-size: clamp(2.5rem, 7.8vw, 8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.momento-expand__photo {
+  position: absolute;
+  z-index: 3;
+  top: 58%;
+  left: 50%;
+  width: min(58vw, 740px);
+  height: min(44svh, 540px);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: #101839;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.35);
+}
+
+.momento-expand__placeholder,
+.momento-expand__picture,
+.momento-expand__picture img {
+  width: 100%;
+  height: 100%;
+}
+
+.momento-expand__picture {
+  display: block;
+}
+
+.momento-expand__picture img {
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.momento-expand__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background:
+    radial-gradient(ellipse at 48% 32%, rgba(89, 106, 164, 0.45), transparent 67%),
+    linear-gradient(155deg, #192346 0%, #060b31 100%);
+  text-align: center;
+}
+
+.momento-expand__placeholder-tag {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  font-size: clamp(0.66rem, 1vw, 0.85rem);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.10em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.momento-expand__placeholder-info {
+  font-size: clamp(0.52rem, 0.75vw, 0.67rem);
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.44);
+}
+
+.momento-expand.is-enhanced .momento-expand__title {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.momento-expand.is-enhanced .momento-expand__photo {
+  will-change: width, height, top, border-radius;
+}
+
+@media (max-width: 767px) {
+  .momento-expand__title {
+    top: clamp(6rem, 15svh, 8.5rem);
+    font-size: clamp(2rem, 8.6vw, 3.7rem);
+    letter-spacing: -0.04em;
+  }
+
+  .momento-expand__photo {
+    top: 58%;
+    width: min(72vw, 360px);
+    height: min(44svh, 480px);
+    border-radius: 5px;
+  }
+
+  .momento-expand__placeholder-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+  }
+
+  .momento-expand__placeholder-info {
+    font-size: 0.56rem;
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .momento-expand__stage { min-height: 0; }
+
+  .momento-expand__title {
+    top: 13%;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+  }
+
+  .momento-expand__photo {
+    width: min(44vw, 530px);
+    height: 45svh;
+    top: 64%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .momento-expand.is-enhanced .momento-expand__photo,
+  .momento-expand.is-enhanced .momento-expand__title {
+    will-change: auto;
+  }
+}
+
 /* Footer: pendiente de su prompt. */
 
 /* Responsive */

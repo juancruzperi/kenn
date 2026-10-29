@@ -288,6 +288,28 @@
           </footer>
         </div>
       </section>
+
+      <!-- SEGUNDO «EL MOMENTO»: una sola fotografía crece hasta fullscreen
+           con el scroll. Esta tarjeta es provisional hasta tener las fotos. -->
+      <section class="momento-expand" id="momento-expandido" data-momento-expand aria-labelledby="momento-expand-title">
+        <div class="momento-expand__stage" data-momento-expand-stage>
+          <h2 class="momento-expand__title" id="momento-expand-title" data-momento-expand-title>EL MOMENTO</h2>
+
+          <div class="momento-expand__photo" data-momento-expand-photo
+               role="img" aria-label="Espacio reservado para la fotografía principal de Kenn">
+            <!-- Cuando estén las fotos, sustituir el div .momento-expand__placeholder por:
+            <picture class="momento-expand__picture">
+              <source media="(max-width: 767px) and (orientation: portrait)" srcset="assets/fotos/el-momento-mobile.webp">
+              <img src="assets/fotos/el-momento-desktop.webp" alt="Kenn animando un evento" decoding="async" loading="lazy">
+            </picture>
+            Y quitar role y aria-label del contenedor .momento-expand__photo. -->
+            <div class="momento-expand__placeholder" aria-hidden="true">
+              <span class="momento-expand__placeholder-tag">FOTOGRAFÍA · EL MOMENTO</span>
+              <span class="momento-expand__placeholder-info">EXPANSIÓN A PANTALLA COMPLETA</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <div class="experiencia-kenn__wipe" data-caracol-wipe aria-hidden="true"></div>
   </body>

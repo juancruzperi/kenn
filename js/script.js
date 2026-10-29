@@ -568,3 +568,92 @@
   section.classList.add('has-scroll-reveal');
   elements.forEach((el) => observer.observe(el));
 })();
+
+
+// Segundo EL MOMENTO: fotografía que crece hasta ocupar la pantalla.
+// La animación es reversible, suavizada y no depende de fotografías reales.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-momento-expand]');
+  if (!section) return;
+
+  const stage = section.querySelector('[data-momento-expand-stage]');
+  const title = section.querySelector('[data-momento-expand-title]');
+  const photo = section.querySelector('[data-momento-expand-photo]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion || !window.gsap || !window.ScrollTrigger) return;
+
+  window.gsap.registerPlugin(window.ScrollTrigger);
+
+  const smoothstep = (number) => {
+    const t = Math.max(0, Math.min(1, number));
+    return t * t * (3 - 2 * t);
+  };
+
+  const state = { value: 0 };
+  let initial = { width: photo.offsetWidth, height: photo.offsetHeight };
+
+  // Medir el tamaño provisional real en CSS; es distinto en desktop,
+  // mobile y horizontal. Se recalcula al cambiar el viewport.
+  const measureInitial = () => {
+    const currentWidth = photo.style.width;
+    const currentHeight = photo.style.height;
+    photo.style.width = '';
+    photo.style.height = '';
+    initial = { width: photo.offsetWidth, height: photo.offsetHeight };
+    photo.style.width = currentWidth;
+    photo.style.height = currentHeight;
+  };
+
+  const render = () => {
+    const progress = state.value;
+    const enter = smoothstep(progress / 0.16);
+    const exit = smoothstep((progress - 0.24) / 0.36);
+    const expand = smoothstep((progress - 0.15) / 0.69);
+
+    // Presentación y desaparición del título (Fade Up -> Fade Out).
+    title.style.opacity = String(enter * (1 - exit));
+    title.style.transform = 'translate3d(-50%, ' +
+      (30 * (1 - enter) - 45 * exit).toFixed(2) + 'px, 0)';
+
+    const width = initial.width + (stage.clientWidth - initial.width) * expand;
+    const height = initial.height + (stage.clientHeight - initial.height) * expand;
+    photo.style.width = width.toFixed(2) + 'px';
+    photo.style.height = height.toFixed(2) + 'px';
+    photo.style.top = (58 - 8 * expand).toFixed(2) + '%';
+    photo.style.borderRadius = (7 * (1 - expand)).toFixed(2) + 'px';
+    photo.style.borderColor = 'rgba(255, 255, 255, ' + (0.20 * (1 - expand)).toFixed(3) + ')';
+  };
+
+  section.classList.add('is-enhanced');
+  measureInitial();
+
+  // El 16 % final es una pausa con la fotografía ya en fullscreen.
+  const tween = window.gsap.to(state, {
+    value: 1,
+    ease: 'none',
+    onUpdate: render,
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 2.3),
+      pin: stage,
+      pinSpacing: true,
+      scrub: window.innerWidth < 768 ? 0.75 : 1.0,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onRefreshInit: measureInitial,
+      onRefresh: render,
+    },
+  });
+
+  // Cuando el dispositivo rota, aseguramos que la foto expandida mantenga
+  // la dimensión correcta, sin añadir una segunda animación.
+  window.addEventListener('resize', () => {
+    measureInitial();
+    render();
+  }, { passive: true });
+
+  render();
+})();
