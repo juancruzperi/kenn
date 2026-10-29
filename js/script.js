@@ -662,3 +662,47 @@
 
   render();
 })();
+
+
+// CTA TU HISTORIA: revelado suave y salto directo al futuro footer.
+// Es independiente del botón PLAY que abre las secciones secretas.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-historia-cta]');
+  if (!section) return;
+
+  const revealItems = [...section.querySelectorAll('[data-historia-reveal]')];
+  const link = section.querySelector('[data-historia-link]');
+  const target = document.getElementById('contacto');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sigue funcionando como un enlace a #contacto cuando JS está deshabilitado.
+  if (link && target) {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: reducedMotion ? 'instant' : 'smooth',
+        block: 'start',
+      });
+      // Mantener la URL navegable, sin disparar un segundo salto.
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#contacto');
+      }
+    });
+  }
+
+  if (reducedMotion || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      revealItems.forEach(item => item.classList.add('is-visible'));
+      observer.disconnect();
+      return;
+    }
+  }, { threshold: 0.20 });
+
+  section.classList.add('is-animated');
+  observer.observe(section);
+})();
