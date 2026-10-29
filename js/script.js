@@ -518,3 +518,34 @@
   render(smoothProgress.value);
   window.addEventListener('resize', () => render(smoothProgress.value), { passive: true });
 })();
+
+
+// Reveal de servicios: animación individual para cada bloque cuando entra
+// al viewport; una vez revelado permanece visible incluso al subir.
+// Sin IntersectionObserver o con movimiento reducido, no se oculta nada.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-servicios]');
+  if (!section) return;
+
+  const elements = [...section.querySelectorAll('[data-reveal]')];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reducedMotion || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    root: null,
+    threshold: 0.12,
+    rootMargin: '0px 0px -7% 0px',
+  });
+
+  section.classList.add('has-scroll-reveal');
+  elements.forEach((el) => observer.observe(el));
+})();

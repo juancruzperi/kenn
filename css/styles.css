@@ -642,6 +642,212 @@ a {
   .experiencia-kenn__wipe { transition: none; }
 }
 
+
+/* RESUMEN DE LOS SERVICIOS INCLUIDOS
+   Tipografía editorial, sin tarjetas; cada bloque entra desde abajo
+   cuando llega al viewport y queda visible después. */
+.servicios {
+  position: relative;
+  background: var(--color-navy);
+  color: var(--color-white);
+  padding: clamp(6rem, 12vw, 11rem) var(--page-gutter)
+           clamp(7rem, 14vw, 13rem);
+}
+
+.servicios__inner {
+  width: min(100%, 1140px);
+  margin-inline: auto;
+}
+
+.servicios__header {
+  max-width: 940px;
+  margin-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.servicios__eyebrow {
+  margin: 0 0 clamp(1rem, 3vw, 2rem);
+  font-size: clamp(0.74rem, 1.1vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.servicios__heading {
+  margin: 0;
+  font-size: clamp(2.4rem, 6.3vw, 6.7rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.servicios__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.servicios__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: start;
+  column-gap: clamp(1.5rem, 6vw, 7rem);
+  row-gap: 0.85rem;
+  padding: clamp(2.3rem, 4.6vw, 4.5rem) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.servicios__item:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.servicios__item-heading {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 2.3vw, 2.1rem);
+}
+
+.servicios__index {
+  flex: 0 0 auto;
+  font-size: clamp(0.76rem, 1vw, 0.9rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.07em;
+}
+
+.servicios__name {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.8vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.servicios__description {
+  max-width: 440px;
+  margin: 0;
+  font-size: clamp(1.06rem, 1.45vw, 1.35rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.servicios__closing {
+  width: min(100%, 990px);
+  margin: clamp(7rem, 15vw, 14rem) auto 0;
+  text-align: center;
+}
+
+.servicios__rule {
+  width: min(100%, 720px);
+  height: 1px;
+  margin: 0 auto clamp(3.75rem, 8vw, 7rem);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.servicios__closing-label {
+  margin: 0 0 clamp(1.25rem, 3vw, 2.2rem);
+  font-size: clamp(0.84rem, 1.3vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.21em;
+}
+
+.servicios__closing-title {
+  margin: 0 auto;
+  max-width: 920px;
+  font-size: clamp(2.9rem, 7vw, 7.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.servicios__closing-description {
+  max-width: 680px;
+  margin: clamp(1.8rem, 4vw, 3.25rem) auto 0;
+  font-size: clamp(1.1rem, 1.75vw, 1.55rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Progressive enhancement: sin JS todos los textos siguen visibles. */
+.servicios.has-scroll-reveal .fade-up-reveal {
+  opacity: 0;
+  transform: translate3d(0, 52px, 0);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 950ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.servicios.has-scroll-reveal .fade-up-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 767px) {
+  .servicios {
+    padding: clamp(5rem, 18vw, 7rem) var(--page-gutter)
+             clamp(6rem, 23vw, 9rem);
+  }
+
+  .servicios__heading {
+    font-size: clamp(2.45rem, 9.3vw, 4.3rem);
+    letter-spacing: -0.05em;
+  }
+
+  .servicios__heading br {
+    display: none;
+  }
+
+  .servicios__header {
+    margin-bottom: clamp(3.5rem, 15vw, 5.5rem);
+  }
+
+  .servicios__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.15rem;
+    padding-block: clamp(2.4rem, 10vw, 3.8rem);
+  }
+
+  .servicios__item-heading {
+    gap: 1rem;
+  }
+
+  .servicios__name {
+    font-size: clamp(1.65rem, 6.7vw, 2.35rem);
+  }
+
+  .servicios__description {
+    margin-left: clamp(2.1rem, 7vw, 2.5rem);
+    font-size: clamp(1.02rem, 4vw, 1.2rem);
+  }
+
+  .servicios__closing {
+    margin-top: clamp(6.5rem, 28vw, 10rem);
+  }
+
+  .servicios__closing-label {
+    font-size: clamp(0.75rem, 3.3vw, 0.95rem);
+    letter-spacing: 0.16em;
+  }
+
+  .servicios__closing-title {
+    font-size: clamp(2.6rem, 10.5vw, 4.5rem);
+  }
+
+  .servicios__closing-description {
+    font-size: clamp(1.05rem, 4.4vw, 1.3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .servicios.has-scroll-reveal .fade-up-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Footer: pendiente de su prompt. */
 
 /* Responsive */
