@@ -350,7 +350,13 @@ a {
   letter-spacing: -0.035em;
   text-align: center;
   text-wrap: balance;
-  will-change: transform;
+  will-change: transform, opacity;
+}
+
+/* Al abrir la página, TU MOMENTO permanece oculto.
+   Se vuelve visible solamente cuando el usuario empieza a desplazarse. */
+.tu-momento.is-animated .tu-momento__title {
+  opacity: 0;
 }
 
 .tu-momento__media {

@@ -271,10 +271,20 @@
     }
   }
 
-  // Movimiento reducido: título en su franja y video completo sin reveal.
-  if (reducedMotion.matches) return;
-
   section.classList.add('is-animated');
+
+  // Sin animación para quienes prefieren movimiento reducido:
+  // el título se muestra al desplazarse, sin efectos de transición.
+  if (reducedMotion.matches) {
+    const updateTitleVisibility = () => {
+      title.style.opacity =
+        section.getBoundingClientRect().top < window.innerHeight * 0.65 ? '1' : '0';
+    };
+    window.addEventListener('scroll', updateTitleVisibility, { passive: true });
+    window.addEventListener('resize', updateTitleVisibility);
+    updateTitleVisibility();
+    return;
+  }
 
   if (window.gsap && window.ScrollTrigger) {
     window.gsap.registerPlugin(window.ScrollTrigger);
@@ -291,10 +301,14 @@
     // Se revela desde arriba hacia abajo. Al retroceder, se oculta de nuevo.
     timeline.fromTo(reveal,
       { clipPath: 'inset(0% 0% 100% 0%)' },
-      { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none' }, 0);
+      { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'none' }, 0);
     timeline.fromTo(title,
       { y: 0 },
-      { y: () => intro.offsetHeight, ease: 'none' }, 0);
+      { y: () => intro.offsetHeight, duration: 1, ease: 'none' }, 0);
+    // No se ve al cargar; aparece suavemente después de iniciar el scroll.
+    timeline.fromTo(title,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, ease: 'none' }, 0.20);
   } else {
     // Fallback si GSAP no está disponible (p. ej., navegador sin CDN).
     let frame = 0;
@@ -304,6 +318,7 @@
       const range = Math.max(window.innerHeight * 0.75, 1);
       const progress = Math.max(0, Math.min(1, (range - top) / range));
       title.style.transform = `translate3d(0, ${(intro.offsetHeight * progress).toFixed(2)}px, 0)`;
+      title.style.opacity = String(Math.max(0, Math.min(1, (progress - 0.20) / 0.35)));
       reveal.style.clipPath = `inset(0 0 ${(100 * (1 - progress)).toFixed(2)}% 0)`;
     };
     const schedule = () => {
