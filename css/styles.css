@@ -654,6 +654,16 @@ a {
            clamp(7rem, 14vw, 13rem);
 }
 
+/* El carrusel termina con PLAY en un escenario de pantalla completa.
+   Acercamos la siguiente sección solo en el recorrido público, mientras
+   la experiencia secreta permanezca oculta. No cambia el pin ni la hélice.
+   Al activar PLAY, este ajuste desaparece automáticamente para evitar
+   superponer servicios con "Ahora empieza mi trabajo". */
+.caracol.is-enhanced ~ .experiencia-kenn[hidden] + .servicios {
+  margin-top: -24svh;
+  padding-top: clamp(2.5rem, 4.8vw, 4.5rem);
+}
+
 .servicios__inner {
   width: min(100%, 1140px);
   margin-inline: auto;
