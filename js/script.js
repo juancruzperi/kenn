@@ -329,3 +329,132 @@
     update();
   }
 })();
+
+
+// Carrusel caracol: la animación se controla por scroll, no por tiempo.
+// Sin GSAP o con movimiento reducido, se muestra la grilla estática.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-caracol]');
+  if (!section) return;
+  const stage = section.querySelector('[data-caracol-stage]');
+  const intro = section.querySelector('[data-caracol-intro]');
+  const words = [...section.querySelectorAll('[data-caracol-word]')];
+  const gallery = section.querySelector('[data-caracol-gallery]');
+  const cards = [...section.querySelectorAll('[data-caracol-card]')];
+  const outro = section.querySelector('[data-caracol-outro]');
+  const play = section.querySelector('[data-caracol-play]');
+  const destination = document.querySelector('[data-caracol-destino]');
+  const wipe = document.querySelector('[data-caracol-wipe]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, min = 0, max = 1) => Math.max(min, Math.min(max, v));
+  let activated = false;
+  let transitionPending = false;
+
+  function goToSecret() {
+    if (!destination) return;
+    if (!activated) {
+      destination.hidden = false;
+      activated = true;
+      play.setAttribute('aria-expanded', 'true');
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }
+    destination.scrollIntoView({
+      behavior: reduceMotion ? 'instant' : 'smooth',
+      block: 'start',
+    });
+  }
+
+  play.addEventListener('click', () => {
+    if (transitionPending) return;
+    if (reduceMotion || !wipe) {
+      goToSecret();
+      return;
+    }
+    transitionPending = true;
+    wipe.classList.add('is-active');
+    window.setTimeout(() => {
+      goToSecret();
+      window.setTimeout(() => {
+        wipe.classList.remove('is-active');
+        transitionPending = false;
+      }, 420);
+    }, 360);
+  });
+
+  if (reduceMotion || !window.gsap || !window.ScrollTrigger) return;
+  window.gsap.registerPlugin(window.ScrollTrigger);
+  section.classList.add('is-enhanced');
+  outro.inert = true;
+
+  function renderSpiral(amount, retreat) {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const mobile = width < 768;
+    const radiusX = mobile ? Math.min(width * 0.24, 160) : Math.min(width * 0.28, 410);
+    const radiusY = Math.min(height * (mobile ? 0.15 : 0.18), mobile ? 130 : 175);
+    const depth = mobile ? 150 : 270;
+
+    cards.forEach((card, index) => {
+      const angle = index * 0.82 - amount * Math.PI * 3.35;
+      const x = Math.sin(angle) * radiusX;
+      const y = Math.cos(angle) * radiusY + (index - (cards.length - 1) / 2) * (mobile ? 12 : 18);
+      const z = Math.cos(angle) * depth - (index % 3) * 65 - retreat * 1000;
+      const tiltY = -Math.sin(angle) * 16;
+      const tiltZ = Math.cos(angle) * 8;
+      const scale = 1 - retreat * 0.55;
+      card.style.transform =
+        'translate3d(calc(-50% + ' + x.toFixed(2) + 'px), calc(-50% + ' +
+        y.toFixed(2) + 'px), ' + z.toFixed(2) + 'px) ' +
+        'rotateY(' + tiltY.toFixed(2) + 'deg) rotateZ(' +
+        tiltZ.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      card.style.zIndex = String(Math.round(z + 1500));
+    });
+  }
+
+  function render(progress) {
+    // 1. Introducción tipográfica: cada palabra aparece gradualmente.
+    const wordPhase = clamp((progress - 0.015) / 0.235);
+    words.forEach((word, index) => {
+      const offset = (index / Math.max(words.length - 1, 1)) * 0.8;
+      const visible = clamp((wordPhase - offset) / 0.20);
+      word.style.opacity = String(0.12 + visible * 0.88);
+      word.style.transform = 'translateY(' + ((1 - visible) * 22).toFixed(2) + 'px)';
+    });
+    // 2. Desaparece la frase mientras las fotos forman la espiral.
+    const introOpacity = 1 - clamp((progress - 0.255) / 0.105);
+    intro.style.opacity = String(introOpacity);
+    intro.style.visibility = introOpacity > 0.005 ? 'visible' : 'hidden';
+
+    const entry = clamp((progress - 0.315) / 0.095);
+    const retreat = clamp((progress - 0.775) / 0.125);
+    const galleryOpacity = entry * (1 - retreat);
+    gallery.style.opacity = String(galleryOpacity);
+    gallery.style.visibility = galleryOpacity > 0.005 ? 'visible' : 'hidden';
+    renderSpiral(clamp((progress - 0.35) / 0.43), retreat);
+
+    // 3. La espiral se aleja y aparece el llamado a la acción.
+    const outroOpacity = clamp((progress - 0.855) / 0.11);
+    outro.style.opacity = String(outroOpacity);
+    outro.style.transform = 'translateY(' + ((1 - outroOpacity) * 25).toFixed(2) + 'px)';
+    outro.style.visibility = outroOpacity > 0.005 ? 'visible' : 'hidden';
+    const clickable = progress > 0.93;
+    outro.classList.toggle('is-clickable', clickable);
+    outro.inert = !clickable;
+  }
+
+  const controller = window.ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.2),
+    pin: stage,
+    pinSpacing: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => render(self.progress),
+    onRefresh: (self) => render(self.progress),
+  });
+  render(controller.progress);
+  window.addEventListener('resize', () => render(controller.progress), { passive: true });
+})();
