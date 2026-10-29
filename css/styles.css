@@ -556,7 +556,7 @@ a {
 }
 .caracol.is-enhanced .caracol__card {
   position: absolute; left: 50%; top: 50%;
-  width: clamp(138px,15vw,235px); height: auto;
+  width: clamp(130px,14vw,215px); height: auto;
   transform-origin: center center; will-change: transform, opacity;
 }
 .caracol.is-enhanced .caracol__outro {
@@ -607,7 +607,7 @@ a {
   }
   .caracol__scene { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .caracol.is-enhanced .caracol__card {
-    width: clamp(116px,34vw,158px);
+    width: clamp(110px,31vw,145px);
   }
   .caracol__question { font-size: clamp(1.8rem,7vw,2.8rem); }
 }

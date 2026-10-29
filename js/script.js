@@ -390,26 +390,26 @@
 
   // ESCALERA CARACOL: los escalones son fotografías dispuestas alrededor
   // de un eje vertical. Cada fotografía ocupa una altura diferente.
-  // El scroll hace que la cámara ascienda por la escalera, en vez de
-  // girar todas las fotos amontonadas a la misma altura.
+  // El scroll desciende por la escalera: las próximas fotos quedan
+  // cada vez más abajo y las ya recorridas pasan por encima.
   function renderSpiral(travel, retreat) {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const mobile = width < 768;
-    const radiusX = mobile ? Math.min(width * 0.28, 118) : Math.min(width * 0.19, 300);
-    const radiusZ = mobile ? 115 : 235;
+    const radiusX = mobile ? Math.min(width * 0.35, 155) : Math.min(width * 0.255, 385);
+    const radiusZ = mobile ? 155 : 300;
     const stepRise = mobile
-      ? Math.min(76, Math.max(54, height * 0.086))
-      : Math.min(110, Math.max(68, height * 0.105));
+      ? Math.min(112, Math.max(85, height * 0.12))
+      : Math.min(160, Math.max(115, height * 0.155));
     const currentStep = travel * (cards.length - 1);
-    const radiansPerStep = Math.PI / 4; // 45°: una vuelta cada ocho fotos.
+    const radiansPerStep = Math.PI / 3.6; // 50° entre escalones: más separación lateral.
 
     cards.forEach((card, index) => {
       const relativeStep = index - currentStep;
       const angle = relativeStep * radiansPerStep;
       // Coordenadas cilíndricas: radio + ángulo + altura incremental.
       const x = Math.sin(angle) * radiusX;
-      const y = -relativeStep * stepRise;
+      const y = relativeStep * stepRise; // La escalera baja al avanzar.
       const z = Math.cos(angle) * radiusZ - retreat * 950;
       const facing = -Math.sin(angle) * 13;
       const scale = 1 - retreat * 0.58;
@@ -422,9 +422,9 @@
       // Los escalones más próximos tapan naturalmente los del fondo.
       card.style.zIndex = String(Math.round(z + 1500));
 
-      // Aparecen nuevos escalones a medida que se asciende y desaparecen
-      // los que quedan demasiado lejos del punto de vista.
-      const proximity = clamp(5.25 - Math.abs(relativeStep));
+      // Conservamos un tramo corto de escalones visibles para que no se
+      // amontonen en profundidad; el resto se desvanece gradualmente.
+      const proximity = clamp(4.5 - Math.abs(relativeStep));
       card.style.opacity = String(proximity);
     });
   }
