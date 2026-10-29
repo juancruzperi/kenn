@@ -460,17 +460,28 @@
     outro.inert = !clickable;
   }
 
-  const controller = window.ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',
-    end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.2),
-    pin: stage,
-    pinSpacing: true,
-    anticipatePin: 1,
-    invalidateOnRefresh: true,
-    onUpdate: (self) => render(self.progress),
-    onRefresh: (self) => render(self.progress),
+  // GSAP interpola el progreso durante una fracción de segundo.
+  // Antes renderizábamos directamente self.progress en cada evento de scroll,
+  // lo que hacía que las tarjetas respondieran demasiado bruscamente.
+  const smoothProgress = { value: 0 };
+  const inertiaSeconds = window.innerWidth < 768 ? 0.8 : 1.1;
+
+  window.gsap.to(smoothProgress, {
+    value: 1,
+    ease: 'none',
+    onUpdate: () => render(smoothProgress.value),
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.2),
+      pin: stage,
+      pinSpacing: true,
+      scrub: inertiaSeconds,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onRefresh: () => render(smoothProgress.value),
+    },
   });
-  render(controller.progress);
-  window.addEventListener('resize', () => render(controller.progress), { passive: true });
+  render(smoothProgress.value);
+  window.addEventListener('resize', () => render(smoothProgress.value), { passive: true });
 })();
