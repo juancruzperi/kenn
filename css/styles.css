@@ -391,10 +391,9 @@ a {
 .tu-momento__fallback {
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(ellipse at 68% 45%, rgba(140, 95, 53, 0.28), transparent 55%),
-    radial-gradient(ellipse at 26% 30%, rgba(30, 47, 107, 0.78), transparent 62%),
-    linear-gradient(160deg, #10153b 0%, var(--color-navy) 100%);
+  /* Un fondo continuo mientras no exista el video: evita la franja violeta
+     que cortaba visualmente la transición desde EL MOMENTO. */
+  background: var(--color-navy);
   transition: opacity 450ms ease;
 }
 
