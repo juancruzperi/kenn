@@ -221,7 +221,8 @@ a {
 .hero__title {
   margin: 0;
   color: var(--color-white);
-  font-size: var(--title-display);
+  /* Recuperamos el tamaño del hero aprobado en Desktop. */
+  font-size: clamp(2.15rem, 5.8vw, 6rem);
   font-weight: 800;
   line-height: 1.03;
   letter-spacing: -0.035em;
@@ -347,7 +348,8 @@ a {
 .tu-momento__title {
   margin: 0;
   color: var(--color-white);
-  font-size: var(--title-display);
+  /* Se mantiene la jerarquía original de TU MOMENTO en Desktop. */
+  font-size: clamp(2.1rem, 5.4vw, 5.5rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.035em;
@@ -906,7 +908,8 @@ a {
   width: calc(100% - 2 * var(--page-gutter));
   margin: 0;
   transform: translate3d(-50%, 0, 0);
-  font-size: var(--title-display);
+  /* Segunda aparición de EL MOMENTO: escala original aprobada. */
+  font-size: clamp(2.5rem, 7.8vw, 8rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.045em;
@@ -1227,6 +1230,30 @@ a {
 .contacto-temporal__datos p {
   max-width: 370px;
   margin: 0;
+}
+
+
+/* TU HISTORIA · Desktop: menos espacio entre bloques, más aire entre
+   subtítulo y titular y una escena ligeramente más compacta.
+   No se modifica la composición Mobile ya aprobada. */
+@media (min-width: 768px) {
+  .historia-cta {
+    min-height: 88vh;
+    min-height: 88svh;
+    padding-block: clamp(4.5rem, 8svh, 6.5rem);
+  }
+
+  .historia-cta__prelude {
+    margin-bottom: clamp(2.15rem, 4.4svh, 3.4rem);
+  }
+
+  .historia-cta__intro {
+    margin-bottom: clamp(1.05rem, 2.4svh, 1.5rem);
+  }
+
+  .historia-cta__link {
+    margin-top: clamp(2.5rem, 5.5svh, 4rem);
+  }
 }
 
 @media (max-width: 767px) {
