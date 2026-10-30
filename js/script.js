@@ -365,8 +365,9 @@
       activated = true;
       if (services) services.classList.remove('is-delayed-reveal', 'is-after-play');
       play.setAttribute('aria-expanded', 'true');
-      // Al cambiar la altura de la página, GSAP debe recalcular el pin.
-      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      // El contenido oculto cambia el alto del documento: dejar que el
+      // navegador termine de recalcular el layout antes de medir.
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh(true);
     }
     destination.scrollIntoView({
       // El salto se hace detrás del velo azul, sin mostrar secciones intermedias.
@@ -512,6 +513,8 @@
       end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.2),
       pin: stage,
       pinSpacing: true,
+      // Prioridad superior: este carrusel está antes de Y DESPUÉS.
+      refreshPriority: 2,
       scrub: inertiaSeconds,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -948,6 +951,9 @@
         end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 10.2),
         pin: stage,
         pinSpacing: true,
+        // Este pin nace al pulsar PLAY, pero está ANTES de servicios
+        // y del segundo EL MOMENTO. Debe medirse primero.
+        refreshPriority: 1,
         scrub: window.innerWidth < 768 ? 0.8 : 1.1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -956,7 +962,11 @@
     });
 
     render(state.progress);
-    window.ScrollTrigger.refresh();
+    // Reordenar cálculos por prioridad: si no, el segundo EL MOMENTO
+    // conserva posiciones anteriores a los ~10 viewport de pinSpacing
+    // creados ahora en Y DESPUÉS y aparece sobre los testimonios.
+    window.ScrollTrigger.sort();
+    window.ScrollTrigger.refresh(true);
   }
 
   if (!secret.hidden) {
