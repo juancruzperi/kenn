@@ -2196,6 +2196,333 @@ a {
   }
 }
 
+
+/* Y DESPUÉS · Final narrativo y testimonios.
+   Diseño completo visible sin JS; con GSAP se fija un escenario 3D liviano
+   y cada captura ocupa su posición hasta el cierre. */
+.fase-despues {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.fase-despues__stage {
+  width: 100%;
+  min-height: 100svh;
+  padding: clamp(6.5rem, 12svh, 9rem) var(--page-gutter)
+           clamp(7rem, 13svh, 10rem);
+}
+
+.fase-despues__intro,
+.fase-despues__final {
+  text-align: center;
+}
+
+.fase-despues__eyebrow {
+  margin: 0 0 clamp(1rem, 2.7vw, 2rem);
+  font-size: clamp(.75rem, 1.1vw, .95rem);
+  font-weight: 700;
+  letter-spacing: .2em;
+  color: rgba(255, 255, 255, .57);
+}
+
+.fase-despues__title {
+  margin: 0;
+  font-size: clamp(3.6rem, 10vw, 9rem);
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -.075em;
+  white-space: nowrap;
+}
+
+.fase-despues__intro-copy {
+  max-width: 660px;
+  margin: clamp(1.6rem, 3.5vw, 2.8rem) auto 0;
+  font-size: clamp(1.13rem, 2vw, 1.65rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .78);
+}
+
+.fase-despues__testimonios {
+  width: min(100%, 1160px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 1.5rem;
+  margin: clamp(5rem, 9vw, 8rem) auto;
+}
+
+.fase-despues__testimonio {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.5 / 1;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 11px;
+  background: #f7f6f5;
+  color: #18203e;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .24);
+}
+
+.fase-despues__testimonio:nth-child(2),
+.fase-despues__testimonio:nth-child(4) {
+  aspect-ratio: 1.35 / 1;
+}
+
+.fase-despues__testimonio img,
+.fase-despues__captura {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fase-despues__captura {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(.8rem, 1.5vw, 1.2rem);
+}
+
+.fase-despues__captura-cabecera {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.fase-despues__avatar {
+  flex: none;
+  width: clamp(20px, 2.3vw, 30px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c3c9d5;
+}
+
+.fase-despues__captura-etiqueta {
+  font-size: clamp(.65rem, .85vw, .82rem);
+  font-weight: 800;
+  letter-spacing: .05em;
+}
+
+.fase-despues__captura-lineas {
+  display: grid;
+  gap: .65rem;
+  margin: clamp(1rem, 2vw, 1.7rem) 0 0;
+}
+
+.fase-despues__captura-lineas span {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border-radius: 20px;
+  background: #d8dbe0;
+}
+
+.fase-despues__captura-lineas span:nth-child(2) { width: 88%; }
+.fase-despues__captura-lineas span:nth-child(3) { width: 58%; }
+
+.fase-despues__pendiente {
+  display: block;
+  margin-top: auto;
+  padding-top: .75rem;
+  color: #8790a1;
+  font-size: clamp(.55rem, .7vw, .7rem);
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.fase-despues__final {
+  max-width: 1100px;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+.fase-despues__frase {
+  margin: 0;
+  color: var(--color-white);
+  font-size: clamp(2.3rem, 6.2vw, 6rem);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.fase-despues__frase--ultima {
+  font-size: clamp(3.1rem, 8.8vw, 8rem);
+}
+
+/* La escena pinneada mantiene las tarjetas quietas en sus ubicaciones;
+   solo entran/desaparecen con el avance de scroll. */
+.fase-despues.is-enhanced .fase-despues__stage {
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.fase-despues.is-enhanced .fase-despues__intro,
+.fase-despues.is-enhanced .fase-despues__testimonios,
+.fase-despues.is-enhanced .fase-despues__final {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.fase-despues.is-enhanced .fase-despues__intro {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-gutter);
+}
+
+.fase-despues.is-enhanced .fase-despues__testimonios {
+  z-index: 3;
+  display: block;
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.fase-despues.is-enhanced .fase-despues__testimonio {
+  position: absolute;
+  width: clamp(155px, 21vw, 260px);
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) scale(.94);
+  will-change: opacity, transform;
+}
+
+/* Posiciones deliberadamente independientes: no se trasladan al
+   aparecer los testimonios siguientes. */
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) {
+  left: 7%; top: 17%;
+}
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) {
+  right: 8%; top: 10%;
+  width: clamp(168px, 22vw, 270px);
+}
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) {
+  left: 34%; top: 37%;
+  width: clamp(160px, 21vw, 250px);
+}
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) {
+  right: 5%; top: 62%;
+  width: clamp(165px, 21vw, 250px);
+}
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) {
+  left: 6%; top: 66%;
+  width: clamp(160px, 19vw, 225px);
+}
+
+.fase-despues.is-enhanced .fase-despues__final {
+  z-index: 4;
+  display: block;
+  padding: var(--page-gutter);
+}
+
+.fase-despues.is-enhanced .fase-despues__frase {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: 1100px;
+  opacity: 0;
+  text-align: center;
+  transform: translate3d(-50%, calc(-50% + 30px), 0);
+  will-change: opacity, transform;
+}
+
+@media (max-width: 767px) {
+  .fase-despues__stage {
+    padding: clamp(5rem, 12svh, 7rem) var(--page-gutter)
+             clamp(6rem, 14svh, 8rem);
+  }
+  .fase-despues__title {
+    font-size: clamp(2.4rem, 11.3vw, 4.4rem);
+    letter-spacing: -.065em;
+  }
+  .fase-despues__intro-copy {
+    max-width: 380px;
+    font-size: clamp(1.02rem, 4.3vw, 1.3rem);
+  }
+  .fase-despues__testimonios {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .fase-despues__captura {
+    padding: .65rem;
+  }
+  .fase-despues__captura-lineas {
+    gap: .4rem;
+    margin-top: .75rem;
+  }
+  .fase-despues__captura-lineas span {
+    height: 6px;
+  }
+  .fase-despues__frase {
+    font-size: clamp(2.1rem, 9.4vw, 3.5rem);
+  }
+  .fase-despues__frase--ultima {
+    font-size: clamp(2.7rem, 11.8vw, 4.7rem);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio {
+    width: clamp(145px, 51vw, 205px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) {
+    left: 3%; top: 12%;
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) {
+    right: 3%; left: auto; top: 27%;
+    width: clamp(145px, 52vw, 208px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) {
+    left: 5%; top: 42%;
+    width: clamp(145px, 50vw, 202px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) {
+    right: 3%; left: auto; top: 57%;
+    width: clamp(140px, 50vw, 202px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) {
+    left: 7%; top: 74%;
+    width: clamp(136px, 47vw, 190px);
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .fase-despues.is-enhanced .fase-despues__testimonio {
+    width: clamp(120px, 16vw, 175px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(n) {
+    width: clamp(120px, 16vw, 175px);
+  }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { top: 56%; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { top: 63%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fase-despues.is-enhanced .fase-despues__testimonio,
+  .fase-despues.is-enhanced .fase-despues__frase {
+    will-change: auto;
+  }
+}
+
+
+/* El pin de Y DESPUÉS necesita poder permanecer fijo durante su recorrido. */
+.experiencia-kenn.has-despues-3d {
+  overflow: visible;
+}
+
 /* Footer: pendiente de su prompt. */
 
 /* Responsive */

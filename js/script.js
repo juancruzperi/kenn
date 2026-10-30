@@ -842,3 +842,105 @@
     }
   });
 })();;
+
+// Y DESPUÉS: testimonios fijos que aparecen uno por uno, luego tres frases.
+// Se inicializa solo cuando PLAY revela la experiencia; GSAP no debe medir
+// elementos dentro de un ancestro [hidden], porque pin/ScrollTrigger fallan.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-fase-despues]');
+  if (!section) return;
+
+  const secret = section.closest('[data-caracol-destino]');
+  const stage = section.querySelector('[data-despues-stage]');
+  const intro = section.querySelector('[data-despues-intro]');
+  const testimonios = section.querySelector('[data-despues-testimonios]');
+  const cards = [...section.querySelectorAll('[data-despues-testimonio]')];
+  const phrases = [...section.querySelectorAll('[data-despues-frase]')];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+  const ease = (x) => {
+    const t = clamp(x);
+    return t * t * (3 - 2 * t);
+  };
+  let initialized = false;
+
+  if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger || !secret) return;
+
+  function render(progress) {
+    // Introducción completa y salida suave antes de que comiencen los mensajes.
+    const introExit = ease((progress - 0.17) / 0.07);
+    intro.style.opacity = String(1 - introExit);
+    intro.style.visibility = introExit < 0.995 ? 'visible' : 'hidden';
+    intro.style.transform = 'translateY(' + (-22 * introExit).toFixed(2) + 'px)';
+
+    // Los mensajes se van acumulando en posiciones permanentes.
+    // Ninguno se desplaza al mostrarse el siguiente.
+    const galleryExit = ease((progress - 0.71) / 0.09);
+    testimonios.style.opacity = String(1 - galleryExit);
+    testimonios.style.visibility = galleryExit < 0.995 ? 'visible' : 'hidden';
+    cards.forEach((card, index) => {
+      const appear = ease((progress - (0.23 + index * 0.087)) / 0.061);
+      card.style.opacity = String(appear);
+      card.style.transform = 'translate3d(0, ' + ((1 - appear) * 32).toFixed(2) +
+        'px, 0) scale(' + (0.94 + appear * 0.06).toFixed(4) + ')';
+    });
+
+    // Tres frases consecutivas: la primera y la segunda se retiran;
+    // la última permanece hasta terminar la sección.
+    const first = ease((progress - 0.79) / 0.032) *
+      (1 - ease((progress - 0.855) / 0.033));
+    const second = ease((progress - 0.88) / 0.028) *
+      (1 - ease((progress - 0.934) / 0.025));
+    const last = ease((progress - 0.954) / 0.038);
+    [first, second, last].forEach((opacity, index) => {
+      const phrase = phrases[index];
+      if (!phrase) return;
+      phrase.style.opacity = String(opacity);
+      phrase.style.visibility = opacity > 0.002 ? 'visible' : 'hidden';
+      phrase.style.transform = 'translate3d(-50%, calc(-50% + ' +
+        ((1 - opacity) * 30).toFixed(2) + 'px), 0)';
+    });
+  }
+
+  function init() {
+    if (initialized || secret.hidden) return;
+    initialized = true;
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    section.classList.add('is-enhanced');
+    secret.classList.add('has-despues-3d');
+
+    const state = { progress: 0 };
+    window.gsap.to(state, {
+      progress: 1,
+      ease: 'none',
+      onUpdate: () => render(state.progress),
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.4),
+        pin: stage,
+        pinSpacing: true,
+        scrub: window.innerWidth < 768 ? 0.8 : 1.1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onRefresh: () => render(state.progress),
+      },
+    });
+    render(state.progress);
+    window.ScrollTrigger.refresh();
+  }
+
+  if (!secret.hidden) {
+    window.requestAnimationFrame(init);
+    return;
+  }
+
+  const observer = new MutationObserver(() => {
+    if (secret.hidden) return;
+    observer.disconnect();
+    window.requestAnimationFrame(init);
+  });
+  observer.observe(secret, { attributes: true, attributeFilter: ['hidden'] });
+})();
