@@ -1182,13 +1182,53 @@ a {
 
 /* FOOTER KENN: versión compacta, centrada, con logo, lema y tres contactos. */
 .footer-kenn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--color-navy);
   color: var(--color-white);
   border-top: 1px solid rgba(255,255,255,.11);
   padding: clamp(2.5rem,4.5vw,3.8rem) var(--page-gutter)
            clamp(1.15rem,2vw,1.6rem);
 }
+
+/* La misma iluminación azul de las cards de Formación Profesional,
+   extendida suavemente detrás del logo. Es decorativa: no agrega alto. */
+.footer-kenn::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: -25% -10%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 48% 62% at 50% 35%,
+    rgba(78, 103, 231, .22) 0%,
+    rgba(63, 83, 180, .105) 44%,
+    transparent 78%
+  );
+}
+
+/* Destello fino en el borde superior, sin convertir el footer en una card. */
+.footer-kenn::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: min(58vw, 450px);
+  height: 1px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(148, 167, 255, .42) 50%,
+    transparent
+  );
+}
+
 .footer-kenn__inner {
+  position: relative;
+  z-index: 1;
   width: min(100%,1080px);
   margin: 0 auto;
   text-align: center;
