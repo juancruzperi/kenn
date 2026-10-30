@@ -590,6 +590,30 @@
   elements.forEach((element) => observer.observe(element));
 })();
 
+// DURANTE: fade-up progresivo al recorrer la experiencia abierta con PLAY.
+// Se muestra directamente si está desactivado el movimiento o falta IntersectionObserver.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-fase-durante]');
+  if (!section) return;
+
+  const elements = [...section.querySelectorAll('[data-durante-reveal]')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+  section.classList.add('is-animated');
+  elements.forEach((element) => observer.observe(element));
+})();
+
 // Reveal de servicios: animación individual para cada bloque cuando entra
 // al viewport; una vez revelado permanece visible incluso al subir.
 // Sin IntersectionObserver o con movimiento reducido, no se oculta nada.
