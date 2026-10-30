@@ -526,6 +526,33 @@ a {
   flex-shrink: 0;
 }
 
+/* PLAY del carrusel: mismo lenguaje visual que DALE PLAY, pero con
+   mayor jerarquía para destacar la acción que abre la experiencia. */
+.caracol__play.kenn-play-link {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  gap: clamp(1rem, 2.3vw, 1.9rem);
+}
+
+.caracol__play .kenn-play-link__arrow {
+  width: clamp(29px, 3.3vw, 43px);
+}
+
+.caracol__play .kenn-play-link__text::after {
+  height: 3px;
+  transform: scaleX(0.93);
+}
+
+@media (max-width: 767px) {
+  .caracol__play.kenn-play-link {
+    font-size: clamp(1.85rem, 7.7vw, 2.5rem);
+    gap: 1rem;
+  }
+
+  .caracol__play .kenn-play-link__arrow {
+    width: clamp(25px, 6.6vw, 34px);
+  }
+}
+
 /* La versión 3D comparte una escena de 100svh durante el recorrido. */
 .caracol.is-enhanced .caracol__stage {
   position: relative; height: 100vh; height: 100svh;
