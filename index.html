@@ -205,7 +205,12 @@
           </div>
           <div class="caracol__outro" data-caracol-outro>
             <p class="caracol__question">¿Le damos <strong>PLAY</strong> a ese momento?</p>
-            <button class="caracol__play" type="button" data-caracol-play aria-expanded="false" aria-controls="experiencia-kenn">PLAY</button>
+            <button class="caracol__play kenn-play-link" type="button" data-caracol-play aria-expanded="false" aria-controls="experiencia-kenn">
+              <span class="kenn-play-link__text">PLAY</span>
+              <svg class="kenn-play-link__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </section>
@@ -324,9 +329,9 @@
           <p class="historia-cta__intro historia-cta__reveal" data-historia-reveal>Estoy listo para conocer</p>
           <h2 class="historia-cta__title historia-cta__reveal" data-historia-reveal id="historia-title">TU HISTORIA</h2>
 
-          <a class="historia-cta__link historia-cta__reveal" data-historia-reveal data-historia-link href="#contacto">
-            <span class="historia-cta__link-text">DALE PLAY</span>
-            <svg class="historia-cta__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <a class="historia-cta__link historia-cta__reveal kenn-play-link" data-historia-reveal data-historia-link href="#contacto">
+            <span class="historia-cta__link-text kenn-play-link__text">DALE PLAY</span>
+            <svg class="historia-cta__arrow kenn-play-link__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
               <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </a>

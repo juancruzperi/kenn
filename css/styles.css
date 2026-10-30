@@ -519,18 +519,11 @@ a {
   font-size: clamp(1.75rem,4.3vw,4.25rem); line-height: 1.2;
   font-weight: 800; letter-spacing: -0.035em;
 }
+/* PLAY abre la experiencia secreta, pero comparte el diseño editorial
+   del DALE PLAY público. No es un rectángulo relleno. */
 .caracol__play {
-  min-width: clamp(170px,20vw,260px);
-  min-height: clamp(70px,9vw,98px);
-  padding: 1rem 2.5rem; border: 0; border-radius: 0.45rem;
-  background: #ffd735; color: #04082f; font-family: inherit;
-  font-size: clamp(1.75rem,3vw,2.65rem);
-  font-weight: 800; letter-spacing: 0.025em; cursor: pointer;
-  transition: transform 220ms var(--motion-ease), background-color 220ms ease;
-}
-.caracol__play:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
-@media (hover:hover) {
-  .caracol__play:hover { transform: translateY(-3px); background: #ffe36b; }
+  margin: 0;
+  flex-shrink: 0;
 }
 
 /* La versión 3D comparte una escena de 100svh durante el recorrido. */
@@ -581,15 +574,9 @@ a {
   will-change: opacity, transform;
 }
 .caracol.is-enhanced .caracol__play {
+  /* Conserva intacta la animación de aparición controlada por scroll. */
   transform: translate3d(0, var(--play-enter-y, 28px), 0)
     scale(var(--play-enter-scale, 0.94));
-  transition: background-color 220ms ease;
-}
-@media (hover: hover) {
-  .caracol.is-enhanced .caracol__play:hover {
-    transform: translate3d(0, calc(var(--play-enter-y, 28px) - 3px), 0)
-      scale(var(--play-enter-scale, 0.94));
-  }
 }
 .experiencia-kenn[hidden] { display: none !important; }
 .experiencia-kenn {
@@ -1105,14 +1092,19 @@ a {
   text-wrap: balance;
 }
 
-.historia-cta__link {
+/* CTA compartido: ambos PLAY usan la misma tipografía,
+   subrayado bajo el texto y flecha a la derecha. */
+.kenn-play-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: clamp(0.8rem, 1.8vw, 1.6rem);
-  margin-top: clamp(3.75rem, 9svh, 6.5rem);
   padding: 0.8rem 0.12rem 0.95rem;
   position: relative;
+  min-height: 48px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: #f7d537;
   font-family: inherit;
   font-size: clamp(1.2rem, 2.1vw, 1.9rem);
@@ -1124,7 +1116,13 @@ a {
   transition: color 250ms ease;
 }
 
-.historia-cta__link::after {
+.kenn-play-link__text {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.55rem;
+}
+
+.kenn-play-link__text::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -1133,26 +1131,37 @@ a {
   height: 2px;
   background: currentColor;
   transform-origin: left center;
-  transform: scaleX(0.65);
+  transform: scaleX(0.88);
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.historia-cta__arrow {
+.kenn-play-link__arrow {
   width: clamp(21px, 2.5vw, 31px);
   height: auto;
   flex: 0 0 auto;
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.historia-cta__link:focus-visible {
+.kenn-play-link:focus-visible {
   outline: 2px solid #f7d537;
   outline-offset: 8px;
 }
 
 @media (hover: hover) {
-  .historia-cta__link:hover { color: #ffe474; }
-  .historia-cta__link:hover::after { transform: scaleX(1); }
-  .historia-cta__link:hover .historia-cta__arrow { transform: translateX(7px); }
+  .kenn-play-link:hover { color: #ffe474; }
+  .kenn-play-link:hover .kenn-play-link__text::after { transform: scaleX(1); }
+  .kenn-play-link:hover .kenn-play-link__arrow { transform: translateX(7px); }
+}
+
+/* Solo cambia la ubicación, no el diseño del botón público. */
+.historia-cta__link {
+  margin-top: clamp(3.75rem, 9svh, 6.5rem);
+}
+
+@media (max-width: 767px) {
+  .kenn-play-link {
+    font-size: clamp(1.22rem, 5vw, 1.55rem);
+  }
 }
 
 /* Reveal secuencial: no se oculta nada si no hay JS o se reduce movimiento. */
@@ -1202,8 +1211,8 @@ a {
   pointer-events: none;
   background: radial-gradient(
     ellipse 48% 62% at 50% 35%,
-    rgba(78, 103, 231, .22) 0%,
-    rgba(63, 83, 180, .105) 44%,
+    rgba(78, 103, 231, .13) 0%,
+    rgba(63, 83, 180, .05) 44%,
     transparent 78%
   );
 }
@@ -1221,7 +1230,7 @@ a {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(148, 167, 255, .42) 50%,
+    rgba(148, 167, 255, .24) 50%,
     transparent
   );
 }
@@ -1420,7 +1429,6 @@ a {
 
   .historia-cta__link {
     margin-top: clamp(3rem, 8svh, 5rem);
-    font-size: clamp(1.22rem, 5vw, 1.55rem);
   }
 
 }
@@ -1445,8 +1453,8 @@ a {
     transition: none;
   }
 
-  .historia-cta__arrow,
-  .historia-cta__link::after { transition: none; }
+  .kenn-play-link__arrow,
+  .kenn-play-link__text::after { transition: none; }
 }
 
 
