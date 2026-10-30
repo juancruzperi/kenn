@@ -1365,25 +1365,47 @@ a {
 }
 
 .formacion__card {
+  /* Mini escenario de la misma familia visual que EL MOMENTO:
+     brillo central leve, sin fotos, íconos ni bordes pronunciados. */
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: clamp(275px, 26vw, 390px);
   padding: clamp(2.75rem, 5vw, 4.75rem) clamp(1.5rem, 3vw, 3.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.17);
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.018);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
   text-align: center;
+  transition: border-color 420ms ease, box-shadow 420ms ease;
+}
+
+.formacion__card::before {
+  content: '';
+  position: absolute;
+  inset: -18%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 61% 57% at 50% 49%,
+    rgba(63, 84, 181, 0.17) 0%,
+    rgba(42, 55, 137, 0.075) 42%,
+    transparent 80%);
+  opacity: 0.72;
+  transition: opacity 480ms ease;
 }
 
 .formacion__card-title {
+  position: relative;
   max-width: 470px;
   margin: 0;
-  font-size: clamp(1.55rem, 2.45vw, 2.55rem);
-  font-weight: 700;
-  line-height: 1.24;
-  letter-spacing: -0.035em;
+  font-size: clamp(1.65rem, 2.8vw, 3rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -1392,11 +1414,23 @@ a {
 }
 
 .formacion__instructor {
+  position: relative;
   margin: clamp(1.25rem, 2vw, 1.85rem) 0 0;
   font-size: clamp(0.92rem, 1.2vw, 1.1rem);
   font-weight: 500;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.63);
+}
+
+@media (hover: hover) {
+  .formacion__card:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+  }
+
+  .formacion__card:hover::before {
+    opacity: 1;
+  }
 }
 
 .formacion.is-animated .formacion__reveal {
@@ -1445,6 +1479,11 @@ a {
   .formacion.is-animated .formacion__reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .formacion__card,
+  .formacion__card::before {
     transition: none;
   }
 }
