@@ -1434,21 +1434,21 @@ a {
    No se modifica la composición Mobile ya aprobada. */
 @media (min-width: 768px) {
   .historia-cta {
-    min-height: 88vh;
-    min-height: 88svh;
-    padding-block: clamp(4.5rem, 8svh, 6.5rem);
+    min-height: 68vh;
+    min-height: 68svh;
+    padding-block: clamp(3.25rem, 5.5svh, 4.5rem);
   }
 
   .historia-cta__prelude {
-    margin-bottom: clamp(2.15rem, 4.4svh, 3.4rem);
+    margin-bottom: clamp(1.7rem, 3.2svh, 2.4rem);
   }
 
   .historia-cta__intro {
-    margin-bottom: clamp(1.05rem, 2.4svh, 1.5rem);
+    margin-bottom: clamp(0.9rem, 1.8svh, 1.2rem);
   }
 
   .historia-cta__link {
-    margin-top: clamp(2.5rem, 5.5svh, 4rem);
+    margin-top: clamp(1.75rem, 3.2svh, 2.5rem);
   }
 }
 
@@ -1512,7 +1512,7 @@ a {
 ------------------------------------------------------------------------ */
 .formacion {
   position: relative;
-  padding: clamp(2.75rem, 5vw, 4.5rem) var(--page-gutter)
+  padding: clamp(1.5rem, 3vw, 2.5rem) var(--page-gutter)
            clamp(6rem, 11vw, 11rem);
   background: var(--color-navy);
   color: var(--color-white);
