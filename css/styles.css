@@ -8,6 +8,9 @@
   --header-height: clamp(4.5rem, 8vw, 6.5rem);
   --motion-duration: 300ms;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Escala editorial común para títulos grandes. */
+  --title-display: clamp(2.2rem, 5.4vw, 5.7rem);
+  --title-display-mobile: clamp(2.2rem, 8.1vw, 3.85rem);
 }
 
 /* Estilos generales */
@@ -218,7 +221,7 @@ a {
 .hero__title {
   margin: 0;
   color: var(--color-white);
-  font-size: clamp(2.15rem, 5.8vw, 6rem);
+  font-size: var(--title-display);
   font-weight: 800;
   line-height: 1.03;
   letter-spacing: -0.035em;
@@ -234,7 +237,7 @@ a {
 
 @media (max-width: 767px) {
   .hero__title {
-    font-size: clamp(1.95rem, 8vw, 3rem);
+    font-size: var(--title-display-mobile);
     letter-spacing: -0.025em;
   }
 
@@ -344,7 +347,7 @@ a {
 .tu-momento__title {
   margin: 0;
   color: var(--color-white);
-  font-size: clamp(2.1rem, 5.4vw, 5.5rem);
+  font-size: var(--title-display);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.035em;
@@ -426,7 +429,7 @@ a {
 
 @media (max-width: 767px) {
   .tu-momento__title {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: var(--title-display-mobile);
     letter-spacing: -0.025em;
   }
 
@@ -697,7 +700,7 @@ a {
 
 .servicios__heading {
   margin: 0;
-  font-size: clamp(2.2rem, 5.4vw, 5.7rem);
+  font-size: var(--title-display);
   font-weight: 800;
   line-height: 1.04;
   letter-spacing: -0.055em;
@@ -814,7 +817,7 @@ a {
   }
 
   .servicios__heading {
-    font-size: clamp(2.2rem, 8.1vw, 3.85rem);
+    font-size: var(--title-display-mobile);
     letter-spacing: -0.05em;
   }
 
@@ -903,7 +906,7 @@ a {
   width: calc(100% - 2 * var(--page-gutter));
   margin: 0;
   transform: translate3d(-50%, 0, 0);
-  font-size: clamp(2.5rem, 7.8vw, 8rem);
+  font-size: var(--title-display);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.045em;
@@ -988,7 +991,7 @@ a {
 @media (max-width: 767px) {
   .momento-expand__title {
     top: clamp(3.5rem, 9svh, 6.5rem);
-    font-size: clamp(2rem, 8.6vw, 3.7rem);
+    font-size: var(--title-display-mobile);
     letter-spacing: -0.04em;
   }
 
@@ -1094,7 +1097,7 @@ a {
 
 .historia-cta__title {
   margin: 0;
-  font-size: clamp(3rem, 9.5vw, 8rem);
+  font-size: var(--title-display);
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 1.04;
@@ -1244,7 +1247,7 @@ a {
   }
 
   .historia-cta__title {
-    font-size: clamp(2.8rem, 12.4vw, 5.4rem);
+    font-size: var(--title-display-mobile);
     letter-spacing: -0.055em;
   }
 
@@ -1294,7 +1297,7 @@ a {
 ------------------------------------------------------------------------ */
 .formacion {
   position: relative;
-  padding: clamp(5.5rem, 10vw, 10rem) var(--page-gutter)
+  padding: clamp(2.75rem, 5vw, 4.5rem) var(--page-gutter)
            clamp(6rem, 11vw, 11rem);
   background: var(--color-navy);
   color: var(--color-white);
@@ -1307,7 +1310,7 @@ a {
 
 .formacion__header {
   max-width: 850px;
-  margin: 0 auto clamp(3.3rem, 7.5vw, 6rem);
+  margin: 0 auto clamp(2.75rem, 5vw, 4.5rem);
   text-align: center;
 }
 
@@ -1323,7 +1326,7 @@ a {
 
 .formacion__title {
   margin: 0;
-  font-size: clamp(2.35rem, 5.2vw, 5rem);
+  font-size: var(--title-display);
   font-weight: 800;
   line-height: 1.07;
   letter-spacing: -0.045em;
@@ -1386,7 +1389,7 @@ a {
 
 @media (max-width: 767px) {
   .formacion {
-    padding: clamp(5rem, 18vw, 7rem) var(--page-gutter)
+    padding: clamp(2.5rem, 8vw, 3.75rem) var(--page-gutter)
              clamp(5.5rem, 19vw, 8rem);
   }
 
@@ -1395,7 +1398,7 @@ a {
   }
 
   .formacion__title {
-    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-size: var(--title-display-mobile);
   }
 
   .formacion__cards {
