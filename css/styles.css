@@ -1180,56 +1180,254 @@ a {
   transform: scaleX(1);
 }
 
-/* Pie provisional para que #contacto funcione desde esta etapa.
-   Los enlaces definitivos llegarán en la etapa de Footer. */
-.contacto-temporal {
-  padding: clamp(4rem, 8vw, 7rem) var(--page-gutter);
-  min-height: clamp(300px, 42svh, 480px);
+/* FOOTER KENN -------------------------------------------------------------
+   Desktop: marca a la izquierda, contacto a la derecha.
+   Mobile: composición centrada en una sola columna.
+   Los iconos son informativos hasta recibir los enlaces oficiales.
+------------------------------------------------------------------------- */
+.footer-kenn {
+  position: relative;
   background: var(--color-navy);
+  color: var(--color-white);
   border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding: clamp(4.5rem, 8vw, 8.75rem) var(--page-gutter)
+           clamp(1.7rem, 3vw, 2.5rem);
+  overflow: hidden;
 }
 
-.contacto-temporal__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 9vw, 8rem);
-  align-items: start;
-  max-width: 1200px;
+.footer-kenn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 47% 60% at 18% 38%,
+              rgba(47, 64, 142, 0.13), transparent 80%);
+  pointer-events: none;
+}
+
+.footer-kenn__inner {
+  position: relative;
+  width: min(100%, 1200px);
   margin-inline: auto;
 }
 
-.contacto-temporal__logo {
+.footer-kenn__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(3rem, 9vw, 9rem);
+  align-items: start;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.footer-kenn__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-kenn__logo {
   display: block;
-  width: clamp(100px, 13vw, 190px);
+  width: clamp(140px, 17vw, 235px);
   height: auto;
-  margin-bottom: 1rem;
+  object-fit: contain;
+  margin: 0 0 clamp(1.25rem, 2.4vw, 2rem);
 }
 
-.contacto-temporal__identidad p {
-  margin: 0 0 0.45rem;
-  font-size: clamp(1rem, 1.6vw, 1.4rem);
-  font-weight: 700;
-}
-
-.contacto-temporal__identidad span,
-.contacto-temporal__datos p {
-  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.60);
-}
-
-.contacto-temporal__datos h2 {
-  margin: 0 0 1.2rem;
-  font-size: clamp(1.65rem, 2.8vw, 2.7rem);
+.footer-kenn__motto {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.35rem, 2.4vw, 2.25rem);
+  line-height: 1.2;
   font-weight: 800;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
 }
 
-.contacto-temporal__datos p {
-  max-width: 370px;
+.footer-kenn__profession {
   margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.9rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
+  font-weight: 400;
 }
 
+.footer-kenn__heading {
+  margin: 0 0 1rem;
+  font-size: clamp(1.65rem, 3.2vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.footer-kenn__invitation {
+  margin: 0 0 clamp(1.75rem, 3vw, 2.8rem);
+  color: rgba(255, 255, 255, 0.79);
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  line-height: 1.5;
+}
+
+.footer-kenn__channels {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.15rem, 2vw, 1.65rem);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-kenn__channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.95rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.footer-kenn__channel-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  color: #f7d537;
+}
+
+.footer-kenn__channel-icon svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.footer-kenn__pending {
+  margin: 2rem 0 0;
+  color: rgba(255, 255, 255, 0.43);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.footer-kenn__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: clamp(1.35rem, 2.5vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.17);
+}
+
+.footer-kenn__copyright {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.51);
+  font-size: clamp(0.77rem, 1vw, 0.9rem);
+  line-height: 1.6;
+}
+
+.footer-kenn__back {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 0.6rem;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-weight: 600;
+  transition: color 200ms ease;
+}
+
+.footer-kenn__back svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 250ms ease;
+}
+
+.footer-kenn__back:focus-visible {
+  outline: 2px solid #f7d537;
+  outline-offset: 6px;
+}
+
+@media (hover: hover) {
+  .footer-kenn__back:hover {
+    color: #f7d537;
+  }
+
+  .footer-kenn__back:hover svg {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-kenn {
+    padding: clamp(4.5rem, 15vw, 6.5rem) var(--page-gutter)
+             clamp(1.5rem, 6vw, 2.25rem);
+  }
+
+  .footer-kenn::before {
+    background: radial-gradient(ellipse 80% 47% at 50% 30%,
+                rgba(47, 64, 142, 0.15), transparent 85%);
+  }
+
+  .footer-kenn__top {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: clamp(4rem, 15vw, 6rem);
+    padding-bottom: clamp(3.5rem, 13vw, 5rem);
+    text-align: center;
+  }
+
+  .footer-kenn__identity {
+    align-items: center;
+  }
+
+  .footer-kenn__logo {
+    width: clamp(148px, 38vw, 210px);
+    margin-bottom: 1.45rem;
+  }
+
+  .footer-kenn__motto {
+    font-size: clamp(1.45rem, 6vw, 1.95rem);
+  }
+
+  .footer-kenn__profession {
+    font-size: clamp(0.89rem, 3.7vw, 1.05rem);
+  }
+
+  .footer-kenn__heading {
+    font-size: clamp(1.85rem, 7.5vw, 2.65rem);
+  }
+
+  .footer-kenn__invitation {
+    font-size: clamp(1rem, 4.3vw, 1.2rem);
+  }
+
+  .footer-kenn__channels {
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  .footer-kenn__channel {
+    font-size: clamp(1.1rem, 4.6vw, 1.3rem);
+  }
+
+  .footer-kenn__pending {
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  .footer-kenn__bottom {
+    flex-direction: column-reverse;
+    gap: 1.4rem;
+    text-align: center;
+  }
+
+  .footer-kenn__copyright {
+    font-size: clamp(0.78rem, 3.2vw, 0.92rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-kenn__back,
+  .footer-kenn__back svg {
+    transition: none;
+  }
+}
 
 /* TU HISTORIA · Desktop: menos espacio entre bloques, más aire entre
    subtítulo y titular y una escena ligeramente más compacta.
@@ -1281,14 +1479,6 @@ a {
     font-size: clamp(1.22rem, 5vw, 1.55rem);
   }
 
-  .contacto-temporal__inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 3.5rem;
-  }
-
-  .contacto-temporal__logo { margin-inline: auto; }
-  .contacto-temporal__datos p { margin-inline: auto; }
 }
 
 @media (max-height: 480px) and (orientation: landscape) {

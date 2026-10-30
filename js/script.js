@@ -732,3 +732,12 @@
 
   items.forEach((item) => observer.observe(item));
 })();
+
+
+// Footer de Kenn: año de copyright actualizado sin edición manual.
+(() => {
+  'use strict';
+
+  const year = document.querySelector('[data-footer-year]');
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
