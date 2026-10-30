@@ -843,9 +843,9 @@
   });
 })();;
 
-// Y DESPUÉS: testimonios fijos que aparecen uno por uno, luego tres frases.
-// Se inicializa solo cuando PLAY revela la experiencia; GSAP no debe medir
-// elementos dentro de un ancestro [hidden], porque pin/ScrollTrigger fallan.
+// Y DESPUÉS: una narración por scroll, no una lista simultánea.
+// Seis frases separadas por pausas, siete mensajes acumulativos y logo final.
+// Todo es reversible; conserva el scrub suave de las demás secciones.
 (() => {
   'use strict';
 
@@ -854,57 +854,83 @@
 
   const secret = section.closest('[data-caracol-destino]');
   const stage = section.querySelector('[data-despues-stage]');
-  const intro = section.querySelector('[data-despues-intro]');
-  const testimonios = section.querySelector('[data-despues-testimonios]');
-  const cards = [...section.querySelectorAll('[data-despues-testimonio]')];
+  const header = section.querySelector('[data-despues-encabezado]');
   const phrases = [...section.querySelectorAll('[data-despues-frase]')];
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (x) => Math.max(0, Math.min(1, x));
-  const ease = (x) => {
-    const t = clamp(x);
+  const gallery = section.querySelector('[data-despues-testimonios]');
+  const cards = [...section.querySelectorAll('[data-despues-testimonio]')];
+  const mark = section.querySelector('[data-despues-marca]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (value) => Math.max(0, Math.min(1, value));
+  const smooth = (value) => {
+    const t = clamp(value);
     return t * t * (3 - 2 * t);
   };
-  let initialized = false;
 
-  if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger || !secret) return;
-
-  function render(progress) {
-    // Introducción completa y salida suave antes de que comiencen los mensajes.
-    const introExit = ease((progress - 0.17) / 0.07);
-    intro.style.opacity = String(1 - introExit);
-    intro.style.visibility = introExit < 0.995 ? 'visible' : 'hidden';
-    intro.style.transform = 'translateY(' + (-22 * introExit).toFixed(2) + 'px)';
-
-    // Los mensajes se van acumulando en posiciones permanentes.
-    // Ninguno se desplaza al mostrarse el siguiente.
-    const galleryExit = ease((progress - 0.71) / 0.09);
-    testimonios.style.opacity = String(1 - galleryExit);
-    testimonios.style.visibility = galleryExit < 0.995 ? 'visible' : 'hidden';
-    cards.forEach((card, index) => {
-      const appear = ease((progress - (0.23 + index * 0.087)) / 0.061);
-      card.style.opacity = String(appear);
-      card.style.transform = 'translate3d(0, ' + ((1 - appear) * 32).toFixed(2) +
-        'px, 0) scale(' + (0.94 + appear * 0.06).toFixed(4) + ')';
-    });
-
-    // Tres frases consecutivas: la primera y la segunda se retiran;
-    // la última permanece hasta terminar la sección.
-    const first = ease((progress - 0.79) / 0.032) *
-      (1 - ease((progress - 0.855) / 0.033));
-    const second = ease((progress - 0.88) / 0.028) *
-      (1 - ease((progress - 0.934) / 0.025));
-    const last = ease((progress - 0.954) / 0.038);
-    [first, second, last].forEach((opacity, index) => {
-      const phrase = phrases[index];
-      if (!phrase) return;
-      phrase.style.opacity = String(opacity);
-      phrase.style.visibility = opacity > 0.002 ? 'visible' : 'hidden';
-      phrase.style.transform = 'translate3d(-50%, calc(-50% + ' +
-        ((1 - opacity) * 30).toFixed(2) + 'px), 0)';
-    });
+  // Ventana con aparición, pausa para leer y desaparición.
+  // Los rangos son posiciones del scroll, no tiempos cronometrados.
+  function fadeWindow(progress, start, end, fadeLength) {
+    const appear = smooth((progress - start) / fadeLength);
+    const disappear = 1 - smooth((progress - (end - fadeLength)) / fadeLength);
+    return appear * disappear;
   }
 
-  function init() {
+  // Las frases mantienen su orden incluso cuando "La fiesta termina..."
+  // se repite antes y después de los mensajes.
+  const phraseWindows = [
+    [0.028, 0.135, 0.022], // La música se apaga...
+    [0.139, 0.246, 0.022], // Las luces se encienden...
+    [0.250, 0.357, 0.022], // La fiesta termina...
+    [0.724, 0.789, 0.017], // La fiesta termina... (segunda vez)
+    [0.794, 0.857, 0.017], // Lo que queda...
+    [0.862, 0.938, 0.018], // Recién empieza.
+  ];
+
+  function render(progress) {
+    const headerOut = smooth((progress - 0.925) / 0.045);
+    header.style.opacity = String(1 - headerOut);
+    header.style.visibility = headerOut < 0.995 ? 'visible' : 'hidden';
+
+    phrases.forEach((phrase, index) => {
+      const w = phraseWindows[index];
+      if (!w) return;
+      const opacity = fadeWindow(progress, w[0], w[1], w[2]);
+      phrase.style.opacity = String(opacity);
+      phrase.style.visibility = opacity > 0.003 ? 'visible' : 'hidden';
+      phrase.style.transform =
+        'translate3d(-50%, calc(-50% + ' + ((1 - opacity) * 25).toFixed(2) + 'px), 0)';
+    });
+
+    // Las capturas aparecen una tras otra. Las anteriores quedan quietas.
+    // Toda la composición desaparece a la vez antes de las frases finales.
+    const galleryExit = smooth((progress - 0.674) / 0.048);
+    const galleryVisible = 1 - galleryExit;
+    gallery.style.opacity = String(galleryVisible);
+    gallery.style.visibility = galleryVisible > 0.003 ? 'visible' : 'hidden';
+    cards.forEach((card, index) => {
+      const appearAt = 0.369 + index * 0.039;
+      const appear = smooth((progress - appearAt) / 0.029);
+      card.style.opacity = String(appear);
+      card.style.transform =
+        'translate3d(0, ' + ((1 - appear) * 26).toFixed(2) + 'px, 0) ' +
+        'scale(' + (0.96 + 0.04 * appear).toFixed(4) + ')';
+    });
+
+    // Último plano: el título se va y queda únicamente la marca Kenn.
+    const logoIn = smooth((progress - 0.942) / 0.037);
+    mark.style.opacity = String(logoIn);
+    mark.style.visibility = logoIn > 0.003 ? 'visible' : 'hidden';
+    mark.style.transform =
+      'translate3d(0, ' + ((1 - logoIn) * 22).toFixed(2) + 'px, 0) ' +
+      'scale(' + (0.96 + logoIn * 0.04).toFixed(4) + ')';
+  }
+
+  let initialized = false;
+
+  // El bloque está oculto hasta que se pulse PLAY. Nunca calculamos las
+  // medidas del pin mientras el ancestro permanezca con [hidden].
+  if (reducedMotion || !window.gsap || !window.ScrollTrigger || !secret) return;
+
+  function initialize() {
     if (initialized || secret.hidden) return;
     initialized = true;
     window.gsap.registerPlugin(window.ScrollTrigger);
@@ -919,7 +945,7 @@
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 5.4),
+        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 10.2),
         pin: stage,
         pinSpacing: true,
         scrub: window.innerWidth < 768 ? 0.8 : 1.1,
@@ -928,19 +954,20 @@
         onRefresh: () => render(state.progress),
       },
     });
+
     render(state.progress);
     window.ScrollTrigger.refresh();
   }
 
   if (!secret.hidden) {
-    window.requestAnimationFrame(init);
+    window.requestAnimationFrame(initialize);
     return;
   }
 
   const observer = new MutationObserver(() => {
     if (secret.hidden) return;
     observer.disconnect();
-    window.requestAnimationFrame(init);
+    window.requestAnimationFrame(initialize);
   });
   observer.observe(secret, { attributes: true, attributeFilter: ['hidden'] });
 })();
