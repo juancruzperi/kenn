@@ -1180,13 +1180,13 @@ a {
   transform: scaleX(1);
 }
 
-/* FOOTER KENN: diseño centrado, simple y fiel al logo y lema. */
+/* FOOTER KENN: versión compacta, centrada, con logo, lema y tres contactos. */
 .footer-kenn {
   background: var(--color-navy);
   color: var(--color-white);
   border-top: 1px solid rgba(255,255,255,.11);
-  padding: clamp(4.75rem,8vw,7rem) var(--page-gutter)
-           clamp(1.75rem,3vw,2.5rem);
+  padding: clamp(2.5rem,4.5vw,3.8rem) var(--page-gutter)
+           clamp(1.15rem,2vw,1.6rem);
 }
 .footer-kenn__inner {
   width: min(100%,1080px);
@@ -1206,15 +1206,15 @@ a {
 }
 .footer-kenn__logo {
   display: block;
-  width: clamp(205px,27vw,330px);
+  width: clamp(150px,17vw,215px);
   max-width: 100%;
   height: auto;
-  margin: 0 0 .15rem;
+  margin: 0;
   object-fit: contain;
 }
 .footer-kenn__motto {
   margin: 0;
-  font-size: clamp(1.25rem,2vw,1.95rem);
+  font-size: clamp(1.05rem,1.45vw,1.4rem);
   font-style: italic;
   font-weight: 700;
   line-height: 1.3;
@@ -1222,14 +1222,14 @@ a {
   text-wrap: balance;
 }
 .footer-kenn__contact {
-  margin: clamp(3.6rem,6.8vw,5.5rem) auto clamp(3.5rem,6vw,4.9rem);
+  margin: clamp(1.6rem,2.8vw,2.5rem) auto clamp(1.8rem,3vw,2.6rem);
 }
 .footer-kenn__channels {
   display: grid;
   grid-template-columns: repeat(3,minmax(0,1fr));
   align-items: start;
-  gap: clamp(1rem,3vw,2.5rem);
-  width: min(100%,740px);
+  gap: clamp(.5rem,2vw,1.5rem);
+  width: min(100%,510px);
   padding: 0; margin: 0 auto; list-style: none;
 }
 .footer-kenn__channel { display: flex; justify-content: center; }
@@ -1237,7 +1237,7 @@ a {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: .9rem;
+  gap: .5rem;
   color: var(--color-white);
   text-decoration: none;
   transition: color 240ms ease,transform 240ms ease;
@@ -1249,15 +1249,15 @@ a {
 .footer-kenn__channel-link[href] { cursor: pointer; }
 .footer-kenn__icon-box {
   display: grid; place-items: center;
-  width: 64px; height: 64px;
+  width: 46px; height: 46px;
   border: 1px solid rgba(255,255,255,.24);
-  border-radius: 15px;
+  border-radius: 11px;
   background: rgba(255,255,255,.025);
   transition: border-color 240ms ease,background-color 240ms ease;
 }
-.footer-kenn__icon-box svg { width: 30px; height: 30px; display: block; }
+.footer-kenn__icon-box svg { width: 23px; height: 23px; display: block; }
 .footer-kenn__channel-label {
-  font-size: clamp(.94rem,1.15vw,1.05rem);
+  font-size: clamp(.84rem,.95vw,.94rem);
   font-weight: 500;
   line-height: 1.35;
 }
@@ -1266,7 +1266,7 @@ a {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding-top: clamp(1.4rem,2.5vw,1.8rem);
+  padding-top: clamp(.9rem,1.5vw,1.2rem);
   border-top: 1px solid rgba(255,255,255,.12);
 }
 .footer-kenn__copyright {
@@ -1299,30 +1299,30 @@ a {
 }
 @media (max-width:767px) {
   .footer-kenn {
-    padding: clamp(4rem,13vw,5.5rem) var(--page-gutter)
-             clamp(1.6rem,6vw,2.25rem);
+    padding: clamp(2.6rem,8vw,3.5rem) var(--page-gutter)
+             clamp(1.1rem,4vw,1.6rem);
   }
   .footer-kenn__logo {
-    width: clamp(190px,52vw,250px);
+    width: clamp(148px,43vw,185px);
     margin-bottom: 0;
   }
-  .footer-kenn__motto { font-size: clamp(1.15rem,5vw,1.5rem); }
+  .footer-kenn__motto { font-size: clamp(1.02rem,4.1vw,1.25rem); }
   .footer-kenn__contact {
-    margin-top: clamp(3.1rem,11vw,4rem);
-    margin-bottom: clamp(3rem,11vw,4rem);
+    margin-top: clamp(1.6rem,6vw,2.25rem);
+    margin-bottom: clamp(1.8rem,6vw,2.4rem);
   }
   .footer-kenn__channels { gap: clamp(.5rem,2.5vw,1rem); }
-  .footer-kenn__channel-link { gap: .75rem; }
+  .footer-kenn__channel-link { gap: .45rem; }
   .footer-kenn__icon-box {
-    width: 56px; height: 56px; border-radius: 13px;
+    width: 44px; height: 44px; border-radius: 11px;
   }
-  .footer-kenn__icon-box svg { width: 26px; height: 26px; }
+  .footer-kenn__icon-box svg { width: 22px; height: 22px; }
   .footer-kenn__channel-label {
-    font-size: clamp(.81rem,3.3vw,.94rem);
+    font-size: clamp(.78rem,3vw,.88rem);
   }
   .footer-kenn__bottom {
     flex-direction: column;
-    gap: .7rem;
+    gap: .4rem;
     text-align: center;
   }
   .footer-kenn__copyright { font-size: .8rem; }
