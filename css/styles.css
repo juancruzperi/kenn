@@ -9,7 +9,7 @@
   --motion-duration: 300ms;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   /* Escala editorial común para títulos grandes. */
-  --title-display: clamp(2.2rem, 5.4vw, 5.7rem);
+  --title-display: clamp(2.2rem, 4.5vw, 4.8rem);
   --title-display-mobile: clamp(2.2rem, 8.1vw, 3.85rem);
 }
 
