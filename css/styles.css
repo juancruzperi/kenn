@@ -1289,7 +1289,7 @@ a {
 
 
 /* FORMACIÓN PROFESIONAL --------------------------------------------------
-   Dos credenciales sobrias con acento dorado, no fotografías ni enlaces.
+   Dos credenciales sobrias, solo texto, sin íconos, fotos ni enlaces.
    El bloque queda entre TU HISTORIA y el footer de contacto.
 ------------------------------------------------------------------------ */
 .formacion {
@@ -1347,14 +1347,6 @@ a {
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.018);
   text-align: center;
-}
-
-.formacion__accent {
-  display: block;
-  width: clamp(38px, 4vw, 58px);
-  height: 2px;
-  margin-bottom: clamp(1.8rem, 3vw, 2.7rem);
-  background: #f7d537;
 }
 
 .formacion__card-title {
