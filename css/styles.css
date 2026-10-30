@@ -1287,6 +1287,148 @@ a {
   .historia-cta__link::after { transition: none; }
 }
 
+
+/* FORMACIÓN PROFESIONAL --------------------------------------------------
+   Dos credenciales sobrias con acento dorado, no fotografías ni enlaces.
+   El bloque queda entre TU HISTORIA y el footer de contacto.
+------------------------------------------------------------------------ */
+.formacion {
+  position: relative;
+  padding: clamp(5.5rem, 10vw, 10rem) var(--page-gutter)
+           clamp(6rem, 11vw, 11rem);
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.formacion__inner {
+  width: min(100%, 1160px);
+  margin-inline: auto;
+}
+
+.formacion__header {
+  max-width: 850px;
+  margin: 0 auto clamp(3.3rem, 7.5vw, 6rem);
+  text-align: center;
+}
+
+.formacion__eyebrow {
+  display: block;
+  margin-bottom: clamp(1.15rem, 2.5vw, 2rem);
+  color: #f7d537;
+  font-size: clamp(0.7rem, 0.95vw, 0.84rem);
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.formacion__title {
+  margin: 0;
+  font-size: clamp(2.35rem, 5.2vw, 5rem);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.formacion__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.formacion__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(275px, 26vw, 390px);
+  padding: clamp(2.75rem, 5vw, 4.75rem) clamp(1.5rem, 3vw, 3.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.018);
+  text-align: center;
+}
+
+.formacion__accent {
+  display: block;
+  width: clamp(38px, 4vw, 58px);
+  height: 2px;
+  margin-bottom: clamp(1.8rem, 3vw, 2.7rem);
+  background: #f7d537;
+}
+
+.formacion__card-title {
+  max-width: 470px;
+  margin: 0;
+  font-size: clamp(1.55rem, 2.45vw, 2.55rem);
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.formacion__acronym {
+  white-space: nowrap;
+}
+
+.formacion__instructor {
+  margin: clamp(1.25rem, 2vw, 1.85rem) 0 0;
+  font-size: clamp(0.92rem, 1.2vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.formacion.is-animated .formacion__reveal {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition:
+    opacity 860ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 930ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.formacion.is-animated .formacion__reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 767px) {
+  .formacion {
+    padding: clamp(5rem, 18vw, 7rem) var(--page-gutter)
+             clamp(5.5rem, 19vw, 8rem);
+  }
+
+  .formacion__header {
+    margin-bottom: clamp(2.75rem, 10vw, 4rem);
+  }
+
+  .formacion__title {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+  }
+
+  .formacion__cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .formacion__card {
+    min-height: clamp(245px, 65vw, 325px);
+    padding: 2.6rem 1.75rem;
+  }
+
+  .formacion__card-title {
+    font-size: clamp(1.55rem, 6.2vw, 2.1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formacion.is-animated .formacion__reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Footer: pendiente de su prompt. */
 
 /* Responsive */

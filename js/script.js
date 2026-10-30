@@ -706,3 +706,29 @@
   section.classList.add('is-animated');
   observer.observe(section);
 })();
+
+
+// Formación profesional: reveal individual y accesible de las dos tarjetas.
+// Sin IntersectionObserver o con movimiento reducido, se muestran de entrada.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-formacion]');
+  if (!section) return;
+
+  const items = [...section.querySelectorAll('[data-formacion-reveal]')];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+
+  // Solo activamos el estado inicial oculto si hay observador disponible.
+  section.classList.add('is-animated');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -5% 0px' });
+
+  items.forEach((item) => observer.observe(item));
+})();
