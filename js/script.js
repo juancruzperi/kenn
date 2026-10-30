@@ -927,6 +927,15 @@
       'scale(' + (0.96 + logoIn * 0.04).toFixed(4) + ')';
   }
 
+  // No dejar que la galería invada el encabezado:
+  // medimos su borde inferior según tipografía y ancho de cada dispositivo.
+  function updateTestimonySafeArea() {
+    if (!section.classList.contains('is-enhanced')) return;
+    const gap = Math.max(20, Math.round(stage.clientHeight * 0.024));
+    const safeTop = Math.ceil(header.offsetTop + header.offsetHeight + gap);
+    stage.style.setProperty('--despues-safe-top', safeTop + 'px');
+  }
+
   let initialized = false;
 
   // El bloque está oculto hasta que se pulse PLAY. Nunca calculamos las
@@ -939,6 +948,7 @@
     window.gsap.registerPlugin(window.ScrollTrigger);
     section.classList.add('is-enhanced');
     secret.classList.add('has-despues-3d');
+    updateTestimonySafeArea();
 
     const state = { progress: 0 };
     window.gsap.to(state, {
@@ -957,6 +967,7 @@
         scrub: window.innerWidth < 768 ? 0.8 : 1.1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
+        onRefreshInit: updateTestimonySafeArea,
         onRefresh: () => render(state.progress),
       },
     });

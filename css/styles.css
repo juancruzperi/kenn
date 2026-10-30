@@ -636,16 +636,16 @@ a {
 
 .experiencia-kenn__inner {
   width: min(100%, 1100px);
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 76vh;
+  min-height: 76svh;
   margin: 0 auto;
-  padding: clamp(5.5rem, 11svh, 8rem) var(--page-gutter)
-           clamp(4rem, 8svh, 6rem);
+  padding: clamp(3.25rem, 6svh, 5rem) var(--page-gutter)
+           clamp(2rem, 4svh, 3.25rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.75rem, 4svh, 3rem);
+  gap: clamp(1.1rem, 2.8svh, 1.85rem);
   text-align: center;
 }
 
@@ -678,7 +678,7 @@ a {
   position: relative;
   flex-shrink: 0;
   isolation: isolate;
-  width: min(100%, 760px);
+  width: min(100%, 660px);
   aspect-ratio: 3 / 2;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .18);
@@ -745,9 +745,10 @@ a {
 
 @media (max-width: 767px) {
   .experiencia-kenn__inner {
-    padding: clamp(5.25rem, 11svh, 7rem) var(--page-gutter)
-             clamp(3rem, 7svh, 4.5rem);
-    gap: clamp(1.25rem, 3svh, 2rem);
+    min-height: 75svh;
+    padding: clamp(4rem, 8svh, 5.5rem) var(--page-gutter)
+             clamp(1.75rem, 4svh, 3rem);
+    gap: clamp(1rem, 2.2svh, 1.6rem);
   }
 
   .experiencia-kenn__title {
@@ -763,7 +764,7 @@ a {
   }
 
   .experiencia-kenn__media {
-    width: min(100%, 345px);
+    width: min(100%, 315px);
     aspect-ratio: 4 / 5;
   }
 
@@ -797,10 +798,9 @@ a {
    Mantiene el fondo azul marino y usa jerarquía editorial, sin tarjetas. */
 .fase-antes {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: clamp(6.25rem, 12svh, 10rem) var(--page-gutter)
-           clamp(7rem, 15svh, 12rem);
+  min-height: 68svh;
+  padding: clamp(3rem, 5.5svh, 5rem) var(--page-gutter)
+           clamp(3rem, 5.5svh, 5rem);
   background: var(--color-navy);
   color: var(--color-white);
 }
@@ -811,7 +811,7 @@ a {
 }
 
 .fase-antes__header {
-  margin-bottom: clamp(3.4rem, 8vw, 7rem);
+  margin-bottom: clamp(2.75rem, 4.8vw, 4.75rem);
   text-align: center;
 }
 
@@ -918,8 +918,9 @@ a {
 
 @media (max-width: 767px) {
   .fase-antes {
-    padding: clamp(5rem, 10svh, 7rem) var(--page-gutter)
-             clamp(6rem, 12svh, 8rem);
+    min-height: 0;
+    padding: clamp(3.25rem, 7svh, 4.5rem) var(--page-gutter)
+             clamp(3rem, 6svh, 4.5rem);
   }
 
   .fase-antes__title {
@@ -927,12 +928,12 @@ a {
   }
 
   .fase-antes__header {
-    margin-bottom: clamp(3.4rem, 11vw, 5rem);
+    margin-bottom: clamp(2.4rem, 7.5vw, 3.5rem);
   }
 
   .fase-antes__body {
     grid-template-columns: minmax(0, 1fr);
-    gap: clamp(3.3rem, 13vw, 5rem);
+    gap: clamp(2.4rem, 8vw, 4rem);
   }
 
   .fase-antes__lead {
@@ -965,10 +966,9 @@ a {
 /* DURANTE · continuidad editorial de ANTES. */
 .fase-durante {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: clamp(6.25rem, 12svh, 10rem) var(--page-gutter)
-           clamp(7rem, 15svh, 12rem);
+  min-height: 68svh;
+  padding: clamp(3rem, 5.5svh, 5rem) var(--page-gutter)
+           clamp(3rem, 5.5svh, 5rem);
   background: var(--color-navy);
   color: var(--color-white);
 }
@@ -979,7 +979,7 @@ a {
 }
 
 .fase-durante__header {
-  margin-bottom: clamp(3.4rem, 8vw, 7rem);
+  margin-bottom: clamp(2.75rem, 4.8vw, 4.75rem);
   text-align: center;
 }
 
@@ -1086,8 +1086,9 @@ a {
 
 @media (max-width: 767px) {
   .fase-durante {
-    padding: clamp(5rem, 10svh, 7rem) var(--page-gutter)
-             clamp(6rem, 12svh, 8rem);
+    min-height: 0;
+    padding: clamp(3.25rem, 7svh, 4.5rem) var(--page-gutter)
+             clamp(3rem, 6svh, 4.5rem);
   }
 
   .fase-durante__title {
@@ -1095,12 +1096,12 @@ a {
   }
 
   .fase-durante__header {
-    margin-bottom: clamp(3.4rem, 11vw, 5rem);
+    margin-bottom: clamp(2.4rem, 7.5vw, 3.5rem);
   }
 
   .fase-durante__body {
     grid-template-columns: minmax(0, 1fr);
-    gap: clamp(3.3rem, 13vw, 5rem);
+    gap: clamp(2.4rem, 8vw, 4rem);
   }
 
   .fase-durante__lead {
@@ -2229,7 +2230,7 @@ a {
 
 .fase-despues__title {
   margin: 0;
-  font-size: clamp(3.6rem, 9vw, 8.6rem);
+  font-size: clamp(3.7rem, 10.4vw, 9.3rem);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -.07em;
@@ -2247,7 +2248,7 @@ a {
 .fase-despues__frase {
   width: min(100%, 1050px);
   margin: 0;
-  font-size: clamp(2.1rem, 5.6vw, 5.8rem);
+  font-size: clamp(1.7rem, 3.2vw, 3.3rem);
   font-weight: 800;
   line-height: 1.16;
   letter-spacing: -.05em;
@@ -2256,7 +2257,7 @@ a {
 }
 
 .fase-despues__frase--ultima {
-  font-size: clamp(2.9rem, 7.5vw, 7.1rem);
+  font-size: clamp(2rem, 4vw, 4.25rem);
 }
 
 .fase-despues__testimonios {
@@ -2379,7 +2380,7 @@ a {
 }
 
 .fase-despues.is-enhanced .fase-despues__title {
-  font-size: clamp(3rem, 7.4vw, 6.7rem);
+  font-size: clamp(3.8rem, 10.4vw, 9.3rem);
 }
 
 .fase-despues.is-enhanced .fase-despues__relato {
@@ -2407,10 +2408,14 @@ a {
 .fase-despues.is-enhanced .fase-despues__testimonios {
   position: absolute;
   inset: 0;
+  /* Se mide con JS desde el borde inferior real del título, así que
+     tampoco chocan los mensajes en tablet ni con alturas de pantalla distintas. */
+  top: var(--despues-safe-top, 28svh);
+  bottom: 0;
   z-index: 2;
   display: block;
   width: min(100%, 1200px);
-  height: 100%;
+  height: auto;
   margin: 0;
   left: 50%;
   right: auto;
@@ -2429,13 +2434,13 @@ a {
 
 /* Ubicaciones fijas y escalonadas; las tarjetas ya visibles no se mueven
    cuando aparecen los mensajes siguientes. */
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 5%; top: 27%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 7%; top: 26%; width: clamp(166px, 19vw, 238px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 36%; top: 35%; width: clamp(150px, 17vw, 215px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 2%; top: 56%; width: clamp(155px, 18vw, 228px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 4%; top: 60%; width: clamp(150px, 18vw, 225px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { left: 38%; top: 69%; width: clamp(148px, 17vw, 215px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { right: 25%; top: 48%; width: clamp(134px, 16vw, 195px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 5%; top: 2%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 7%; top: 1%; width: clamp(166px, 19vw, 238px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 36%; top: 20%; width: clamp(150px, 17vw, 215px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 2%; top: 51%; width: clamp(155px, 18vw, 228px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 4%; top: 52%; width: clamp(150px, 18vw, 225px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { left: 38%; top: 72%; width: clamp(148px, 17vw, 215px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { right: 25%; top: 37%; width: clamp(134px, 16vw, 195px); }
 
 .fase-despues.is-enhanced .fase-despues__marca {
   position: absolute;
@@ -2460,14 +2465,14 @@ a {
 /* En Mobile hay menos espacio: zigzag de 7 mensajes en cuatro niveles. */
 @media (max-width: 767px) {
   .fase-despues__title {
-    font-size: clamp(2.3rem, 10vw, 4rem);
+    font-size: clamp(2.6rem, 12vw, 4.5rem);
     letter-spacing: -.065em;
   }
   .fase-despues__frase {
-    font-size: clamp(1.9rem, 8.6vw, 3.6rem);
+    font-size: clamp(1.35rem, 5.4vw, 2.2rem);
   }
   .fase-despues__frase--ultima {
-    font-size: clamp(2.5rem, 11vw, 4.5rem);
+    font-size: clamp(1.8rem, 6.2vw, 2.65rem);
   }
   .fase-despues__testimonios {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2480,9 +2485,14 @@ a {
     top: clamp(4.8rem, 10svh, 6rem);
   }
   .fase-despues.is-enhanced .fase-despues__title {
-    font-size: clamp(2.15rem, 10vw, 3.5rem);
+    font-size: clamp(2.65rem, 12vw, 4.6rem);
   }
   .fase-despues.is-enhanced .fase-despues__frase { top: 52%; }
+  .fase-despues.is-enhanced .fase-despues__testimonios {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
   .fase-despues.is-enhanced .fase-despues__testimonio {
     width: clamp(123px, 41vw, 175px);
   }
