@@ -2414,16 +2414,25 @@ a {
   will-change: transform, opacity;
 }
 
+/* Seis mensajes exactamente como en el boceto:
+   1  5  2
+   3  6  4
+   Orden de aparición: 1 → 2 → 3 → 4 → 5 → 6.
+   La cuadrícula permanece fija al revelar cada mensaje. */
 .fase-despues.is-enhanced .fase-despues__testimonios {
   position: absolute;
   inset: 0;
-  /* Se mide con JS desde el borde inferior real del título, así que
-     tampoco chocan los mensajes en tablet ni con alturas de pantalla distintas. */
   top: var(--despues-safe-top, 28svh);
-  bottom: 0;
+  bottom: clamp(1rem, 3svh, 2rem);
   z-index: 2;
-  display: block;
-  width: min(100%, 1200px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(.75rem, 3.5vw, 3rem);
+  row-gap: clamp(.8rem, 2.5svh, 1.6rem);
+  align-items: center;
+  justify-items: center;
+  width: min(calc(100% - 2 * var(--page-gutter)), 1120px);
   height: auto;
   margin: 0;
   left: 50%;
@@ -2431,28 +2440,33 @@ a {
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
-  /* Ancho calculado también por el ALTO libre de cada notebook.
-     Permite tres niveles completos debajo del título. */
-  --despues-card-width: min(228px, 18vw, calc((100svh - var(--despues-safe-top, 28svh)) * .37));
+  /* El límite vertical garantiza dos filas completas en notebooks bajas. */
+  --despues-card-width: min(100%, 295px, calc((100svh - var(--despues-safe-top, 28svh) - 66px) * .77));
 }
 
-.fase-despues.is-enhanced .fase-despues__testimonio {
-  position: absolute;
+.fase-despues.is-enhanced .fase-despues__testimonio,
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3n+2) {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
   width: var(--despues-card-width);
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1.75 / 1;
   opacity: 0;
   transform: translate3d(0, 26px, 0) scale(.96);
   will-change: opacity, transform;
 }
 
-/* Ubicaciones fijas y escalonadas; las tarjetas ya visibles no se mueven
-   cuando aparecen los mensajes siguientes. */
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 5%; top: 3%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 5%; top: 4%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 39%; top: 34%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 5%; top: 67%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 5%; top: 67%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { left: 39%; top: 68%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { left: 39%; top: 3%; }
+/* Ubicaciones referidas a los números de mensaje, no al orden DOM. */
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { grid-column: 1; grid-row: 1; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { grid-column: 3; grid-row: 1; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { grid-column: 1; grid-row: 2; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { grid-column: 3; grid-row: 2; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { grid-column: 2; grid-row: 1; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { grid-column: 2; grid-row: 2; }
 
 .fase-despues.is-enhanced .fase-despues__marca {
   position: absolute;
@@ -2501,27 +2515,32 @@ a {
   }
   .fase-despues.is-enhanced .fase-despues__frase { top: 52%; }
   .fase-despues.is-enhanced .fase-despues__testimonios {
-    top: 0;
-    bottom: 0;
-    height: 100%;
+    top: var(--despues-safe-top, 24svh);
+    bottom: clamp(1rem, 3svh, 1.7rem);
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(.55rem, 3vw, 1rem);
+    row-gap: clamp(.6rem, 2svh, 1rem);
+    --despues-card-width: min(100%, 175px, 41vw,
+      calc((100svh - var(--despues-safe-top, 24svh) - 90px) * .48));
   }
-  .fase-despues.is-enhanced .fase-despues__testimonio {
-    width: clamp(123px, 41vw, 175px);
-  }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 4%; top: 28%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 3%; top: 27%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 8%; top: 45%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 5%; top: 44%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 5%; top: 62%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { right: 4%; left: auto; top: 62%; width: clamp(123px, 41vw, 175px); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { left: 30%; top: 79%; width: clamp(123px, 41vw, 175px); }
+  /* Mobile: el orden de lectura se muestra en filas consecutivas. */
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { grid-column: 1; grid-row: 2; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { grid-column: 2; grid-row: 2; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { grid-column: 1; grid-row: 3; }
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { grid-column: 2; grid-row: 3; }
 }
 
 @media (max-height: 540px) and (orientation: landscape) {
   .fase-despues.is-enhanced .fase-despues__encabezado { top: 2.5rem; }
   .fase-despues.is-enhanced .fase-despues__title { font-size: clamp(1.8rem, 5vw, 3.4rem); }
-  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(n) {
-    width: min(150px, 13vw, calc((100svh - var(--despues-safe-top, 28svh)) * .37));
+  .fase-despues.is-enhanced .fase-despues__testimonios {
+    row-gap: .55rem;
+    --despues-card-width: min(100%, 150px, 15vw,
+      calc((100svh - var(--despues-safe-top, 28svh) - 44px) * .72));
   }
 }
 

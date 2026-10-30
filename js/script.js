@@ -858,7 +858,7 @@
 })();;
 
 // Y DESPUÉS: una narración por scroll, no una lista simultánea.
-// Seis frases separadas por pausas, siete mensajes acumulativos y logo final.
+// Seis frases separadas por pausas, seis mensajes acumulativos y logo final.
 // Todo es reversible; conserva el scrub suave de las demás secciones.
 (() => {
   'use strict';
@@ -921,7 +921,8 @@
     gallery.style.opacity = String(galleryVisible);
     gallery.style.visibility = galleryVisible > 0.003 ? 'visible' : 'hidden';
     cards.forEach((card, index) => {
-      const appearAt = 0.369 + index * 0.039;
+      // Orden temporal 01 a 06, independiente de la ubicación en la grilla.
+      const appearAt = 0.369 + index * 0.046;
       const appear = smooth((progress - appearAt) / 0.029);
       card.style.opacity = String(appear);
       card.style.transform =
