@@ -762,15 +762,13 @@ a {
 
 .servicios__closing {
   width: min(100%, 990px);
-  margin: clamp(7rem, 15vw, 14rem) auto 0;
+  margin: clamp(2.5rem, 4.5vw, 4.5rem) auto 0;
   text-align: center;
 }
 
 .servicios__rule {
-  width: min(100%, 720px);
-  height: 1px;
-  margin: 0 auto clamp(3.75rem, 8vw, 7rem);
-  background: rgba(255, 255, 255, 0.28);
+  /* El último servicio ya tiene un divisor inferior: evitamos duplicarlo. */
+  display: none;
 }
 
 .servicios__closing-label {
@@ -851,7 +849,7 @@ a {
   }
 
   .servicios__closing {
-    margin-top: clamp(6.5rem, 28vw, 10rem);
+    margin-top: clamp(2rem, 7vw, 3rem);
   }
 
   .servicios__closing-label {
