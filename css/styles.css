@@ -1177,6 +1177,15 @@ a {
            clamp(1.5rem, 3vw, 3rem);
 }
 
+/* En el recorrido secreto, el resumen entra en el tramo inferior del
+   último plano con el logo: no dejamos casi una pantalla vacía entre ambos.
+   Es exclusivamente la transición desde Y DESPUÉS, no afecta el inicio
+   público ni la geometría del caracol. */
+.experiencia-kenn:not([hidden]) + .servicios {
+  margin-top: -27svh;
+  padding-top: clamp(2rem, 4svh, 3.25rem);
+}
+
 /* El carrusel termina con PLAY en un escenario de pantalla completa.
    Acercamos la siguiente sección solo en el recorrido público, mientras
    la experiencia secreta permanezca oculta. No cambia el pin ni la hélice.
@@ -2422,11 +2431,14 @@ a {
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
+  /* Ancho calculado también por el ALTO libre de cada notebook.
+     Permite tres niveles completos debajo del título. */
+  --despues-card-width: min(228px, 18vw, calc((100svh - var(--despues-safe-top, 28svh)) * .37));
 }
 
 .fase-despues.is-enhanced .fase-despues__testimonio {
   position: absolute;
-  width: clamp(155px, 18vw, 228px);
+  width: var(--despues-card-width);
   opacity: 0;
   transform: translate3d(0, 26px, 0) scale(.96);
   will-change: opacity, transform;
@@ -2434,13 +2446,13 @@ a {
 
 /* Ubicaciones fijas y escalonadas; las tarjetas ya visibles no se mueven
    cuando aparecen los mensajes siguientes. */
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 5%; top: 2%; }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 7%; top: 1%; width: clamp(166px, 19vw, 238px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 36%; top: 20%; width: clamp(150px, 17vw, 215px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 2%; top: 51%; width: clamp(155px, 18vw, 228px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 4%; top: 52%; width: clamp(150px, 18vw, 225px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { left: 38%; top: 72%; width: clamp(148px, 17vw, 215px); }
-.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { right: 25%; top: 37%; width: clamp(134px, 16vw, 195px); }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(1) { left: 5%; top: 3%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(2) { right: 5%; top: 4%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3) { left: 39%; top: 34%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { right: 5%; top: 67%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { left: 5%; top: 67%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { left: 39%; top: 68%; }
+.fase-despues.is-enhanced .fase-despues__testimonio:nth-child(7) { left: 39%; top: 3%; }
 
 .fase-despues.is-enhanced .fase-despues__marca {
   position: absolute;
@@ -2509,7 +2521,7 @@ a {
   .fase-despues.is-enhanced .fase-despues__encabezado { top: 2.5rem; }
   .fase-despues.is-enhanced .fase-despues__title { font-size: clamp(1.8rem, 5vw, 3.4rem); }
   .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(n) {
-    width: clamp(100px, 13vw, 150px);
+    width: min(150px, 13vw, calc((100svh - var(--despues-safe-top, 28svh)) * .37));
   }
 }
 

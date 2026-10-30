@@ -363,11 +363,18 @@
     if (!activated) {
       destination.hidden = false;
       activated = true;
+      // Garantizar que el título, logo y foto de la intro no se queden
+      // invisibles tras abrir un bloque con muchos viewports de contenido.
+      destination.classList.add('is-visible');
       if (services) services.classList.remove('is-delayed-reveal', 'is-after-play');
       play.setAttribute('aria-expanded', 'true');
-      // El contenido oculto cambia el alto del documento: dejar que el
-      // navegador termine de recalcular el layout antes de medir.
-      if (window.ScrollTrigger) window.ScrollTrigger.refresh(true);
+      // Registrar el pin de Y DESPUÉS ANTES de desplazar a la intro:
+      // así no aparece de golpe otro tramo de 10 pantallas después del salto.
+      window.dispatchEvent(new Event('kenn:secret-opened'));
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.sort();
+        window.ScrollTrigger.refresh();
+      }
     }
     destination.scrollIntoView({
       // El salto se hace detrás del velo azul, sin mostrar secciones intermedias.
@@ -552,6 +559,10 @@
 
   const section = document.querySelector('[data-caracol-destino]');
   if (!section) return;
+  // La experiencia completa es demasiado alta: el 12% de esa sección
+  // nunca cabía en una pantalla y el título/foto quedaban ocultos.
+  const intro = section.querySelector('.experiencia-kenn__inner');
+  if (!intro) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reducedMotion || !('IntersectionObserver' in window)) return;
@@ -566,7 +577,7 @@
   });
 
   section.classList.add('has-intro-reveal');
-  observer.observe(section);
+  observer.observe(intro);
 })();
 
 // ANTES: fade-up por bloques, una sola vez, después de activar PLAY.
@@ -991,4 +1002,8 @@
     window.requestAnimationFrame(initialize);
   });
   observer.observe(secret, { attributes: true, attributeFilter: ['hidden'] });
+
+  // PLAY comunica la apertura: preferimos medir de forma síncrona antes
+  // de scrollIntoView; el MutationObserver sigue como respaldo.
+  window.addEventListener('kenn:secret-opened', initialize, { once: true });
 })();
