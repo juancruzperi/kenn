@@ -831,8 +831,8 @@
 (() => {
   'use strict';
   const CONTACTOS_KENN = {
-    whatsapp: '',
-    instagram: '',
+    whatsapp: 'https://wa.me/5492346415996',
+    instagram: 'https://www.instagram.com/kenn__ofc/?hl=es',
     email: '',
   };
   const footer = document.querySelector('.footer-kenn');
