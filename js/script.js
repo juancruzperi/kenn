@@ -734,10 +734,36 @@
 })();
 
 
-// Footer de Kenn: año de copyright actualizado sin edición manual.
+// Footer: completar estos tres enlaces cuando estén disponibles.
+// No colocar datos de ejemplo en producción; los vacíos quedan inactivos.
+// WhatsApp: https://wa.me/549221XXXXXXXX
+// Instagram: https://www.instagram.com/usuario/
+// Email: mailto:correo@dominio.com
 (() => {
   'use strict';
-
-  const year = document.querySelector('[data-footer-year]');
+  const CONTACTOS_KENN = {
+    whatsapp: '',
+    instagram: '',
+    email: '',
+  };
+  const footer = document.querySelector('.footer-kenn');
+  if (!footer) return;
+  const year = footer.querySelector('[data-footer-year]');
   if (year) year.textContent = String(new Date().getFullYear());
-})();
+
+  footer.querySelectorAll('[data-contact-link]').forEach(link => {
+    const key = link.getAttribute('data-contact-link');
+    const url = String(CONTACTOS_KENN[key] || '').trim();
+    const valid = key === 'email'
+      ? url.startsWith('mailto:') && url.includes('@')
+      : url.startsWith('https://');
+    if (!valid) return;
+
+    link.href = url;
+    link.removeAttribute('aria-disabled');
+    if (key !== 'email') {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+  });
+})();;
