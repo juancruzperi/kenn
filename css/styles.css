@@ -661,7 +661,7 @@ a {
   flex-direction: column;
   align-items: center;
   margin: 0;
-  font-size: clamp(2.65rem, 5vw, 5.5rem);
+  font-size: clamp(2.15rem, 3.9vw, 4.25rem);
   font-weight: 800;
   line-height: 1.07;
   letter-spacing: -.055em;
@@ -752,7 +752,7 @@ a {
   }
 
   .experiencia-kenn__title {
-    font-size: clamp(2.25rem, 8.8vw, 3.45rem);
+    font-size: clamp(1.75rem, 6.8vw, 2.65rem);
     letter-spacing: -.045em;
   }
 
@@ -776,7 +776,7 @@ a {
     padding-block: 3rem;
   }
   .experiencia-kenn__title {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.7rem, 4.2vw, 2.5rem);
   }
   .experiencia-kenn__media {
     width: min(100%, 440px);
