@@ -566,6 +566,30 @@
   observer.observe(section);
 })();
 
+// ANTES: fade-up por bloques, una sola vez, después de activar PLAY.
+// No altera las animaciones aprobadas del caracol ni del título inicial.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-fase-antes]');
+  if (!section) return;
+
+  const elements = [...section.querySelectorAll('[data-antes-reveal]')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+  section.classList.add('is-animated');
+  elements.forEach((element) => observer.observe(element));
+})();
+
 // Reveal de servicios: animación individual para cada bloque cuando entra
 // al viewport; una vez revelado permanece visible incluso al subir.
 // Sin IntersectionObserver o con movimiento reducido, no se oculta nada.
