@@ -215,13 +215,39 @@
         </div>
       </section>
 
-      <!-- Destino temporal. Completaremos esta sección al desarrollar ANTES,
-           DURANTE y Y DESPUÉS; PLAY ya puede abrirla y navegar a ella. -->
+      <!-- INTRO DE LA EXPERIENCIA SECRETA: PLAY la revela.
+           Después se incorporarán ANTES, DURANTE y Y DESPUÉS.
+           La foto todavía no existe: el placeholder evita solicitudes fallidas. -->
       <section class="experiencia-kenn" id="experiencia-kenn" data-caracol-destino aria-labelledby="experiencia-kenn-title" hidden>
         <div class="experiencia-kenn__inner">
-          <h2 class="experiencia-kenn__title" id="experiencia-kenn-title">Ahora empieza mi trabajo</h2>
-          <img class="experiencia-kenn__logo" src="assets/logo-kenn.svg" alt="Kenn" width="861" height="441" decoding="async">
-          <div class="experiencia-kenn__placeholder" aria-hidden="true">FOTO · KENN EN ACCIÓN</div>
+          <div class="experiencia-kenn__intro">
+            <h2 class="experiencia-kenn__title experiencia-kenn__reveal" id="experiencia-kenn-title">
+              <span>Ahora empieza</span>
+              <span>mi trabajo</span>
+            </h2>
+            <img
+              class="experiencia-kenn__logo experiencia-kenn__reveal"
+              src="assets/logo-kenn.svg"
+              alt="Kenn"
+              width="861"
+              height="441"
+              decoding="async"
+            >
+          </div>
+
+          <div class="experiencia-kenn__media experiencia-kenn__reveal"
+               role="img" aria-label="Espacio reservado para una fotografía de Kenn trabajando en un evento">
+            <!-- Cuando llegue la fotografía, sustituir el placeholder por:
+            <picture class="experiencia-kenn__picture">
+              <source media="(max-width: 767px) and (orientation: portrait)" srcset="assets/fotos/kenn-trabajo-mobile.webp">
+              <img src="assets/fotos/kenn-trabajo-desktop.webp" alt="Kenn trabajando durante un evento" loading="lazy" decoding="async">
+            </picture>
+            Eliminar también role y aria-label de .experiencia-kenn__media,
+            porque el <img> tendrá su propio texto alternativo. -->
+            <div class="experiencia-kenn__placeholder" aria-hidden="true">
+              <span class="experiencia-kenn__placeholder-label">FOTOGRAFÍA · KENN EN ACCIÓN</span>
+            </div>
+          </div>
         </div>
       </section>
 

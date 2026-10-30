@@ -539,6 +539,33 @@
 })();
 
 
+
+
+// Intro secreta: el PLAY del caracol hace visible la sección.
+// Revelamos título, logo y foto por etapas al entrar en pantalla.
+// Sin IntersectionObserver o con movimiento reducido, todo es visible.
+(() => {
+  'use strict';
+
+  const section = document.querySelector('[data-caracol-destino]');
+  if (!section) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    section.classList.add('is-visible');
+    observer.disconnect();
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -5% 0px',
+  });
+
+  section.classList.add('has-intro-reveal');
+  observer.observe(section);
+})();
+
 // Reveal de servicios: animación individual para cada bloque cuando entra
 // al viewport; una vez revelado permanece visible incluso al subir.
 // Sin IntersectionObserver o con movimiento reducido, no se oculta nada.
