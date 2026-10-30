@@ -641,6 +641,12 @@ a {
 }
 .experiencia-kenn__wipe.is-active { opacity: 1; }
 @media (max-width:767px) {
+  .caracol__outro,
+  .caracol.is-enhanced .caracol__outro {
+    /* La pregunta y PLAY forman una única llamada a la acción. */
+    gap: clamp(.75rem, 2.2svh, 1.25rem);
+  }
+
   .caracol__heading {
     font-size: clamp(1.8rem,7.5vw,3rem); line-height: 1.2;
   }
@@ -697,8 +703,22 @@ a {
 }
 
 .servicios__inner {
+  position: relative;
   width: min(100%, 1140px);
   margin-inline: auto;
+}
+
+/* Separador muy sutil entre el cierre PLAY y el resumen de servicios.
+   No cambia la altura ni interfiere con el reveal del contenido. */
+.servicios__inner::before {
+  content: '';
+  position: absolute;
+  top: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 900px);
+  height: 1px;
+  background: rgba(255, 255, 255, .18);
 }
 
 .servicios__header {
@@ -825,6 +845,10 @@ a {
 }
 
 @media (max-width: 767px) {
+  .servicios__inner::before {
+    top: -1.75rem;
+  }
+
   .servicios {
     padding: clamp(5rem, 18vw, 7rem) var(--page-gutter)
              clamp(1.25rem, 4vw, 2rem);
@@ -1011,7 +1035,8 @@ a {
   }
 
   .momento-expand__photo {
-    --momento-photo-start: 56%;
+    /* Más cerca del título sin cambiar la expansión a fullscreen. */
+    --momento-photo-start: 51%;
     width: min(72vw, 360px);
     height: min(44svh, 480px);
     border-radius: 5px;
@@ -1434,11 +1459,14 @@ a {
 
 @media (max-width: 767px) {
   .historia-cta {
-    min-height: 100svh;
-    padding: clamp(6.5rem, 12svh, 9rem) var(--page-gutter);
+    /* En mobile, evitamos la pantalla completa y el gran vacío
+       entre la foto expandida y el comienzo de TU HISTORIA. */
+    min-height: 0;
+    padding: clamp(3rem, 7svh, 4.25rem) var(--page-gutter)
+             clamp(3.5rem, 7.5svh, 4.75rem);
   }
 
-  .historia-cta__prelude { margin-bottom: clamp(3.5rem, 9svh, 5rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1.3rem, 3.3svh, 2rem); }
   .historia-cta__line { width: clamp(24px, 9vw, 56px); }
 
   .historia-cta__script {
@@ -1455,7 +1483,7 @@ a {
   }
 
   .historia-cta__link {
-    margin-top: clamp(3rem, 8svh, 5rem);
+    margin-top: clamp(1.45rem, 3.8svh, 2.25rem);
   }
 
 }
@@ -1495,6 +1523,20 @@ a {
            clamp(6rem, 11vw, 11rem);
   background: var(--color-navy);
   color: var(--color-white);
+}
+
+/* Separador entre DALE PLAY y Formación Profesional.
+   Es decorativo: no suma espacio al layout. */
+.formacion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(900px, calc(100% - 2 * var(--page-gutter)));
+  height: 1px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, .18);
+  pointer-events: none;
 }
 
 .formacion__inner {
