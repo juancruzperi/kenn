@@ -1388,18 +1388,21 @@ a {
   content: '';
   position: absolute;
   inset: -18%;
-  z-index: -1;
+  /* Sobre el fondo de la tarjeta, detrás de sus textos.
+     Con z-index negativo el brillo quedaba escondido. */
+  z-index: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 61% 57% at 50% 49%,
-    rgba(63, 84, 181, 0.17) 0%,
-    rgba(42, 55, 137, 0.075) 42%,
-    transparent 80%);
-  opacity: 0.72;
-  transition: opacity 480ms ease;
+  background: radial-gradient(ellipse 62% 58% at 50% 49%,
+    rgba(78, 103, 231, 0.36) 0%,
+    rgba(63, 83, 180, 0.18) 40%,
+    transparent 78%);
+  opacity: 0.38;
+  transition: opacity 500ms ease;
 }
 
 .formacion__card-title {
   position: relative;
+  z-index: 1;
   max-width: 470px;
   margin: 0;
   font-size: clamp(1.65rem, 2.8vw, 3rem);
@@ -1415,6 +1418,7 @@ a {
 
 .formacion__instructor {
   position: relative;
+  z-index: 1;
   margin: clamp(1.25rem, 2vw, 1.85rem) 0 0;
   font-size: clamp(0.92rem, 1.2vw, 1.1rem);
   font-weight: 500;
@@ -1422,10 +1426,10 @@ a {
   color: rgba(255, 255, 255, 0.63);
 }
 
-/* Hover apenas luminoso: sin movimiento, sombras nuevas ni bordes más fuertes. */
-@media (hover: hover) and (pointer: fine) {
+/* Solo iluminación: no desplaza la tarjeta ni modifica borde/sombra. */
+@media (hover: hover) {
   .formacion__card:hover::before {
-    opacity: 0.90;
+    opacity: 1;
   }
 }
 
