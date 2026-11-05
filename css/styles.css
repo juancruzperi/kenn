@@ -2579,3 +2579,169 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* REFINAMIENTO DE IDENTIDAD · CTA, numeración, intro y formación.
+   Sin modificar el azul marino ni la trayectoria de las animaciones. */
+
+/* El PLAY que abre la experiencia es el foco principal:
+   botón dorado sólido, distinto del DALE PLAY editorial. */
+.caracol__play.kenn-play-link {
+  min-width: clamp(205px, 24vw, 310px);
+  min-height: clamp(78px, 8.5vw, 106px);
+  padding: clamp(1.1rem, 2.1vw, 1.6rem) clamp(2.1rem, 3.6vw, 3.25rem);
+  gap: clamp(1.1rem, 2.2vw, 1.8rem);
+  border: 1px solid rgba(255, 231, 117, .88);
+  border-radius: 7px;
+  background: #f7d537;
+  color: #04082f;
+  font-size: clamp(2.15rem, 4.15vw, 3.55rem);
+  font-weight: 800;
+  letter-spacing: .025em;
+  box-shadow:
+    0 13px 38px rgba(0, 0, 0, .22),
+    0 0 36px rgba(247, 213, 55, .11);
+  transition: background-color 250ms ease, box-shadow 300ms ease, border-color 250ms ease;
+}
+.caracol__play.kenn-play-link .kenn-play-link__text {
+  padding-bottom: 0;
+}
+.caracol__play.kenn-play-link .kenn-play-link__text::after {
+  display: none;
+}
+.caracol__play.kenn-play-link .kenn-play-link__arrow {
+  width: clamp(29px, 3vw, 42px);
+}
+.caracol__play.kenn-play-link:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 6px;
+}
+@media (hover: hover) {
+  .caracol__play.kenn-play-link:hover {
+    background: #ffe475;
+    color: #04082f;
+    border-color: #ffe475;
+    box-shadow:
+      0 17px 48px rgba(0, 0, 0, .24),
+      0 0 46px rgba(247, 213, 55, .24);
+  }
+}
+
+/* Una única familia para los números de cada servicio/capítulo. */
+.fase-antes__number,
+.fase-durante__number,
+.servicios__index {
+  color: #f7d537;
+  font-size: clamp(.8rem, .95vw, .9rem);
+  font-weight: 700;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mayor pausa entre "Ahora empieza mi trabajo" y la marca. */
+.experiencia-kenn__intro {
+  gap: clamp(1.9rem, 4.2svh, 3.25rem);
+}
+
+/* Elegancia editorial: una sola cursiva serif como acento,
+   el resto usa la tipografía sans del sitio y no hay rayas laterales. */
+.historia-cta__prelude {
+  gap: 0;
+  margin-bottom: clamp(1.8rem, 3.8svh, 2.8rem);
+}
+.historia-cta__script {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.85rem, 3.5vw, 3.5rem);
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  color: rgba(255, 255, 255, .93);
+}
+.historia-cta__intro {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 1.85vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: .012em;
+  color: rgba(255, 255, 255, .76);
+}
+.historia-cta__title {
+  font-family: var(--font-sans);
+  letter-spacing: -.045em;
+}
+/* DALE PLAY permanece tipográfico, pero ahora tiene peso propio
+   frente al título y una flecha más expresiva. */
+.historia-cta__link.kenn-play-link {
+  gap: clamp(1rem, 2vw, 1.8rem);
+  font-size: clamp(1.75rem, 3vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: .065em;
+}
+.historia-cta__link .kenn-play-link__text {
+  padding-bottom: .65rem;
+}
+.historia-cta__link .kenn-play-link__text::after {
+  height: 3px;
+  transform: scaleX(.92);
+}
+.historia-cta__link .kenn-play-link__arrow {
+  width: clamp(30px, 3vw, 43px);
+}
+
+/* Conservamos exactamente el fondo de Formación Profesional.
+   Bajamos la altura y añadimos un borde dorado con halo discreto. */
+.formacion__card {
+  min-height: clamp(215px, 19vw, 280px);
+  padding: clamp(2.1rem, 3.1vw, 2.9rem) clamp(1.5rem, 3vw, 3.5rem);
+  border-color: rgba(247, 213, 55, .43);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, .07),
+    0 0 0 1px rgba(247, 213, 55, .045),
+    0 0 30px rgba(247, 213, 55, .085);
+  transition: border-color 320ms ease, box-shadow 350ms ease;
+}
+@media (hover: hover) {
+  .formacion__card:hover {
+    border-color: rgba(247, 213, 55, .68);
+    box-shadow:
+      0 10px 36px rgba(0, 0, 0, .1),
+      0 0 0 1px rgba(247, 213, 55, .09),
+      0 0 42px rgba(247, 213, 55, .13);
+  }
+}
+@media (max-width: 767px) {
+  .caracol__play.kenn-play-link {
+    min-width: 205px;
+    min-height: 75px;
+    padding: 1rem 2rem;
+    font-size: clamp(2rem, 7.8vw, 2.6rem);
+    gap: 1rem;
+  }
+  .caracol__play.kenn-play-link .kenn-play-link__arrow {
+    width: clamp(27px, 7vw, 35px);
+  }
+  .experiencia-kenn__intro {
+    gap: clamp(1.5rem, 3.3svh, 2.3rem);
+  }
+  .historia-cta__prelude {
+    margin-bottom: clamp(1.5rem, 3.8svh, 2.25rem);
+  }
+  .historia-cta__script {
+    font-size: clamp(1.65rem, 6.5vw, 2.25rem);
+  }
+  .historia-cta__link.kenn-play-link {
+    font-size: clamp(1.5rem, 5.9vw, 2.05rem);
+    gap: 1rem;
+  }
+  .historia-cta__link .kenn-play-link__arrow {
+    width: clamp(27px, 7vw, 33px);
+  }
+  .formacion__card {
+    min-height: clamp(185px, 47vw, 235px);
+    padding: clamp(1.8rem, 7vw, 2.25rem) 1.75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .formacion__card { transition: none; }
+}
+

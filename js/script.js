@@ -970,7 +970,10 @@
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 10.2),
+        // Recorrido aproximadamente un 35% más breve. Conserva las seis
+        // frases y seis capturas, pero exige menos giros de rueda/touch.
+        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) *
+          (window.innerWidth < 768 ? 7 : 6.6)),
         pin: stage,
         pinSpacing: true,
         // Este pin nace al pulsar PLAY, pero está ANTES de servicios
