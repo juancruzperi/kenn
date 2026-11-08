@@ -896,7 +896,7 @@ a {
   font-size: .85rem;
   font-weight: 700;
   letter-spacing: .06em;
-  color: rgba(255, 255, 255, .5);
+  color: #f7d537;
 }
 
 .fase-antes__step-title {
@@ -1064,7 +1064,7 @@ a {
   font-size: .85rem;
   font-weight: 700;
   letter-spacing: .06em;
-  color: rgba(255, 255, 255, .5);
+  color: #f7d537;
 }
 
 .fase-durante__step-title {
@@ -1293,7 +1293,7 @@ a {
   font-size: clamp(0.76rem, 1vw, 0.9rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: rgba(255, 255, 255, 0.5);
+  color: #f7d537;
   letter-spacing: 0.07em;
 }
 
