@@ -658,7 +658,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(.45rem, 1.8svh, 1rem);
+  /* Más aire exclusivamente entre el título y el logo de Kenn. */
+  gap: clamp(1.8rem, 4svh, 3rem);
 }
 
 .experiencia-kenn__title {
@@ -754,6 +755,10 @@ a {
     padding: clamp(4rem, 8svh, 5.5rem) var(--page-gutter)
              clamp(1.75rem, 4svh, 3rem);
     gap: clamp(1rem, 2.2svh, 1.6rem);
+  }
+
+  .experiencia-kenn__intro {
+    gap: clamp(1.35rem, 3svh, 2rem);
   }
 
   .experiencia-kenn__title {
