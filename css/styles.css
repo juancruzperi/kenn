@@ -2112,7 +2112,7 @@ a {
   min-height: clamp(235px, 22vw, 315px);
   padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 3.5rem);
   overflow: hidden;
-  border: 1px solid rgba(247, 213, 55, 0.28);
+  border: 3px solid rgba(247, 213, 55, 0.28);
   border-radius: 5px;
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
