@@ -529,27 +529,29 @@ a {
 /* PLAY del carrusel: mismo lenguaje visual que DALE PLAY, pero con
    mayor jerarquía para destacar la acción que abre la experiencia. */
 .caracol__play.kenn-play-link {
-  font-size: clamp(2.1rem, 4vw, 3.2rem);
-  gap: clamp(1rem, 2.3vw, 1.9rem);
+  /* Acción principal: sigue siendo tipográfica, sin fondo ni caja. */
+  font-size: clamp(2.65rem, 5.2vw, 4.3rem);
+  gap: clamp(1.2rem, 2.8vw, 2.4rem);
+  letter-spacing: 0.055em;
 }
 
 .caracol__play .kenn-play-link__arrow {
-  width: clamp(29px, 3.3vw, 43px);
+  width: clamp(36px, 4.2vw, 55px);
 }
 
 .caracol__play .kenn-play-link__text::after {
   height: 3px;
-  transform: scaleX(0.93);
+  transform: scaleX(0.96);
 }
 
 @media (max-width: 767px) {
   .caracol__play.kenn-play-link {
-    font-size: clamp(1.85rem, 7.7vw, 2.5rem);
-    gap: 1rem;
+    font-size: clamp(2.15rem, 8.8vw, 3.05rem);
+    gap: clamp(0.95rem, 3.5vw, 1.35rem);
   }
 
   .caracol__play .kenn-play-link__arrow {
-    width: clamp(25px, 6.6vw, 34px);
+    width: clamp(30px, 7.6vw, 42px);
   }
 }
 
@@ -1712,9 +1714,18 @@ a {
   .kenn-play-link:hover .kenn-play-link__arrow { transform: translateX(7px); }
 }
 
-/* Solo cambia la ubicación, no el diseño del botón público. */
-.historia-cta__link {
+/* DALE PLAY: más presencia que los enlaces secundarios, pero sin
+   perder el subrayado, la flecha ni su estilo editorial. */
+.historia-cta__link.kenn-play-link {
   margin-top: clamp(3.75rem, 9svh, 6.5rem);
+  font-size: clamp(1.75rem, 3.15vw, 2.8rem);
+  gap: clamp(1rem, 2.2vw, 1.85rem);
+}
+.historia-cta__link .kenn-play-link__text::after {
+  height: 3px;
+}
+.historia-cta__link .kenn-play-link__arrow {
+  width: clamp(29px, 3.45vw, 44px);
 }
 
 @media (max-width: 767px) {
@@ -1989,8 +2000,13 @@ a {
     letter-spacing: -0.055em;
   }
 
-  .historia-cta__link {
+  .historia-cta__link.kenn-play-link {
     margin-top: clamp(1.45rem, 3.8svh, 2.25rem);
+    font-size: clamp(1.55rem, 5.9vw, 2.05rem);
+    gap: clamp(.85rem, 3.2vw, 1.2rem);
+  }
+  .historia-cta__link .kenn-play-link__arrow {
+    width: clamp(27px, 7vw, 36px);
   }
 
 }
