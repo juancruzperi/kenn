@@ -658,8 +658,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Más aire exclusivamente entre el título y el logo de Kenn. */
-  gap: clamp(1.8rem, 4svh, 3rem);
+  /* Separación claramente visible entre "Ahora empieza mi trabajo" y el logo. */
+  gap: clamp(3.5rem, 8svh, 5rem);
 }
 
 .experiencia-kenn__title {
@@ -758,7 +758,7 @@ a {
   }
 
   .experiencia-kenn__intro {
-    gap: clamp(1.35rem, 3svh, 2rem);
+    gap: clamp(2.25rem, 5svh, 3.5rem);
   }
 
   .experiencia-kenn__title {
