@@ -1627,14 +1627,14 @@ a {
 
 /* Un acento serif sobrio y elegante, sin líneas decorativas. */
 .historia-cta__script {
+  flex-shrink: 0;
   margin: 0;
-  color: rgba(255, 255, 255, 0.94);
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
-  font-style: normal;
+  color: var(--color-white);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.65rem, 3.1vw, 3rem);
-  line-height: 1.18;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.45rem, 2.9vw, 2.85rem);
+  line-height: 1.25;
 }
 
 /* Texto de apoyo más discreto; TU HISTORIA conserva el protagonismo. */
@@ -1994,7 +1994,7 @@ a {
   .historia-cta__prelude { margin-bottom: clamp(1.3rem, 3.3svh, 2rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.45rem, 5.7vw, 2rem);
+    font-size: clamp(1.35rem, 5.6vw, 1.85rem);
   }
 
   .historia-cta__intro {
