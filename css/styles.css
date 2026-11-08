@@ -2101,21 +2101,23 @@ a {
 }
 
 .formacion__card {
-  /* Mini escenario de la misma familia visual que EL MOMENTO:
-     brillo central leve, sin fotos, íconos ni bordes pronunciados. */
+  /* Mantiene la misma familia visual azul marino; suma un acento
+     dorado delicado sin convertir la tarjeta en un botón. */
   position: relative;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: clamp(275px, 26vw, 390px);
-  padding: clamp(2.75rem, 5vw, 4.75rem) clamp(1.5rem, 3vw, 3.5rem);
+  min-height: clamp(235px, 22vw, 315px);
+  padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 3.5rem);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(247, 213, 55, 0.28);
   border-radius: 5px;
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
+              0 0 24px rgba(247, 213, 55, 0.045),
+              inset 0 0 24px rgba(247, 213, 55, 0.018);
   text-align: center;
 
 }
@@ -2162,8 +2164,14 @@ a {
   color: rgba(255, 255, 255, 0.63);
 }
 
-/* Solo iluminación: no desplaza la tarjeta ni modifica borde/sombra. */
+/* El brillo sube apenas al pasar el cursor, sin mover la tarjeta. */
 @media (hover: hover) {
+  .formacion__card:hover {
+    border-color: rgba(247, 213, 55, 0.45);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
+                0 0 30px rgba(247, 213, 55, 0.085),
+                inset 0 0 24px rgba(247, 213, 55, 0.025);
+  }
   .formacion__card:hover::before {
     opacity: 1;
   }
@@ -2202,8 +2210,8 @@ a {
   }
 
   .formacion__card {
-    min-height: clamp(245px, 65vw, 325px);
-    padding: 2.6rem 1.75rem;
+    min-height: clamp(220px, 54vw, 275px);
+    padding: 2.15rem 1.75rem;
   }
 
   .formacion__card-title {
