@@ -2078,7 +2078,7 @@ a {
 .formacion__eyebrow {
   display: block;
   margin-bottom: clamp(1.15rem, 2.5vw, 2rem);
-  color: #f7d537;
+  color: rgba(255, 255, 255, 0.56);
   font-size: clamp(0.7rem, 0.95vw, 0.84rem);
   line-height: 1.4;
   font-weight: 700;
