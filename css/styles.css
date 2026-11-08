@@ -529,6 +529,8 @@ a {
 /* PLAY del carrusel: mismo lenguaje visual que DALE PLAY, pero con
    mayor jerarquía para destacar la acción que abre la experiencia. */
 .caracol__play.kenn-play-link {
+  /* Equilibra la flecha a la derecha para centrar ópticamente PLAY. */
+  --cta-arrow-width: clamp(36px, 4.2vw, 55px);
   /* Acción principal: sigue siendo tipográfica, sin fondo ni caja. */
   font-size: clamp(2.65rem, 5.2vw, 4.3rem);
   gap: clamp(1.2rem, 2.8vw, 2.4rem);
@@ -536,7 +538,7 @@ a {
 }
 
 .caracol__play .kenn-play-link__arrow {
-  width: clamp(36px, 4.2vw, 55px);
+  width: var(--cta-arrow-width);
 }
 
 .caracol__play .kenn-play-link__text::after {
@@ -546,12 +548,13 @@ a {
 
 @media (max-width: 767px) {
   .caracol__play.kenn-play-link {
+    --cta-arrow-width: clamp(30px, 7.6vw, 42px);
     font-size: clamp(2.15rem, 8.8vw, 3.05rem);
     gap: clamp(0.95rem, 3.5vw, 1.35rem);
   }
 
   .caracol__play .kenn-play-link__arrow {
-    width: clamp(30px, 7.6vw, 42px);
+    width: var(--cta-arrow-width);
   }
 }
 
@@ -1714,10 +1717,22 @@ a {
   .kenn-play-link:hover .kenn-play-link__arrow { transform: translateX(7px); }
 }
 
+/* Contrapeso invisible: texto y subrayado quedan centrados frente
+   al título, mientras la flecha permanece a su derecha. */
+.caracol__play.kenn-play-link::before,
+.historia-cta__link.kenn-play-link::before {
+  content: '';
+  flex: 0 0 var(--cta-arrow-width);
+  height: 1px;
+  pointer-events: none;
+}
+
 /* DALE PLAY: más presencia que los enlaces secundarios, pero sin
    perder el subrayado, la flecha ni su estilo editorial. */
 .historia-cta__link.kenn-play-link {
-  margin-top: clamp(3.75rem, 9svh, 6.5rem);
+  --cta-arrow-width: clamp(29px, 3.45vw, 44px);
+  /* Menos separación respecto de TU HISTORIA. */
+  margin-top: clamp(1.5rem, 3svh, 2.25rem);
   font-size: clamp(1.75rem, 3.15vw, 2.8rem);
   gap: clamp(1rem, 2.2vw, 1.85rem);
 }
@@ -1725,7 +1740,7 @@ a {
   height: 3px;
 }
 .historia-cta__link .kenn-play-link__arrow {
-  width: clamp(29px, 3.45vw, 44px);
+  width: var(--cta-arrow-width);
 }
 
 @media (max-width: 767px) {
@@ -2001,12 +2016,13 @@ a {
   }
 
   .historia-cta__link.kenn-play-link {
-    margin-top: clamp(1.45rem, 3.8svh, 2.25rem);
+    --cta-arrow-width: clamp(27px, 7vw, 36px);
+    margin-top: clamp(0.95rem, 2.5svh, 1.5rem);
     font-size: clamp(1.55rem, 5.9vw, 2.05rem);
     gap: clamp(.85rem, 3.2vw, 1.2rem);
   }
   .historia-cta__link .kenn-play-link__arrow {
-    width: clamp(27px, 7vw, 36px);
+    width: var(--cta-arrow-width);
   }
 
 }
