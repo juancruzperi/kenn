@@ -8,7 +8,6 @@
     if (instances.has(header)) return instances.get(header);
 
     const button = header.querySelector('.menu-toggle');
-    const brand = header.querySelector('.site-header__brand');
     const menu = document.getElementById(button.getAttribute('aria-controls'));
     const links = [...menu.querySelectorAll('a[href^="#"]')];
     const events = new AbortController();
@@ -108,7 +107,7 @@
         setMenu(false);
       }
       if (event.key !== 'Tab') return;
-      const focusable = [brand, button, ...links].filter(Boolean);
+      const focusable = [button, ...links];
       const index = focusable.indexOf(document.activeElement);
       if (event.shiftKey && index <= 0) {
         event.preventDefault();
@@ -135,13 +134,6 @@
     }
 
     button.addEventListener('click', () => setMenu(!open), options);
-    if (brand) brand.addEventListener('click', event => {
-      event.preventDefault();
-      // El logo vuelve al inicio incluso si hay contenido secreto abierto.
-      if (open) setMenu(false);
-      header.classList.remove('is-hidden');
-      window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-    }, options);
     links.forEach(link => link.addEventListener('click', navigate, options));
     document.addEventListener('keydown', handleKeyboard, options);
     // Evitar que el foco salga del menú incluso por foco programático externo.
@@ -978,10 +970,7 @@
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        // Menos desplazamiento para leer toda la secuencia, conservando
-        // el orden, las pausas, el scrub y los seis testimonios.
-        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) *
-          (window.innerWidth < 768 ? 7.2 : 6.8)),
+        end: () => '+=' + Math.round(Math.max(window.innerHeight, 480) * 10.2),
         pin: stage,
         pinSpacing: true,
         // Este pin nace al pulsar PLAY, pero está ANTES de servicios

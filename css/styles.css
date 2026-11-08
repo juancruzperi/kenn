@@ -79,20 +79,6 @@ a {
   gap: 1.5rem;
 }
 
-/* El logo también es un enlace accesible al inicio. */
-.site-header__brand {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.site-header__brand:focus-visible {
-  outline: 2px solid #f7d537;
-  outline-offset: 6px;
-}
 .site-header__logo {
   display: block;
   flex-shrink: 0;
@@ -540,54 +526,30 @@ a {
   flex-shrink: 0;
 }
 
-/* PLAY secreto: acción principal, botón dorado sólido. El DALE PLAY
-   público conserva su carácter tipográfico/editorial. */
+/* PLAY del carrusel: mismo lenguaje visual que DALE PLAY, pero con
+   mayor jerarquía para destacar la acción que abre la experiencia. */
 .caracol__play.kenn-play-link {
-  min-width: clamp(198px, 24vw, 290px);
-  min-height: clamp(76px, 8.2vw, 102px);
-  padding: clamp(1rem, 2vw, 1.4rem) clamp(2rem, 3.2vw, 3rem);
-  gap: clamp(1rem, 2vw, 1.7rem);
-  border: 1px solid rgba(255, 229, 112, .8);
-  border-radius: 6px;
-  background: #f7d537;
-  color: #04082f;
-  font-size: clamp(2.1rem, 4vw, 3.3rem);
-  letter-spacing: .035em;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, .2),
-              0 0 32px rgba(247, 213, 55, .11);
-  transition: background-color 250ms ease, box-shadow 300ms ease;
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  gap: clamp(1rem, 2.3vw, 1.9rem);
 }
-.caracol__play .kenn-play-link__text {
-  padding-bottom: 0;
-}
-.caracol__play .kenn-play-link__text::after {
-  display: none;
-}
+
 .caracol__play .kenn-play-link__arrow {
-  width: clamp(28px, 3vw, 42px);
+  width: clamp(29px, 3.3vw, 43px);
 }
-.caracol__play.kenn-play-link:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 6px;
+
+.caracol__play .kenn-play-link__text::after {
+  height: 3px;
+  transform: scaleX(0.93);
 }
-@media (hover: hover) {
-  .caracol__play.kenn-play-link:hover {
-    color: #04082f;
-    background: #ffe475;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, .24),
-                0 0 42px rgba(247, 213, 55, .2);
-  }
-}
+
 @media (max-width: 767px) {
   .caracol__play.kenn-play-link {
-    min-width: 200px;
-    min-height: 76px;
-    padding: 1rem 1.85rem;
-    font-size: clamp(1.95rem, 7.5vw, 2.55rem);
+    font-size: clamp(1.85rem, 7.7vw, 2.5rem);
     gap: 1rem;
   }
+
   .caracol__play .kenn-play-link__arrow {
-    width: clamp(26px, 6.6vw, 34px);
+    width: clamp(25px, 6.6vw, 34px);
   }
 }
 
@@ -691,7 +653,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.6rem, 4svh, 2.8rem);
+  gap: clamp(.45rem, 1.8svh, 1rem);
 }
 
 .experiencia-kenn__title {
@@ -797,9 +759,6 @@ a {
     max-width: 100%;
   }
 
-  .experiencia-kenn__intro {
-    gap: clamp(1.25rem, 3.2svh, 2rem);
-  }
   .experiencia-kenn__logo {
     width: clamp(135px, 38vw, 175px);
   }
@@ -923,7 +882,7 @@ a {
   font-size: .85rem;
   font-weight: 700;
   letter-spacing: .06em;
-  color: #f7d537;
+  color: rgba(255, 255, 255, .5);
 }
 
 .fase-antes__step-title {
@@ -1091,7 +1050,7 @@ a {
   font-size: .85rem;
   font-weight: 700;
   letter-spacing: .06em;
-  color: #f7d537;
+  color: rgba(255, 255, 255, .5);
 }
 
 .fase-durante__step-title {
@@ -1320,7 +1279,7 @@ a {
   font-size: clamp(0.76rem, 1vw, 0.9rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #f7d537;
+  color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.07em;
 }
 
@@ -1651,9 +1610,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0;
+  gap: clamp(0.85rem, 2.2vw, 2.25rem);
   width: 100%;
-  margin-bottom: clamp(2.7rem, 5.5svh, 4.4rem);
+  margin-bottom: clamp(3.75rem, 8vh, 6.25rem);
 }
 
 .historia-cta__line {
@@ -1667,21 +1626,20 @@ a {
   flex-shrink: 0;
   margin: 0;
   color: var(--color-white);
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.8rem, 3.35vw, 3.2rem);
-  line-height: 1.28;
-  letter-spacing: -.025em;
+  font-size: clamp(1.45rem, 2.9vw, 2.85rem);
+  line-height: 1.25;
 }
 
 .historia-cta__intro {
   margin: 0 0 clamp(0.4rem, 1.5vh, 0.9rem);
   color: rgba(255, 255, 255, 0.83);
-  font-size: clamp(1.12rem, 1.9vw, 1.8rem);
-  font-weight: 500;
+  font-size: clamp(1.12rem, 2vw, 1.9rem);
+  font-weight: 400;
   line-height: 1.4;
-  letter-spacing: .01em;
+  letter-spacing: -0.02em;
 }
 
 .historia-cta__title {
@@ -1754,17 +1712,9 @@ a {
   .kenn-play-link:hover .kenn-play-link__arrow { transform: translateX(7px); }
 }
 
-/* DALE PLAY tiene presencia, pero sigue siendo un CTA editorial. */
+/* Solo cambia la ubicación, no el diseño del botón público. */
 .historia-cta__link {
-  margin-top: clamp(3rem, 7svh, 5.2rem);
-  gap: clamp(1rem, 2vw, 1.7rem);
-  font-size: clamp(1.6rem, 2.9vw, 2.7rem);
-}
-.historia-cta__link .kenn-play-link__text::after {
-  height: 3px;
-}
-.historia-cta__link .kenn-play-link__arrow {
-  width: clamp(28px, 3vw, 41px);
+  margin-top: clamp(3.75rem, 9svh, 6.5rem);
 }
 
 @media (max-width: 767px) {
@@ -2023,11 +1973,11 @@ a {
              clamp(3.5rem, 7.5svh, 4.75rem);
   }
 
-  .historia-cta__prelude { margin-bottom: clamp(1.45rem, 3.8svh, 2.2rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1.3rem, 3.3svh, 2rem); }
   .historia-cta__line { width: clamp(24px, 9vw, 56px); }
 
   .historia-cta__script {
-    font-size: clamp(1.6rem, 6.4vw, 2.15rem);
+    font-size: clamp(1.35rem, 5.6vw, 1.85rem);
   }
 
   .historia-cta__intro {
@@ -2040,11 +1990,7 @@ a {
   }
 
   .historia-cta__link {
-    margin-top: clamp(1.75rem, 4.3svh, 2.5rem);
-    font-size: clamp(1.55rem, 5.75vw, 2.1rem);
-  }
-  .historia-cta__link .kenn-play-link__arrow {
-    width: clamp(25px, 7vw, 34px);
+    margin-top: clamp(1.45rem, 3.8svh, 2.25rem);
   }
 
 }
@@ -2145,15 +2091,13 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: clamp(220px, 20vw, 285px);
-  padding: clamp(2.1rem, 3.1vw, 3rem) clamp(1.5rem, 3vw, 3.5rem);
+  min-height: clamp(275px, 26vw, 390px);
+  padding: clamp(2.75rem, 5vw, 4.75rem) clamp(1.5rem, 3vw, 3.5rem);
   overflow: hidden;
-  border: 1px solid rgba(247, 213, 55, .45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 5px;
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-              0 0 28px rgba(247, 213, 55, .075);
-  transition: border-color 350ms ease, box-shadow 350ms ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
   text-align: center;
 
 }
@@ -2205,11 +2149,6 @@ a {
   .formacion__card:hover::before {
     opacity: 1;
   }
-  .formacion__card:hover {
-    border-color: rgba(247, 213, 55, .72);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, .12),
-                0 0 40px rgba(247, 213, 55, .14);
-  }
 }
 
 .formacion.is-animated .formacion__reveal {
@@ -2245,8 +2184,8 @@ a {
   }
 
   .formacion__card {
-    min-height: clamp(196px, 49vw, 242px);
-    padding: 2rem 1.75rem;
+    min-height: clamp(245px, 65vw, 325px);
+    padding: 2.6rem 1.75rem;
   }
 
   .formacion__card-title {
