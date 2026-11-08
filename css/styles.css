@@ -678,6 +678,9 @@ a {
   width: clamp(145px, 17vw, 215px);
   height: auto;
   object-fit: contain;
+  /* Distancia adicional REAL bajo el título: el gap solo
+     resultaba visualmente insuficiente con este SVG. */
+  margin-block-start: clamp(3.25rem, 7svh, 5rem);
 }
 
 .experiencia-kenn__media {
@@ -771,6 +774,7 @@ a {
 
   .experiencia-kenn__logo {
     width: clamp(135px, 38vw, 175px);
+    margin-block-start: clamp(2rem, 5svh, 3rem);
   }
 
   .experiencia-kenn__media {
