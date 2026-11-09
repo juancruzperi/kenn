@@ -88,6 +88,14 @@ a {
   object-fit: contain;
 }
 
+/* El logo mantiene sus dimensiones y ahora funciona como enlace. */
+.site-header__home {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
 .menu-toggle {
   display: grid;
   place-items: center;
@@ -2584,6 +2592,27 @@ a {
 }
 
 /* Footer: pendiente de su prompt. */
+
+/* Transición de navegación: se cubre la pantalla de azul marino
+   mientras el destino cambia instantáneamente detrás del velo. */
+.kenn-navigation-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-navy);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 270ms ease, visibility 0s linear 270ms;
+}
+.kenn-navigation-fade.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 270ms ease, visibility 0s linear 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kenn-navigation-fade { transition: none; }
+}
 
 /* Responsive */
 @media (hover: hover) {

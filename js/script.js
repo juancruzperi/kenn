@@ -1,3 +1,79 @@
+// Navegación entre secciones: fade azul marino, sin recorrer la página.
+// El scroll normal y el PLAY que abre la experiencia secreta no se modifican.
+const kennNavigateTo = (() => {
+  'use strict';
+
+  const veil = document.querySelector('[data-kenn-navigation-fade]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const fadeMs = 270;
+  let busy = false;
+
+  function navigate(target, hash = '') {
+    if (!target || target.closest('[hidden], [inert]') || !target.getClientRects().length) {
+      return false;
+    }
+    if (busy) return true;
+
+    const jump = () => {
+      // Destino instantáneo mientras la pantalla está tapada.
+      // En el inicio, el scroll debe quedar exactamente en cero.
+      if (target.id === 'inicio') {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else {
+        target.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+      if (window.ScrollTrigger) window.ScrollTrigger.update();
+
+      // Actualizar la URL sin provocar otro salto de ancla.
+      if (hash && window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', hash);
+      }
+      if (!target.hasAttribute('tabindex')) {
+        target.setAttribute('tabindex', '-1');
+        target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+      }
+      target.focus({ preventScroll: true });
+    };
+
+    if (reducedMotion.matches || !veil) {
+      jump();
+      return true;
+    }
+
+    busy = true;
+    veil.classList.add('is-active');
+
+    window.setTimeout(() => {
+      jump();
+      // Dos cuadros para fijar el destino y actualizar ScrollTrigger
+      // antes de dejarlo ver: ningún tramo intermedio queda expuesto.
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          veil.classList.remove('is-active');
+          window.setTimeout(() => { busy = false; }, fadeMs);
+        });
+      });
+    }, fadeMs);
+
+    return true;
+  }
+
+  // Logo, DALE PLAY y Volver al inicio comparten la misma transición.
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[data-kenn-nav]');
+    if (!link) return;
+    const hash = link.hash;
+    const target = hash ? document.getElementById(hash.slice(1)) : null;
+    if (!target || target.closest('[hidden], [inert]')) return;
+    event.preventDefault();
+    navigate(target, hash);
+  });
+
+  return navigate;
+})();
+
 (() => {
   'use strict';
 
@@ -12,7 +88,6 @@
     const links = [...menu.querySelectorAll('a[href^="#"]')];
     const events = new AbortController();
     const options = { signal: events.signal };
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const directionThreshold = 10;
     const topThreshold = 8;
     let open = false;
@@ -124,13 +199,7 @@
       setMenu(false);
       // Los destinos se incorporarán después. Nunca revelar contenido oculto.
       if (!target || target.closest('[hidden], [inert]') || !target.getClientRects().length) return;
-      target.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
-      const originalTabindex = target.getAttribute('tabindex');
-      if (originalTabindex === null) {
-        target.setAttribute('tabindex', '-1');
-        target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
-      }
-      target.focus({ preventScroll: true });
+      kennNavigateTo(target, event.currentTarget.hash);
     }
 
     button.addEventListener('click', () => setMenu(!open), options);
@@ -762,25 +831,10 @@
   if (!section) return;
 
   const revealItems = [...section.querySelectorAll('[data-historia-reveal]')];
-  const link = section.querySelector('[data-historia-link]');
-  const target = document.getElementById('contacto');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Sigue funcionando como un enlace a #contacto cuando JS está deshabilitado.
-  if (link && target) {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      target.scrollIntoView({
-        behavior: reducedMotion ? 'instant' : 'smooth',
-        block: 'start',
-      });
-      // Mantener la URL navegable, sin disparar un segundo salto.
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, '', '#contacto');
-      }
-    });
-  }
-
+  // DALE PLAY navega mediante el fade compartido (data-kenn-nav).
+  // El enlace href="#contacto" sigue funcionando sin JavaScript.
   if (reducedMotion || !('IntersectionObserver' in window)) return;
 
   const observer = new IntersectionObserver((entries) => {
