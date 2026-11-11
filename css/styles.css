@@ -2151,13 +2151,15 @@ a {
   overflow: hidden;
   border: 3px solid transparent;
   border-radius: 5px;
-  /* Dos capas preservan el fondo azul y pintan solo el borde metálico. */
+  /* El interior mantiene el azul original; el dorado solo ocupa los 3 px del borde.
+     La capa opaca evita que el degradado metálico se vea detrás de la tarjeta. */
   background:
     linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005)) padding-box,
+    linear-gradient(var(--color-navy), var(--color-navy)) padding-box,
     var(--kenn-gold-metallic) border-box;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-              0 0 24px rgba(249, 227, 122, 0.09),
-              inset 0 0 24px rgba(249, 227, 122, 0.018);
+              0 0 24px rgba(247, 213, 55, 0.045),
+              inset 0 0 24px rgba(247, 213, 55, 0.018);
   transition: box-shadow 380ms ease;
   text-align: center;
 
@@ -2209,8 +2211,8 @@ a {
 @media (hover: hover) {
   .formacion__card:hover {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-                0 0 32px rgba(249, 227, 122, 0.22),
-                inset 0 0 24px rgba(249, 227, 122, 0.045);
+                0 0 30px rgba(247, 213, 55, 0.085),
+                inset 0 0 24px rgba(247, 213, 55, 0.025);
   }
   .formacion__card:hover::before {
     opacity: 1;
