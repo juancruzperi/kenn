@@ -8,6 +8,12 @@
   --header-height: clamp(4.5rem, 8vw, 6.5rem);
   --motion-duration: 300ms;
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Dorado metálico 1: único acabado para botones y marcos. */
+  --kenn-gold-metallic: linear-gradient(100deg,
+    #F6E073 0%, #C28F1A 25%, #F9E37A 50%, #B7831A 75%, #FCD96C 100%);
+  /* Reflejo que cruza el texto al pasar el mouse (sin alterar su tamaño). */
+  --kenn-gold-sheen: linear-gradient(105deg,
+    transparent 43%, rgba(255, 252, 214, 0.62) 50%, transparent 57%);
   /* Escala editorial común para títulos grandes. */
   --title-display: clamp(2.2rem, 4.5vw, 4.8rem);
   --title-display-mobile: clamp(2.2rem, 8.1vw, 3.85rem);
@@ -1677,7 +1683,7 @@ a {
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #f7d537;
+  color: #F6E073;
   font-family: inherit;
   font-size: clamp(1.2rem, 2.1vw, 1.9rem);
   font-weight: 800;
@@ -1692,6 +1698,17 @@ a {
   display: inline-block;
   position: relative;
   padding-bottom: 0.55rem;
+  /* Acabado metálico permanente; el brillo extra solo aparece en hover. */
+  color: #F6E073;
+  background-image: var(--kenn-gold-sheen), var(--kenn-gold-metallic);
+  background-size: 260% 100%, 100% 100%;
+  background-position: 100% 50%, 0 0;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 250ms ease;
 }
 
 .kenn-play-link__text::after {
@@ -1701,10 +1718,14 @@ a {
   left: 0;
   width: 100%;
   height: 2px;
-  background: currentColor;
+  background-image: var(--kenn-gold-sheen), var(--kenn-gold-metallic);
+  background-size: 260% 100%, 100% 100%;
+  background-position: 100% 50%, 0 0;
+  background-repeat: no-repeat;
   transform-origin: left center;
   transform: scaleX(0.88);
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-position 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .kenn-play-link__arrow {
@@ -1715,13 +1736,20 @@ a {
 }
 
 .kenn-play-link:focus-visible {
-  outline: 2px solid #f7d537;
+  outline: 2px solid #F9E37A;
   outline-offset: 8px;
 }
 
 @media (hover: hover) {
-  .kenn-play-link:hover { color: #ffe474; }
-  .kenn-play-link:hover .kenn-play-link__text::after { transform: scaleX(1); }
+  .kenn-play-link:hover { color: #FFE89A; }
+  .kenn-play-link:hover .kenn-play-link__text {
+    background-position: 0 50%, 0 0;
+    filter: drop-shadow(0 0 7px rgba(249, 227, 122, 0.22));
+  }
+  .kenn-play-link:hover .kenn-play-link__text::after {
+    transform: scaleX(1);
+    background-position: 0 50%, 0 0;
+  }
   .kenn-play-link:hover .kenn-play-link__arrow { transform: translateX(7px); }
 }
 
@@ -2042,6 +2070,7 @@ a {
   }
 
   .kenn-play-link__arrow,
+  .kenn-play-link__text,
   .kenn-play-link__text::after { transition: none; }
 }
 
@@ -2120,12 +2149,16 @@ a {
   min-height: clamp(235px, 22vw, 315px);
   padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 3.5rem);
   overflow: hidden;
-  border: 3px solid rgba(247, 213, 55, 0.28);
+  border: 3px solid transparent;
   border-radius: 5px;
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
+  /* Dos capas preservan el fondo azul y pintan solo el borde metálico. */
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005)) padding-box,
+    var(--kenn-gold-metallic) border-box;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-              0 0 24px rgba(247, 213, 55, 0.045),
-              inset 0 0 24px rgba(247, 213, 55, 0.018);
+              0 0 24px rgba(249, 227, 122, 0.09),
+              inset 0 0 24px rgba(249, 227, 122, 0.018);
+  transition: box-shadow 380ms ease;
   text-align: center;
 
 }
@@ -2175,10 +2208,9 @@ a {
 /* El brillo sube apenas al pasar el cursor, sin mover la tarjeta. */
 @media (hover: hover) {
   .formacion__card:hover {
-    border-color: rgba(247, 213, 55, 0.45);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-                0 0 30px rgba(247, 213, 55, 0.085),
-                inset 0 0 24px rgba(247, 213, 55, 0.025);
+                0 0 32px rgba(249, 227, 122, 0.22),
+                inset 0 0 24px rgba(249, 227, 122, 0.045);
   }
   .formacion__card:hover::before {
     opacity: 1;
