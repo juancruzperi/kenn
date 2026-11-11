@@ -2149,14 +2149,10 @@ a {
   min-height: clamp(235px, 22vw, 315px);
   padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 3.5rem);
   overflow: hidden;
-  border: 3px solid transparent;
+  border: 0;
   border-radius: 5px;
-  /* El interior mantiene el azul original; el dorado solo ocupa los 3 px del borde.
-     La capa opaca evita que el degradado metálico se vea detrás de la tarjeta. */
-  background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005)) padding-box,
-    linear-gradient(var(--color-navy), var(--color-navy)) padding-box,
-    var(--kenn-gold-metallic) border-box;
+  /* Mantener el fondo original independiente del marco dorado. */
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
               0 0 24px rgba(247, 213, 55, 0.045),
               inset 0 0 24px rgba(247, 213, 55, 0.018);
@@ -2179,6 +2175,27 @@ a {
     transparent 78%);
   opacity: 0.38;
   transition: opacity 500ms ease;
+}
+
+/* El metal se dibuja únicamente en el anillo exterior de 3 px.
+   La máscara recorta el centro: nunca pinta el interior de la tarjeta. */
+.formacion__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 3px;
+  background: var(--kenn-gold-metallic);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }
 
 .formacion__card-title {
