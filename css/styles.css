@@ -336,6 +336,24 @@ a {
   transition: opacity 180ms ease;
 }
 
+/* Estado normal blanco; únicamente el hover/foco es metalizado. */
+@media (hover: hover) {
+  .fullscreen-menu a:hover {
+    color: #F9E37A;
+    background-image: var(--kenn-gold-metallic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+.fullscreen-menu a:focus-visible {
+  color: #F9E37A;
+  background-image: var(--kenn-gold-metallic);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* TU MOMENTO: aparición del video backstage por scroll -------------------
    El título comienza en una franja azul de 25svh. Al descender,
    se integra en el video de 75svh que se revela de arriba hacia abajo.
@@ -1910,12 +1928,29 @@ a {
 }
 .footer-kenn__channel-link[href] { cursor: pointer; }
 .footer-kenn__icon-box {
+  position: relative;
   display: grid; place-items: center;
   width: 46px; height: 46px;
   border: 1px solid rgba(255,255,255,.24);
   border-radius: 11px;
   background: rgba(255,255,255,.025);
   transition: border-color 240ms ease,background-color 240ms ease;
+}
+/* Anillo metálico sin rellenar el interior del ícono. */
+.footer-kenn__icon-box::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--kenn-gold-metallic);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  transition: opacity 240ms ease;
 }
 .footer-kenn__icon-box svg { width: 23px; height: 23px; display: block; }
 .footer-kenn__channel-label {
@@ -1945,17 +1980,38 @@ a {
   transition: color 240ms ease;
 }
 .footer-kenn__channel-link:focus-visible,.footer-kenn__back:focus-visible {
-  outline: 2px solid #f7d537;
+  outline: 2px solid #F9E37A;
   outline-offset: 6px;
+}
+/* SVG con degradados internos: los trazos son metálicos solo en interacción. */
+.footer-kenn__channel-link[data-contact-link="whatsapp"]:is(:hover, :focus-visible)[href] svg [stroke] {
+  stroke: url(#kenn-footer-gold-whatsapp);
+}
+.footer-kenn__channel-link[data-contact-link="email"]:is(:hover, :focus-visible)[href] svg [stroke] {
+  stroke: url(#kenn-footer-gold-email);
+}
+.footer-kenn__channel-link[data-contact-link="instagram"]:is(:hover, :focus-visible)[href] svg [stroke] {
+  stroke: url(#kenn-footer-gold-instagram);
+}
+.footer-kenn__channel-link[data-contact-link="instagram"]:is(:hover, :focus-visible)[href] svg [fill="currentColor"] {
+  fill: url(#kenn-footer-gold-instagram);
+}
+.footer-kenn__channel-link[href]:is(:hover, :focus-visible) .footer-kenn__channel-label {
+  background-image: var(--kenn-gold-metallic);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-kenn__channel-link[href]:is(:hover, :focus-visible) .footer-kenn__icon-box {
+  border-color: transparent;
+}
+.footer-kenn__channel-link[href]:is(:hover, :focus-visible) .footer-kenn__icon-box::after {
+  opacity: 1;
 }
 @media (hover:hover) {
   .footer-kenn__channel-link[href]:hover {
-    color: #f7d537;
+    color: #F9E37A;
     transform: translateY(-3px);
-  }
-  .footer-kenn__channel-link[href]:hover .footer-kenn__icon-box {
-    border-color: rgba(247,213,55,.7);
-    background-color: rgba(247,213,55,.04);
   }
   .footer-kenn__back:hover { color: #f7d537; }
 }
@@ -1990,7 +2046,8 @@ a {
   .footer-kenn__copyright { font-size: .8rem; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .footer-kenn__channel-link,.footer-kenn__icon-box,.footer-kenn__back {
+  .footer-kenn__channel-link,.footer-kenn__icon-box,
+  .footer-kenn__icon-box::after,.footer-kenn__back {
     transition: none;
   }
 }
