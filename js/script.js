@@ -928,6 +928,8 @@ const kennNavigateTo = (() => {
   const cards = [...section.querySelectorAll('[data-despues-testimonio]')];
   const mark = section.querySelector('[data-despues-marca]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Solo en mobile vertical se superponen los mensajes; desktop mantiene su grilla.
+  const mobileStack = window.matchMedia('(max-width: 767px) and (orientation: portrait)');
   const clamp = (value) => Math.max(0, Math.min(1, value));
   const smooth = (value) => {
     const t = clamp(value);
@@ -974,14 +976,31 @@ const kennNavigateTo = (() => {
     const galleryVisible = 1 - galleryExit;
     gallery.style.opacity = String(galleryVisible);
     gallery.style.visibility = galleryVisible > 0.003 ? 'visible' : 'hidden';
+    const stacked = mobileStack.matches;
+    // Cinco franjas visibles en la pila completa, sin invadir el encabezado.
+    // Debe coincidir con --despues-stack-step definido para mobile en CSS.
+    const stackStep = Math.min(28, Math.max(18, window.innerHeight * 0.03));
     cards.forEach((card, index) => {
-      // Orden temporal 01 a 06, independiente de la ubicación en la grilla.
+      // Conservamos el mismo orden y los mismos momentos de aparición.
       const appearAt = 0.369 + index * 0.046;
       const appear = smooth((progress - appearAt) / 0.029);
       card.style.opacity = String(appear);
-      card.style.transform =
-        'translate3d(0, ' + ((1 - appear) * 26).toFixed(2) + 'px, 0) ' +
-        'scale(' + (0.96 + 0.04 * appear).toFixed(4) + ')';
+      if (stacked) {
+        // La burbuja nueva queda delante y 18–28 px más abajo:
+        // se conserva la parte superior de los mensajes anteriores.
+        const offsetY = (index - (cards.length - 1) / 2) * stackStep +
+          (1 - appear) * 26;
+        card.style.zIndex = String(index + 1);
+        card.style.transform =
+          'translate3d(-50%, calc(-50% + ' + offsetY.toFixed(2) + 'px), 0) ' +
+          'scale(' + (0.96 + 0.04 * appear).toFixed(4) + ')';
+      } else {
+        // Desktop y mobile apaisado: disposición en grilla sin cambios.
+        card.style.zIndex = '';
+        card.style.transform =
+          'translate3d(0, ' + ((1 - appear) * 26).toFixed(2) + 'px, 0) ' +
+          'scale(' + (0.96 + 0.04 * appear).toFixed(4) + ')';
+      }
     });
 
     // Último plano: el título se va y queda únicamente la marca Kenn.
