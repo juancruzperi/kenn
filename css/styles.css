@@ -1187,24 +1187,8 @@ a {
 @media (max-width:767px) {
   .caracol__outro,
   .caracol.is-enhanced .caracol__outro {
-    /* La pregunta y PLAY forman una única llamada a la acción centrada. */
+    /* La pregunta y PLAY forman una única llamada a la acción. */
     gap: clamp(.75rem, 2.2svh, 1.25rem);
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .caracol__outro .caracol__question {
-    width: 100%;
-    max-width: 30rem;
-    margin-inline: auto;
-    text-align: center;
-    text-wrap: balance;
-  }
-
-  .caracol__outro .caracol__play {
-    align-self: center;
-    margin-inline: auto;
   }
 
   .caracol__heading {
@@ -2762,6 +2746,68 @@ a {
   .fase-despues.is-enhanced .fase-despues__testimonio,
   .fase-despues.is-enhanced .fase-despues__marca {
     will-change: auto;
+  }
+}
+
+/* Experiencia secreta: en mobile todos los títulos y textos se leen
+   centrados, incluidos los tres pasos de ANTES y DURANTE.
+   Desktop conserva su composición editorial de dos columnas. */
+@media (max-width: 767px) {
+  .experiencia-kenn__inner,
+  .experiencia-kenn__intro,
+  .experiencia-kenn__title,
+  .fase-antes__inner,
+  .fase-durante__inner,
+  .fase-despues__encabezado,
+  .fase-despues__frase {
+    text-align: center;
+  }
+
+  .fase-antes__story,
+  .fase-durante__story {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .fase-antes__lead,
+  .fase-durante__lead,
+  .fase-antes__copy,
+  .fase-durante__copy {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .fase-antes__step,
+  .fase-durante__step {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: .65rem;
+  }
+
+  .fase-antes__number,
+  .fase-durante__number {
+    padding-top: 0;
+  }
+
+  .fase-antes__step > div,
+  .fase-durante__step > div {
+    width: 100%;
+    text-align: center;
+  }
+
+  .fase-antes__step-title,
+  .fase-durante__step-title,
+  .fase-antes__step-copy,
+  .fase-durante__step-copy {
+    text-align: center;
+  }
+
+  .fase-antes__step-copy,
+  .fase-durante__step-copy {
+    margin-inline: auto;
   }
 }
 
