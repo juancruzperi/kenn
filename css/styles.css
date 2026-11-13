@@ -2645,7 +2645,7 @@ a {
   max-width: 75%;
 }
 
-/* En Mobile hay menos espacio: zigzag de 7 mensajes en cuatro niveles. */
+/* Mobile apaisado: grilla de seis mensajes. Mobile vertical: pila superpuesta. */
 @media (max-width: 767px) {
   .fase-despues__title {
     font-size: clamp(2.6rem, 12vw, 4.5rem);
@@ -2689,6 +2689,34 @@ a {
   .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(4) { grid-column: 2; grid-row: 2; }
   .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(5) { grid-column: 1; grid-row: 3; }
   .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(6) { grid-column: 2; grid-row: 3; }
+}
+
+/* Mobile vertical: pila de seis burbujas grandes.
+   Cada nueva burbuja tapa parte de la anterior, dejando visible su borde superior.
+   El cálculo de altura reserva espacio para cinco desplazamientos y el título. */
+@media (max-width: 767px) and (orientation: portrait) {
+  .fase-despues.is-enhanced .fase-despues__testimonios {
+    display: block;
+    width: min(calc(100% - 2 * var(--page-gutter)), 460px);
+    --despues-stack-step: clamp(18px, 3svh, 28px);
+    --despues-card-width: min(100%, 430px,
+      calc((100svh - var(--despues-safe-top, 24svh)
+        - clamp(1rem, 3svh, 1.7rem)
+        - clamp(90px, 15svh, 140px) - 20px) * 1.75));
+  }
+
+  .fase-despues.is-enhanced .fase-despues__testimonio,
+  .fase-despues.is-enhanced .fase-despues__testimonio:nth-child(3n+2) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: var(--despues-card-width);
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1.75 / 1;
+  }
 }
 
 @media (max-height: 540px) and (orientation: landscape) {
