@@ -620,7 +620,7 @@ a {
 }
 .caracol.is-enhanced .caracol__card {
   position: absolute; left: 50%; top: 50%;
-  width: clamp(130px,14vw,215px); height: auto;
+  width: clamp(130px,18vw,270px); height: auto;
   transform-origin: center center; will-change: transform, opacity;
 }
 .caracol.is-enhanced .caracol__outro {
