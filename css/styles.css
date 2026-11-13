@@ -523,7 +523,7 @@ a {
   gap: clamp(0.5rem, 1.5vw, 1.2rem);
 }
 .caracol__card {
-  width: 100%; aspect-ratio: 4 / 5; margin: 0;
+  width: 100%; aspect-ratio: 5 / 4; margin: 0;
   border: 1px solid rgba(255,255,255,0.22); border-radius: 0.3rem;
   overflow: hidden; background: #111940;
   box-shadow: 0 16px 38px rgba(0,0,0,0.25);
