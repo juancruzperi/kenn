@@ -1187,8 +1187,24 @@ a {
 @media (max-width:767px) {
   .caracol__outro,
   .caracol.is-enhanced .caracol__outro {
-    /* La pregunta y PLAY forman una única llamada a la acción. */
+    /* La pregunta y PLAY forman una única llamada a la acción centrada. */
     gap: clamp(.75rem, 2.2svh, 1.25rem);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .caracol__outro .caracol__question {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .caracol__outro .caracol__play {
+    align-self: center;
+    margin-inline: auto;
   }
 
   .caracol__heading {
@@ -2716,6 +2732,18 @@ a {
     max-width: 100%;
     max-height: 100%;
     aspect-ratio: 1.75 / 1;
+  }
+
+  /* Solo mobile vertical: la sombra sigue el contorno real de la burbuja
+     transparente. No dibujar rectángulos ni alterar el PNG. */
+  .fase-despues.is-enhanced .fase-despues__testimonio--preview {
+    overflow: visible;
+  }
+
+  .fase-despues.is-enhanced .fase-despues__testimonio--preview img {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .8))
+            drop-shadow(0 7px 9px rgba(0, 0, 0, .7))
+            drop-shadow(0 0 1px rgba(229, 233, 250, .25));
   }
 }
 
