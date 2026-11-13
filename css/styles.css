@@ -2435,6 +2435,17 @@ a {
   aspect-ratio: 1.37 / 1;
 }
 
+/* Muestra temporal: solo la burbuja transparente, sin fondo de tarjeta.
+   La imagen 2:1 debe verse completa dentro de las posiciones originales. */
+.fase-despues__testimonio--preview {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.fase-despues__testimonio--preview img {
+  object-fit: contain;
+}
+
 .fase-despues__testimonio img,
 .fase-despues__captura {
   display: block;
