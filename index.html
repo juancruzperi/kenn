@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#04082f">
     <title>Kenn</title>
-    <link rel="stylesheet" href="css/styles.css?v=caracol-desktop-270-20261112">
+    <link rel="stylesheet" href="css/styles.css?v=testimonios-preview-20261113-01">
     <!-- GSAP y ScrollTrigger: zoom del video sincronizado con el scroll. -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
@@ -334,9 +334,9 @@
           </div>
         </section>
 
-        <!-- Y DESPUÉS: secuencia narrativa completa, controlada por el scroll.
-             El título permanece visible hasta dar paso al logo final.
-             Los testimonios son espacios provisionales, no reseñas ficticias. -->
+        <!-- Y DESPUÉS: prueba de distribución con LA MISMA burbuja en los seis espacios.
+             Imagen de muestra repetida; reemplazar por seis testimonios diferentes
+             cuando se aprueben. Sin cambios a la animación del scroll. -->
         <section class="fase-despues" id="despues" data-fase-despues aria-labelledby="despues-title">
           <div class="fase-despues__stage" data-despues-stage>
             <header class="fase-despues__encabezado" data-despues-encabezado>
@@ -350,96 +350,24 @@
               <p class="fase-despues__frase" data-despues-frase>La fiesta termina...</p>
             </div>
 
-            <div class="fase-despues__testimonios" data-despues-testimonios aria-label="Espacios para capturas de mensajes reales">
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-01.webp" alt="Testimonio recibido por Kenn 01" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 01">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 01</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+            <div class="fase-despues__testimonios" data-despues-testimonios aria-label="Vista previa de seis mensajes de WhatsApp, con la misma imagen repetida">
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="Mensaje de prueba: Kenn, no me equivoqué en elegirte. Gracias por estar ahí siempre, llamándome, acompañándonos y dándonos la tranquilidad que necesitamos." width="700" height="350" loading="eager" decoding="async">
               </figure>
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-02.webp" alt="Testimonio recibido por Kenn 02" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 02">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 02</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="La misma burbuja de WhatsApp repetida para probar la distribución de los seis testimonios." width="700" height="350" loading="eager" decoding="async">
               </figure>
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-03.webp" alt="Testimonio recibido por Kenn 03" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 03">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 03</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="La misma burbuja de WhatsApp repetida para probar la distribución de los seis testimonios." width="700" height="350" loading="eager" decoding="async">
               </figure>
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-04.webp" alt="Testimonio recibido por Kenn 04" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 04">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 04</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="La misma burbuja de WhatsApp repetida para probar la distribución de los seis testimonios." width="700" height="350" loading="eager" decoding="async">
               </figure>
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-05.webp" alt="Testimonio recibido por Kenn 05" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 05">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 05</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="La misma burbuja de WhatsApp repetida para probar la distribución de los seis testimonios." width="700" height="350" loading="eager" decoding="async">
               </figure>
-              <figure class="fase-despues__testimonio" data-despues-testimonio>
-                <!-- Sustituir el placeholder por una captura auténtica:
-                <img src="assets/testimonios/testimonio-06.webp" alt="Testimonio recibido por Kenn 06" loading="lazy" decoding="async">
-                -->
-                <div class="fase-despues__captura" role="img" aria-label="Lugar reservado para un mensaje real de un cliente, número 06">
-                  <div class="fase-despues__captura-cabecera" aria-hidden="true">
-                    <span class="fase-despues__avatar"></span>
-                    <span class="fase-despues__captura-etiqueta">MENSAJE 06</span>
-                  </div>
-                  <div class="fase-despues__captura-lineas" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="fase-despues__pendiente" aria-hidden="true">CAPTURA PENDIENTE</span>
-                </div>
+              <figure class="fase-despues__testimonio fase-despues__testimonio--preview" data-despues-testimonio>
+                <img src="assets/testimonios/kenn-mensaje-prueba.webp" alt="La misma burbuja de WhatsApp repetida para probar la distribución de los seis testimonios." width="700" height="350" loading="eager" decoding="async">
               </figure>
             </div>
 
