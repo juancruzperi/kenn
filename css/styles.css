@@ -1670,7 +1670,7 @@ a {
 
 .historia-cta__prelude {
   width: 100%;
-  margin-bottom: clamp(3.75rem, 8vh, 6.25rem);
+  margin-bottom: clamp(2.2rem, 5svh, 3.1rem);
 }
 
 /* Un acento serif sobrio y elegante, sin líneas decorativas. */
@@ -1681,15 +1681,15 @@ a {
   font-family: Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.45rem, 2.9vw, 2.85rem);
+  font-size: clamp(1.8rem, 2.2vw, 2.65rem);
   line-height: 1.25;
 }
 
 /* Texto de apoyo más discreto; TU HISTORIA conserva el protagonismo. */
 .historia-cta__intro {
-  margin: 0 0 clamp(0.4rem, 1.5vh, 0.9rem);
+  margin: 0 0 clamp(0.15rem, 0.7svh, 0.5rem);
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(1rem, 1.7vw, 1.45rem);
+  font-size: clamp(1.1rem, 1.35vw, 1.45rem);
   font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0.025em;
@@ -1697,10 +1697,10 @@ a {
 
 .historia-cta__title {
   margin: 0;
-  font-size: var(--title-display);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-size: clamp(3.4rem, 5.1vw, 5.65rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
   text-wrap: balance;
 }
 
@@ -1801,9 +1801,9 @@ a {
    perder el subrayado, la flecha ni su estilo editorial. */
 .historia-cta__link.kenn-play-link {
   --cta-arrow-width: clamp(29px, 3.45vw, 44px);
-  /* Menos separación respecto de TU HISTORIA. */
-  margin-top: clamp(1.5rem, 3svh, 2.25rem);
-  font-size: clamp(1.75rem, 3.15vw, 2.8rem);
+  /* El CTA respira debajo del título, sin competir con él. */
+  margin-top: clamp(2rem, 4.4svh, 2.8rem);
+  font-size: clamp(2rem, 2.4vw, 2.55rem);
   gap: clamp(1rem, 2.2vw, 1.85rem);
 }
 .historia-cta__link .kenn-play-link__text::after {
@@ -2068,9 +2068,8 @@ a {
   }
 }
 
-/* TU HISTORIA · Desktop: menos espacio entre bloques, más aire entre
-   subtítulo y titular y una escena ligeramente más compacta.
-   No se modifica la composición Mobile ya aprobada. */
+/* TU HISTORIA · Ajuste editorial: la frase de apoyo y el título
+   forman un grupo; la cursiva abre la escena y el CTA cierra. */
 @media (min-width: 768px) {
   .historia-cta {
     min-height: 68vh;
@@ -2079,15 +2078,15 @@ a {
   }
 
   .historia-cta__prelude {
-    margin-bottom: clamp(1.7rem, 3.2svh, 2.4rem);
+    margin-bottom: clamp(2.2rem, 4.6svh, 3rem);
   }
 
   .historia-cta__intro {
-    margin-bottom: clamp(0.9rem, 1.8svh, 1.2rem);
+    margin-bottom: clamp(0.15rem, 0.65svh, 0.45rem);
   }
 
   .historia-cta__link {
-    margin-top: clamp(1.75rem, 3.2svh, 2.5rem);
+    margin-top: clamp(2rem, 4.4svh, 2.8rem);
   }
 }
 
@@ -2100,25 +2099,26 @@ a {
              clamp(3.5rem, 7.5svh, 4.75rem);
   }
 
-  .historia-cta__prelude { margin-bottom: clamp(1.3rem, 3.3svh, 2rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1.65rem, 4svh, 2.35rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.35rem, 5.6vw, 1.85rem);
+    font-size: clamp(1.45rem, 5.2vw, 1.9rem);
   }
 
   .historia-cta__intro {
     font-size: clamp(1rem, 4vw, 1.25rem);
+    margin-bottom: clamp(0.15rem, 0.65svh, 0.45rem);
   }
 
   .historia-cta__title {
-    font-size: var(--title-display-mobile);
-    letter-spacing: -0.04em;
+    font-size: clamp(2.5rem, 9vw, 3.5rem);
+    letter-spacing: -0.045em;
   }
 
   .historia-cta__link.kenn-play-link {
     --cta-arrow-width: clamp(27px, 7vw, 36px);
-    margin-top: clamp(0.95rem, 2.5svh, 1.5rem);
-    font-size: clamp(1.55rem, 5.9vw, 2.05rem);
+    margin-top: clamp(1.65rem, 4svh, 2.5rem);
+    font-size: clamp(1.5rem, 5.4vw, 1.9rem);
     gap: clamp(.85rem, 3.2vw, 1.2rem);
   }
   .historia-cta__link .kenn-play-link__arrow {
