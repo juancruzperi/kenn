@@ -2061,14 +2061,14 @@ a {
    Mobile: mantiene la composición centrada; no se altera la animación. */
 @media (min-width: 768px) {
   .historia-cta {
-    min-height: clamp(620px, 88svh, 920px);
-    padding-block: clamp(3.5rem, 6svh, 5.5rem);
-    padding-inline: clamp(2rem, 5vw, 7rem);
+    min-height: clamp(580px, 82svh, 840px);
+    padding-block: clamp(3rem, 5svh, 4.5rem);
+    padding-inline: clamp(2rem, 6vw, 8rem);
     text-align: left;
   }
 
   .historia-cta__inner {
-    width: min(100%, 1480px);
+    width: min(100%, 1340px);
     margin-inline: auto;
     align-items: flex-start;
     text-align: left;
@@ -2076,21 +2076,22 @@ a {
 
   .historia-cta__prelude {
     width: auto;
-    margin-bottom: clamp(1.65rem, 3.5svh, 2.5rem);
+    margin-bottom: clamp(1.1rem, 2.3svh, 1.8rem);
   }
 
   .historia-cta__script {
-    font-size: clamp(3rem, 3.4vw, 3.75rem);
-    line-height: 1.12;
+    font-size: clamp(2.8rem, 3.25vw, 3.55rem);
+    font-weight: 500;
+    line-height: 1.14;
   }
 
   .historia-cta__intro {
-    margin-bottom: clamp(.8rem, 1.8svh, 1.35rem);
+    margin-bottom: clamp(.6rem, 1svh, .95rem);
     font-size: clamp(1.65rem, 1.9vw, 2.125rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(4.5rem, 6.5vw, 7.25rem);
+    font-size: clamp(4.5rem, 6.2vw, 7rem);
     font-weight: 800;
     line-height: .9;
     letter-spacing: -.065em;
@@ -2109,7 +2110,7 @@ a {
 
   .historia-cta__link.kenn-play-link {
     align-self: flex-start;
-    margin-top: clamp(2.1rem, 4.5svh, 3.3rem);
+    margin-top: clamp(1.55rem, 3.1svh, 2.35rem);
     font-size: clamp(3rem, 3.7vw, 4.25rem);
     --cta-arrow-width: clamp(36px, 3.9vw, 58px);
     gap: clamp(1.25rem, 2.2vw, 2rem);
@@ -2133,15 +2134,16 @@ a {
 
   .historia-cta__title-line { display: inline; }
 
-  .historia-cta__prelude { margin-bottom: clamp(1.65rem, 4svh, 2.35rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1rem, 2.5svh, 1.55rem); }
 
   .historia-cta__script {
     font-size: clamp(1.65rem, 6vw, 2.15rem);
+    font-weight: 500;
   }
 
   .historia-cta__intro {
     font-size: clamp(1.15rem, 4.8vw, 1.55rem);
-    margin-bottom: clamp(0.15rem, 0.65svh, 0.45rem);
+    margin-bottom: clamp(0.5rem, 1.2svh, 0.85rem);
   }
 
   .historia-cta__title {
@@ -2151,7 +2153,8 @@ a {
 
   .historia-cta__link.kenn-play-link {
     --cta-arrow-width: clamp(27px, 7vw, 36px);
-    margin-top: clamp(1.65rem, 4svh, 2.5rem);
+    margin-top: clamp(1.2rem, 2.7svh, 1.8rem);
+    padding-block: 0.45rem 0.75rem;
     font-size: clamp(1.8rem, 7.2vw, 2.5rem);
     gap: clamp(.65rem, 2.8vw, 1.15rem);
   }
