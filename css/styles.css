@@ -2253,8 +2253,8 @@ a {
 }
 
 .formacion__card {
-  /* Mantiene la misma familia visual azul marino; suma un acento
-     dorado delicado sin convertir la tarjeta en un botón. */
+  /* Marco azul discreto, integrado al fondo de humo;
+     las tarjetas siguen sin parecer botones. */
   position: relative;
   isolation: isolate;
   display: flex;
@@ -2266,11 +2266,11 @@ a {
   overflow: hidden;
   border: 0;
   border-radius: 5px;
-  /* Mantener el fondo original independiente del marco dorado. */
+  /* Fondo original independiente del contorno azul. */
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-              0 0 24px rgba(247, 213, 55, 0.045),
-              inset 0 0 24px rgba(247, 213, 55, 0.018);
+              0 0 24px rgba(79, 113, 206, 0.045),
+              inset 0 0 24px rgba(91, 118, 200, 0.018);
   transition: box-shadow 380ms ease;
   text-align: center;
 
@@ -2292,8 +2292,8 @@ a {
   transition: opacity 500ms ease;
 }
 
-/* El metal se dibuja únicamente en el anillo exterior de 3 px.
-   La máscara recorta el centro: nunca pinta el interior de la tarjeta. */
+/* Azul desaturado solo en el anillo exterior de 3 px.
+   La máscara preserva el interior de cada tarjeta. */
 .formacion__card::after {
   content: '';
   position: absolute;
@@ -2302,7 +2302,10 @@ a {
   pointer-events: none;
   border-radius: inherit;
   padding: 3px;
-  background: var(--kenn-gold-metallic);
+  background: linear-gradient(135deg,
+    rgba(124, 155, 225, .43) 0%,
+    rgba(73, 103, 177, .25) 49%,
+    rgba(115, 144, 213, .36) 100%);
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -2343,8 +2346,8 @@ a {
 @media (hover: hover) {
   .formacion__card:hover {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-                0 0 30px rgba(247, 213, 55, 0.085),
-                inset 0 0 24px rgba(247, 213, 55, 0.025);
+                0 0 30px rgba(87, 121, 212, 0.075),
+                inset 0 0 24px rgba(96, 128, 210, 0.022);
   }
   .formacion__card:hover::before {
     opacity: 1;
