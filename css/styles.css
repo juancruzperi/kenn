@@ -275,6 +275,21 @@ a {
   }
 }
 
+/* PRUEBA DESKTOP · Hero más inmersivo.
+   88% de la pantalla para EL MOMENTO y 12% para la entrada de TU MOMENTO.
+   No afecta mobile ni la altura del segundo video. */
+@media (min-width: 768px) {
+  .hero__media {
+    height: 88vh;
+    height: 88svh;
+  }
+
+  .tu-momento__intro {
+    min-height: 12vh;
+    min-height: 12svh;
+  }
+}
+
 /* Secciones de contenido: pendientes de las siguientes etapas. */
 
 /* Animaciones visuales: menú fullscreen */
