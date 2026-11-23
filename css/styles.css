@@ -2068,25 +2068,62 @@ a {
   }
 }
 
-/* TU HISTORIA · Ajuste editorial: la frase de apoyo y el título
-   forman un grupo; la cursiva abre la escena y el CTA cierra. */
+/* TU HISTORIA · Experimento editorial asimétrico.
+   Desktop: frase principal de gran escala y alineación izquierda.
+   Mobile: mantiene la composición centrada; no se altera la animación. */
 @media (min-width: 768px) {
   .historia-cta {
-    min-height: 68vh;
-    min-height: 68svh;
-    padding-block: clamp(3.25rem, 5.5svh, 4.5rem);
+    min-height: clamp(620px, 88svh, 920px);
+    padding-block: clamp(3.5rem, 6svh, 5.5rem);
+    padding-inline: clamp(2rem, 5vw, 7rem);
+    text-align: left;
+  }
+
+  .historia-cta__inner {
+    width: min(100%, 1480px);
+    margin-inline: auto;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .historia-cta__prelude {
-    margin-bottom: clamp(2.2rem, 4.6svh, 3rem);
+    width: auto;
+    margin-bottom: clamp(1.65rem, 3.5svh, 2.5rem);
+  }
+
+  .historia-cta__script {
+    font-size: clamp(2.4rem, 3.3vw, 4.2rem);
+    line-height: 1.12;
   }
 
   .historia-cta__intro {
-    margin-bottom: clamp(0.15rem, 0.65svh, 0.45rem);
+    margin-bottom: clamp(.8rem, 1.8svh, 1.35rem);
+    font-size: clamp(1.2rem, 1.65vw, 1.9rem);
   }
 
-  .historia-cta__link {
-    margin-top: clamp(2rem, 4.4svh, 2.8rem);
+  .historia-cta__title {
+    font-size: clamp(4.6rem, 8vw, 9rem);
+    font-weight: 800;
+    line-height: .9;
+    letter-spacing: -.065em;
+    text-wrap: nowrap;
+  }
+
+  .historia-cta__title-line {
+    display: block;
+  }
+
+  /* El contrapeso invisible era útil para un CTA centrado.
+     En composición izquierda solo desplazaría el texto hacia adentro. */
+  .historia-cta__link.kenn-play-link::before {
+    display: none;
+  }
+
+  .historia-cta__link.kenn-play-link {
+    align-self: flex-start;
+    margin-top: clamp(2.1rem, 4.5svh, 3.3rem);
+    font-size: clamp(2rem, 2.7vw, 3rem);
+    gap: clamp(1.25rem, 2.2vw, 2rem);
   }
 }
 
@@ -2097,7 +2134,15 @@ a {
     min-height: 0;
     padding: clamp(3rem, 7svh, 4.25rem) var(--page-gutter)
              clamp(3.5rem, 7.5svh, 4.75rem);
+    text-align: center;
   }
+
+  .historia-cta__inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  .historia-cta__title-line { display: inline; }
 
   .historia-cta__prelude { margin-bottom: clamp(1.65rem, 4svh, 2.35rem); }
 
