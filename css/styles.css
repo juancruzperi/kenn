@@ -138,8 +138,8 @@ a {
 .menu-toggle[aria-expanded="true"] span span:last-child { transform: rotate(-45deg); }
 
 /* Hero «EL MOMENTO» -----------------------------------------------------
-   Video: 75 % del alto visible. La introducción azul de TU MOMENTO
-   aporta el 25 % restante, sin duplicar espacios.
+   Video: 88 % del alto visible. La introducción de TU MOMENTO
+   aporta el 12 % restante, sin duplicar espacios.
 ------------------------------------------------------------------------ */
 .hero {
   position: relative;
@@ -149,8 +149,8 @@ a {
 
 .hero__media {
   position: relative;
-  height: 75vh; /* Compatibilidad para navegadores anteriores a svh. */
-  height: 75svh;
+  height: 88vh; /* Compatibilidad para navegadores anteriores a svh. */
+  height: 88svh;
   overflow: hidden;
   background: var(--color-navy);
 }
@@ -355,8 +355,8 @@ a {
 }
 
 /* TU MOMENTO: aparición del video backstage por scroll -------------------
-   El título comienza en una franja azul de 25svh. Al descender,
-   se integra en el video de 75svh que se revela de arriba hacia abajo.
+   El título comienza en una franja de 12svh. Al descender,
+   se integra en el video de 88svh que se revela de arriba hacia abajo.
    No se aplica zoom a este segundo video.
 ------------------------------------------------------------------------ */
 .tu-momento {
@@ -371,8 +371,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 25vh;
-  min-height: 25svh;
+  min-height: 12vh;
+  min-height: 12svh;
   padding-inline: var(--page-gutter);
   pointer-events: none;
 }
@@ -399,8 +399,8 @@ a {
 .tu-momento__media {
   position: relative;
   z-index: 1;
-  height: 75vh;
-  height: 75svh;
+  height: 88vh;
+  height: 88svh;
   overflow: hidden;
   background: var(--color-navy);
 }
@@ -489,21 +489,7 @@ a {
 }
 
 
-/* DESKTOP · EL MOMENTO y TU MOMENTO comparten tamaño.
-   Debe aparecer DESPUÉS de las reglas base de ambos videos para que
-   el navegador no lo sobrescriba. Mobile conserva el 75% anterior. */
-@media (min-width: 768px) {
-  .hero__media,
-  .tu-momento__media {
-    height: 88vh;
-    height: 88svh;
-  }
-
-  .tu-momento__intro {
-    min-height: 12vh;
-    min-height: 12svh;
-  }
-}
+/* Las proporciones 88% + 12% se comparten en desktop y mobile. */
 
 /* CARRUSEL CARACOL: sin JavaScript avanzado conserva un diseño en grilla. */
 .sr-only {
@@ -1678,11 +1664,13 @@ a {
   flex-shrink: 0;
   margin: 0;
   color: var(--color-white);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
+  /* Una única familia sans serif para las cuatro líneas del CTA. */
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -.035em;
   font-size: clamp(1.8rem, 2.2vw, 2.65rem);
-  line-height: 1.25;
+  line-height: 1.18;
 }
 
 /* Texto de apoyo más discreto; TU HISTORIA conserva el protagonismo. */
@@ -2092,8 +2080,8 @@ a {
   }
 
   .historia-cta__script {
-    font-size: clamp(2.4rem, 3.3vw, 4.2rem);
-    line-height: 1.12;
+    font-size: clamp(2.2rem, 3vw, 3.55rem);
+    line-height: 1.15;
   }
 
   .historia-cta__intro {
