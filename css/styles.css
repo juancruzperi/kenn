@@ -2080,17 +2080,17 @@ a {
   }
 
   .historia-cta__script {
-    font-size: clamp(2.2rem, 3vw, 3.55rem);
-    line-height: 1.15;
+    font-size: clamp(3rem, 3.4vw, 3.75rem);
+    line-height: 1.12;
   }
 
   .historia-cta__intro {
     margin-bottom: clamp(.8rem, 1.8svh, 1.35rem);
-    font-size: clamp(1.2rem, 1.65vw, 1.9rem);
+    font-size: clamp(1.65rem, 1.9vw, 2.125rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(4.6rem, 8vw, 9rem);
+    font-size: clamp(4.5rem, 6.5vw, 7.25rem);
     font-weight: 800;
     line-height: .9;
     letter-spacing: -.065em;
@@ -2110,7 +2110,8 @@ a {
   .historia-cta__link.kenn-play-link {
     align-self: flex-start;
     margin-top: clamp(2.1rem, 4.5svh, 3.3rem);
-    font-size: clamp(2rem, 2.7vw, 3rem);
+    font-size: clamp(3rem, 3.7vw, 4.25rem);
+    --cta-arrow-width: clamp(36px, 3.9vw, 58px);
     gap: clamp(1.25rem, 2.2vw, 2rem);
   }
 }
@@ -2135,11 +2136,11 @@ a {
   .historia-cta__prelude { margin-bottom: clamp(1.65rem, 4svh, 2.35rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.45rem, 5.2vw, 1.9rem);
+    font-size: clamp(1.65rem, 6vw, 2.15rem);
   }
 
   .historia-cta__intro {
-    font-size: clamp(1rem, 4vw, 1.25rem);
+    font-size: clamp(1.15rem, 4.8vw, 1.55rem);
     margin-bottom: clamp(0.15rem, 0.65svh, 0.45rem);
   }
 
@@ -2151,8 +2152,8 @@ a {
   .historia-cta__link.kenn-play-link {
     --cta-arrow-width: clamp(27px, 7vw, 36px);
     margin-top: clamp(1.65rem, 4svh, 2.5rem);
-    font-size: clamp(1.5rem, 5.4vw, 1.9rem);
-    gap: clamp(.85rem, 3.2vw, 1.2rem);
+    font-size: clamp(1.8rem, 7.2vw, 2.5rem);
+    gap: clamp(.65rem, 2.8vw, 1.15rem);
   }
   .historia-cta__link .kenn-play-link__arrow {
     width: var(--cta-arrow-width);
