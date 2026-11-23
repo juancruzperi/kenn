@@ -275,11 +275,13 @@ a {
   }
 }
 
-/* PRUEBA DESKTOP · Hero más inmersivo.
-   88% de la pantalla para EL MOMENTO y 12% para la entrada de TU MOMENTO.
-   No afecta mobile ni la altura del segundo video. */
+/* PRUEBA DESKTOP · Dos videos con el mismo protagonismo.
+   EL MOMENTO y TU MOMENTO ocupan 88% de la altura visible;
+   la entrada de TU MOMENTO conserva el 12% complementario.
+   En mobile ambos siguen al 75% hasta revisar videos reales. */
 @media (min-width: 768px) {
-  .hero__media {
+  .hero__media,
+  .tu-momento__media {
     height: 88vh;
     height: 88svh;
   }
