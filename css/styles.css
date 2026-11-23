@@ -2268,9 +2268,10 @@ a {
   border-radius: 5px;
   /* Fondo original independiente del contorno azul. */
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
+  /* Resplandor azul delicado, perceptible incluso sin hover. */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-              0 0 24px rgba(79, 113, 206, 0.045),
-              inset 0 0 24px rgba(91, 118, 200, 0.018);
+              0 0 26px rgba(79, 113, 206, 0.095),
+              inset 0 0 24px rgba(91, 118, 200, 0.025);
   transition: box-shadow 380ms ease;
   text-align: center;
 
@@ -2292,8 +2293,8 @@ a {
   transition: opacity 500ms ease;
 }
 
-/* Azul desaturado solo en el anillo exterior de 3 px.
-   La máscara preserva el interior de cada tarjeta. */
+/* Acabado azul metalizado PERMANENTE: reflejos de varios tonos
+   fríos sobre el mismo anillo de 3px. La máscara recorta el centro. */
 .formacion__card::after {
   content: '';
   position: absolute;
@@ -2302,10 +2303,18 @@ a {
   pointer-events: none;
   border-radius: inherit;
   padding: 3px;
-  background: linear-gradient(135deg,
-    rgba(124, 155, 225, .43) 0%,
-    rgba(73, 103, 177, .25) 49%,
-    rgba(115, 144, 213, .36) 100%);
+  background: linear-gradient(112deg,
+    rgba(69, 101, 170, .78) 0%,
+    rgba(145, 182, 237, .93) 12%,
+    rgba(192, 218, 252, .96) 17%,
+    rgba(90, 122, 193, .70) 28%,
+    rgba(51, 76, 138, .57) 43%,
+    rgba(136, 174, 232, .92) 53%,
+    rgba(182, 209, 247, .95) 57%,
+    rgba(70, 99, 164, .65) 70%,
+    rgba(119, 158, 219, .85) 84%,
+    rgba(179, 206, 247, .94) 92%,
+    rgba(83, 114, 182, .76) 100%);
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -2386,8 +2395,8 @@ a {
 @keyframes formacion-brillo-mobile {
   0%, 100% {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
-                0 0 24px rgba(79, 113, 206, 0.045),
-                inset 0 0 24px rgba(91, 118, 200, 0.018);
+                0 0 26px rgba(79, 113, 206, 0.095),
+                inset 0 0 24px rgba(91, 118, 200, 0.025);
   }
   40% {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
