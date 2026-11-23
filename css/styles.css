@@ -2839,6 +2839,72 @@ a {
   .kenn-navigation-fade { transition: none; }
 }
 
+/* EXPERIMENTO VISUAL · HUMO AMBIENTAL EN TODA LA WEB
+   Una única textura continua y lenta, no un fondo diferente por sección.
+   La capa es decorativa y queda detrás de todo el contenido.
+   Se puede revertir eliminando este bloque; no afecta GSAP ni el HTML. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -8%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(4, 8, 47, .12), rgba(4, 8, 47, .02) 50%, rgba(4, 8, 47, .12)),
+    url('../assets/kenn-humo-ambiental.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: .92;
+  transform: translate3d(-1.4%, -.7%, 0) scale(1.07);
+  animation: kenn-humo-flotar 38s ease-in-out infinite alternate;
+}
+
+@keyframes kenn-humo-flotar {
+  from { transform: translate3d(-1.4%, -.7%, 0) scale(1.07); }
+  to   { transform: translate3d(1.4%, 1%, 0) scale(1.12); }
+}
+
+/* Mantener todo el sitio sobre la textura, sin cambiar la geometría de
+   las escenas fijadas por ScrollTrigger ni la jerarquía de header y menú. */
+body > main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Antes estos bloques dibujaban un azul sólido sobre la capa.
+   Solo se transparentan sus fondos, no los videos ni los placeholders. */
+.hero,
+.tu-momento,
+.caracol,
+.experiencia-kenn,
+.fase-antes,
+.fase-durante,
+.fase-despues,
+.servicios,
+.momento-expand,
+.momento-expand__stage,
+.historia-cta,
+.formacion,
+.footer-kenn {
+  background-color: transparent;
+}
+
+/* En pantalla vertical conservamos las nubes laterales, sin depender de
+   background-attachment: fixed (inconsistente en navegadores móviles). */
+@media (max-width: 767px) and (orientation: portrait) {
+  body::before {
+    background-size: 140% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* Responsive */
 @media (hover: hover) {
   .fullscreen-menu a:hover { opacity: 0.7; }
