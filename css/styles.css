@@ -2056,9 +2056,9 @@ a {
   }
 }
 
-/* TU HISTORIA · Experimento editorial asimétrico.
-   Desktop: frase principal de gran escala y alineación izquierda.
-   Mobile: mantiene la composición centrada; no se altera la animación. */
+/* TU HISTORIA · composición editorial de una línea en desktop.
+   Se conserva el CTA dorado original. En mobile, titular en dos líneas
+   y jerarquía de espacios coherente, sin alterar los reveals. */
 @media (min-width: 768px) {
   .historia-cta {
     min-height: clamp(580px, 82svh, 840px);
@@ -2075,31 +2075,44 @@ a {
   }
 
   .historia-cta__prelude {
+    position: relative;
     width: auto;
-    margin-bottom: clamp(1.1rem, 2.3svh, 1.8rem);
+    margin-bottom: clamp(1.3rem, 2.7svh, 2rem);
+  }
+
+  /* Acento del concepto visual: marca lateral fina, sin caja ni botón. */
+  .historia-cta__prelude::before {
+    content: '';
+    position: absolute;
+    left: -1.4rem;
+    top: .15em;
+    width: 3px;
+    height: .95em;
+    background: var(--kenn-gold-metallic);
   }
 
   .historia-cta__script {
-    font-size: clamp(2.8rem, 3.25vw, 3.55rem);
-    font-weight: 500;
-    line-height: 1.14;
+    font-size: clamp(2.55rem, 3.2vw, 3.65rem);
+    font-weight: 700;
+    line-height: 1.12;
   }
 
   .historia-cta__intro {
-    margin-bottom: clamp(.6rem, 1svh, .95rem);
-    font-size: clamp(1.65rem, 1.9vw, 2.125rem);
+    margin-bottom: clamp(.7rem, 1.4svh, 1.1rem);
+    font-size: clamp(1.5rem, 1.85vw, 2rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(4.5rem, 6.2vw, 7rem);
+    font-size: clamp(4.25rem, 7.7vw, 8.75rem);
     font-weight: 800;
-    line-height: .9;
+    line-height: .98;
     letter-spacing: -.065em;
+    white-space: nowrap;
     text-wrap: nowrap;
   }
 
   .historia-cta__title-line {
-    display: block;
+    display: inline;
   }
 
   /* El contrapeso invisible era útil para un CTA centrado.
@@ -2132,28 +2145,31 @@ a {
     text-align: center;
   }
 
-  .historia-cta__title-line { display: inline; }
+  .historia-cta__title-line { display: block; }
+  .historia-cta__title-line + .historia-cta__title-line { margin-top: .035em; }
 
-  .historia-cta__prelude { margin-bottom: clamp(1rem, 2.5svh, 1.55rem); }
+  .historia-cta__prelude { margin-bottom: clamp(.9rem, 2svh, 1.35rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.65rem, 6vw, 2.15rem);
-    font-weight: 500;
+    font-size: clamp(1.55rem, 5.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.16;
   }
 
   .historia-cta__intro {
-    font-size: clamp(1.15rem, 4.8vw, 1.55rem);
-    margin-bottom: clamp(0.5rem, 1.2svh, 0.85rem);
+    font-size: clamp(1.05rem, 4.35vw, 1.4rem);
+    margin-bottom: clamp(.75rem, 1.5svh, 1rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(2.5rem, 9vw, 3.5rem);
-    letter-spacing: -0.045em;
+    font-size: clamp(2.6rem, 10vw, 3.75rem);
+    line-height: .99;
+    letter-spacing: -.05em;
   }
 
   .historia-cta__link.kenn-play-link {
     --cta-arrow-width: clamp(27px, 7vw, 36px);
-    margin-top: clamp(1.2rem, 2.7svh, 1.8rem);
+    margin-top: clamp(1.7rem, 3.4svh, 2.3rem);
     padding-block: 0.45rem 0.75rem;
     font-size: clamp(1.8rem, 7.2vw, 2.5rem);
     gap: clamp(.65rem, 2.8vw, 1.15rem);
