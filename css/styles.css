@@ -2080,17 +2080,6 @@ a {
     margin-bottom: clamp(1.3rem, 2.7svh, 2rem);
   }
 
-  /* Acento del concepto visual: marca lateral fina, sin caja ni botón. */
-  .historia-cta__prelude::before {
-    content: '';
-    position: absolute;
-    left: -1.4rem;
-    top: .15em;
-    width: 3px;
-    height: .95em;
-    background: var(--kenn-gold-metallic);
-  }
-
   .historia-cta__script {
     font-size: clamp(2.55rem, 3.2vw, 3.65rem);
     font-weight: 700;
