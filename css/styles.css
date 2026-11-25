@@ -2945,82 +2945,41 @@ a {
   .kenn-navigation-fade { transition: none; }
 }
 
-/* PRUEBA VISUAL · NOCHE ESTRELLADA VIVA
-   Azul noche sin humo, con pequeños puntos que titilan en momentos
-   distintos. El cielo es decorativo y no interfiere con las animaciones.
-   El fondo de humo anterior sigue en assets para revertir fácilmente. */
+/* FONDO AMBIENTAL · HUMO AZUL SUAVIZADO
+   Restauramos la imagen original de Kenn pero con una presencia menor:
+   opacidad .70 (antes .92). Movimiento muy lento y continuo.
+   El fondo permanece detrás del contenido sin afectar ScrollTrigger. */
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -8%;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 100% 110% at 51% 44%,
-    #0c1741 0%, #080f30 53%, #03071d 100%);
+  background-image:
+    linear-gradient(90deg, rgba(4, 8, 47, .12), rgba(4, 8, 47, .02) 50%, rgba(4, 8, 47, .12)),
+    url('../assets/kenn-humo-ambiental.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: .70;
+  transform: translate3d(-1.4%, -.7%, 0) scale(1.07);
+  animation: kenn-humo-flotar 38s ease-in-out infinite alternate;
 }
 
-.kenn-starfield {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  user-select: none;
+@keyframes kenn-humo-flotar {
+  from { transform: translate3d(-1.4%, -.7%, 0) scale(1.07); }
+  to   { transform: translate3d(1.4%, 1%, 0) scale(1.12); }
 }
 
-.kenn-starfield__layer {
-  position: absolute;
-  inset: -4%;
-  animation: kenn-starfield-drift 52s ease-in-out infinite alternate;
-}
-
-.kenn-starfield__layer--near {
-  animation-duration: 73s;
-  animation-direction: alternate-reverse;
-}
-
-.kenn-starfield__star {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: #e6eeff;
-  box-shadow: 0 0 4px rgba(177, 209, 255, .56);
-  opacity: var(--min-opacity);
-  animation: kenn-star-twinkle var(--duration) ease-in-out var(--delay) infinite;
-}
-
-.kenn-starfield__star--bright {
-  background: #f8fbff;
-  box-shadow: 0 0 4px rgba(229, 240, 255, .9),
-              0 0 11px rgba(142, 189, 255, .38);
-}
-
-@keyframes kenn-star-twinkle {
-  0%, 100% { opacity: var(--min-opacity); transform: scale(.88); }
-  50% { opacity: var(--max-opacity); transform: scale(1.26); }
-}
-
-@keyframes kenn-starfield-drift {
-  from { transform: translate3d(-.9%, .35%, 0); }
-  to   { transform: translate3d(.9%, -.35%, 0); }
-}
-
-/* En celulares menos estrellas, conservando su brillo individual. */
-@media (max-width: 767px) {
-  .kenn-starfield__star--desktop-extra { display: none; }
-}
-
-/* Mantener contenido, header y menú por encima del cielo. */
+/* El resto de la página se dibuja por encima, manteniendo intacta
+   la geometría de las escenas con scroll y la navegación. */
 body > main {
   position: relative;
   z-index: 1;
 }
 
-/* Secciones transparentes para conservar un único cielo continuo.
-   Los videos y tarjetas mantienen sus propios fondos. */
+/* Secciones transparentes sobre la textura continua.
+   Los videos y las tarjetas preservan sus fondos individuales. */
 .hero,
 .tu-momento,
 .caracol,
@@ -3037,13 +2996,17 @@ body > main {
   background-color: transparent;
 }
 
+@media (max-width: 767px) and (orientation: portrait) {
+  body::before {
+    background-size: 140% 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .kenn-starfield__layer,
-  .kenn-starfield__star {
+  body::before {
     animation: none;
     transform: none;
   }
-  .kenn-starfield__star { opacity: var(--max-opacity); }
 }
 
 /* Responsive */
