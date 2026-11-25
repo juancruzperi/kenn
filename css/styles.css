@@ -2121,45 +2121,56 @@ a {
 
 @media (max-width: 767px) {
   .historia-cta {
-    /* Un espacio de respiro proporcionado, sin volver a 100svh. */
-    min-height: clamp(390px, 62svh, 540px);
-    padding: clamp(3.15rem, 7svh, 4.25rem) var(--page-gutter)
-             clamp(3.15rem, 7svh, 4.25rem);
+    /* Altura determinada por el contenido: evita espacios vacíos excesivos. */
+    min-height: 0;
+    padding: clamp(3.25rem, 7svh, 4.4rem) var(--page-gutter)
+             clamp(3.5rem, 7.5svh, 4.6rem);
     text-align: center;
   }
 
   .historia-cta__inner {
+    width: min(100%, 470px);
     align-items: center;
     text-align: center;
   }
 
-  /* TU HISTORIA no se parte artificialmente en dos renglones. */
-  .historia-cta__title-line { display: inline; }
+  /* Layout explícito: ni el título ni sus dos spans pueden apilarse. */
+  .historia-cta__title-line {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
 
-  .historia-cta__prelude { margin-bottom: clamp(1.35rem, 3svh, 1.85rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1.3rem, 3svh, 1.9rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.55rem, 5.8vw, 2rem);
+    font-size: clamp(1.5rem, 5.8vw, 1.9rem);
     font-weight: 600;
-    line-height: 1.16;
+    line-height: 1.2;
   }
 
   .historia-cta__intro {
-    font-size: clamp(1.05rem, 4.35vw, 1.4rem);
-    margin-bottom: clamp(.3rem, .8svh, .55rem);
+    font-size: clamp(1.08rem, 4.3vw, 1.38rem);
+    line-height: 1.35;
+    margin-bottom: clamp(.45rem, 1.1svh, .7rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(2rem, 9.5vw, 2.9rem);
-    line-height: 1.05;
-    letter-spacing: -.05em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: .22em;
+    width: 100%;
+    font-size: clamp(1.9rem, 8.8vw, 3.1rem);
+    line-height: 1.03;
+    letter-spacing: -.055em;
     white-space: nowrap;
     text-wrap: nowrap;
   }
 
   .historia-cta__link.kenn-play-link {
     --cta-arrow-width: clamp(27px, 7vw, 36px);
-    margin-top: clamp(1.7rem, 3.4svh, 2.3rem);
+    margin-top: clamp(1.55rem, 3.2svh, 2.1rem);
     padding-block: 0.45rem 0.75rem;
     font-size: clamp(1.8rem, 7.2vw, 2.5rem);
     gap: clamp(.65rem, 2.8vw, 1.15rem);
