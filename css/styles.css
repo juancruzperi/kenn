@@ -2056,9 +2056,9 @@ a {
   }
 }
 
-/* TU HISTORIA · composición editorial de una línea en desktop.
-   Se conserva el CTA dorado original. En mobile, titular en dos líneas
-   y jerarquía de espacios coherente, sin alterar los reveals. */
+/* TU HISTORIA · composición editorial coherente en desktop y mobile.
+   Titular en una línea en ambas vistas, sin cambiar el botón dorado
+   ni el reveal ya implementado. */
 @media (min-width: 768px) {
   .historia-cta {
     min-height: clamp(580px, 82svh, 840px);
@@ -2121,11 +2121,10 @@ a {
 
 @media (max-width: 767px) {
   .historia-cta {
-    /* En mobile, evitamos la pantalla completa y el gran vacío
-       entre la foto expandida y el comienzo de TU HISTORIA. */
-    min-height: 0;
-    padding: clamp(3rem, 7svh, 4.25rem) var(--page-gutter)
-             clamp(3.5rem, 7.5svh, 4.75rem);
+    /* Un espacio de respiro proporcionado, sin volver a 100svh. */
+    min-height: clamp(390px, 62svh, 540px);
+    padding: clamp(3.15rem, 7svh, 4.25rem) var(--page-gutter)
+             clamp(3.15rem, 7svh, 4.25rem);
     text-align: center;
   }
 
@@ -2134,26 +2133,28 @@ a {
     text-align: center;
   }
 
-  .historia-cta__title-line { display: block; }
-  .historia-cta__title-line + .historia-cta__title-line { margin-top: .035em; }
+  /* TU HISTORIA no se parte artificialmente en dos renglones. */
+  .historia-cta__title-line { display: inline; }
 
-  .historia-cta__prelude { margin-bottom: clamp(.9rem, 2svh, 1.35rem); }
+  .historia-cta__prelude { margin-bottom: clamp(1.35rem, 3svh, 1.85rem); }
 
   .historia-cta__script {
     font-size: clamp(1.55rem, 5.8vw, 2rem);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.16;
   }
 
   .historia-cta__intro {
     font-size: clamp(1.05rem, 4.35vw, 1.4rem);
-    margin-bottom: clamp(.75rem, 1.5svh, 1rem);
+    margin-bottom: clamp(.3rem, .8svh, .55rem);
   }
 
   .historia-cta__title {
-    font-size: clamp(2.6rem, 10vw, 3.75rem);
-    line-height: .99;
+    font-size: clamp(2rem, 9.5vw, 2.9rem);
+    line-height: 1.05;
     letter-spacing: -.05em;
+    white-space: nowrap;
+    text-wrap: nowrap;
   }
 
   .historia-cta__link.kenn-play-link {
