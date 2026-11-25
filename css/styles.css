@@ -2325,19 +2325,6 @@ a {
   mask-composite: exclude;
 }
 
-/* El destello solo recorre el anillo azul de 3px, sin teñir el
-   fondo ni el contenido de la tarjeta. Navegadores sin @property
-   mantienen el contorno y la iluminación del hover. */
-@property --formacion-borde-angulo {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes formacion-borde-recorrido {
-  to { --formacion-borde-angulo: 360deg; }
-}
-
 .formacion__card-title {
   position: relative;
   z-index: 1;
@@ -2364,8 +2351,8 @@ a {
   color: rgba(255, 255, 255, 0.63);
 }
 
-/* Desktop: resplandor azul tenue y un reflejo que recorre el borde
-   únicamente mientras el cursor está encima. Nada cambia de posición. */
+/* Desktop: solo un resplandor azul suave al pasar el cursor.
+   El borde metalizado permanece estático en todo momento. */
 @media (hover: hover) {
   .formacion__card:hover {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
@@ -2375,18 +2362,6 @@ a {
   }
   .formacion__card:hover::before {
     opacity: .72;
-  }
-  .formacion__card:hover::after {
-    background: conic-gradient(
-      from var(--formacion-borde-angulo),
-      rgba(103, 140, 215, .36) 0deg,
-      rgba(83, 118, 194, .3) 260deg,
-      rgba(132, 179, 252, .55) 316deg,
-      rgba(207, 231, 255, .94) 338deg,
-      rgba(132, 179, 252, .55) 352deg,
-      rgba(103, 140, 215, .36) 360deg
-    );
-    animation: formacion-borde-recorrido 3.6s linear infinite;
   }
 }
 
