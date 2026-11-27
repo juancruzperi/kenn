@@ -2153,7 +2153,7 @@ a {
   .historia-cta__intro {
     font-size: clamp(1.2rem, 5.4vw, 1.4rem);
     line-height: 1.35;
-    margin-bottom: clamp(.2rem, .65svh, .45rem);
+    margin-bottom: clamp(.55rem, 1.2svh, .8rem);
   }
 
   .historia-cta__title {
@@ -2172,11 +2172,11 @@ a {
   }
 
   .historia-cta__link.kenn-play-link {
-    --cta-arrow-width: clamp(27px, 7vw, 36px);
+    --cta-arrow-width: clamp(30px, 7.5vw, 40px);
     margin-top: clamp(2rem, 4.3svh, 2.75rem);
     padding-block: 0.45rem 0.75rem;
-    font-size: clamp(1.8rem, 7.2vw, 2.5rem);
-    gap: clamp(.65rem, 2.8vw, 1.15rem);
+    font-size: clamp(2rem, 7.8vw, 2.7rem);
+    gap: clamp(.75rem, 3vw, 1.25rem);
   }
   .historia-cta__link .kenn-play-link__arrow {
     width: var(--cta-arrow-width);
