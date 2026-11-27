@@ -342,6 +342,10 @@ const kennNavigateTo = (() => {
 
   section.classList.add('is-animated');
 
+  // Bajamos levemente el título dentro del video para que respire
+  // (sin alterar la franja 12svh ni el video 88svh).
+  const getTitleTravel = () => intro.offsetHeight + Math.min(window.innerHeight * 0.045, 42);
+
   // Sin animación para quienes prefieren movimiento reducido:
   // el título se muestra al desplazarse, sin efectos de transición.
   if (reducedMotion.matches) {
@@ -373,7 +377,7 @@ const kennNavigateTo = (() => {
       { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'none' }, 0);
     timeline.fromTo(title,
       { y: 0 },
-      { y: () => intro.offsetHeight, duration: 1, ease: 'none' }, 0);
+      { y: getTitleTravel, duration: 1, ease: 'none' }, 0);
     // No se ve al cargar; aparece suavemente después de iniciar el scroll.
     timeline.fromTo(title,
       { opacity: 0 },
@@ -386,7 +390,7 @@ const kennNavigateTo = (() => {
       const top = section.getBoundingClientRect().top;
       const range = Math.max(window.innerHeight * 0.75, 1);
       const progress = Math.max(0, Math.min(1, (range - top) / range));
-      title.style.transform = `translate3d(0, ${(intro.offsetHeight * progress).toFixed(2)}px, 0)`;
+      title.style.transform = `translate3d(0, ${(getTitleTravel() * progress).toFixed(2)}px, 0)`;
       title.style.opacity = String(Math.max(0, Math.min(1, (progress - 0.20) / 0.35)));
       reveal.style.clipPath = `inset(0 0 ${(100 * (1 - progress)).toFixed(2)}% 0)`;
     };
