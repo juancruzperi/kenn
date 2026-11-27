@@ -699,12 +699,15 @@ a {
 .experiencia-kenn__title {
   display: block;
   margin: 0;
-  /* Una sola línea; escalamos la tipografía para evitar overflow. */
-  font-size: clamp(2.1rem, 3.7vw, 4rem);
+  /* Estilo editorial de ANTES, a menor escala, también en desktop. */
+  font-size: clamp(2.45rem, 4.4vw, 4.4rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -.055em;
-  white-space: nowrap;
+  line-height: 1.05;
+  letter-spacing: -.065em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .experiencia-kenn__logo {
