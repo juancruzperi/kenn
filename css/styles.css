@@ -2281,8 +2281,13 @@ a {
   overflow: hidden;
   border: 0;
   border-radius: 5px;
-  /* Fondo original independiente del contorno azul. */
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.005));
+  /* Degradado azul noche muy suave: profundidad sin una luz protagonista.
+     El anillo metalizado se sigue dibujando independientemente. */
+  background:
+    linear-gradient(155deg,
+      rgba(73, 105, 185, .095) 0%,
+      rgba(36, 61, 132, .045) 53%,
+      rgba(9, 21, 61, .065) 100%);
   /* Resplandor azul delicado, perceptible incluso sin hover. */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07),
               0 0 26px rgba(79, 113, 206, 0.095),
@@ -2364,6 +2369,20 @@ a {
   font-weight: 500;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.63);
+}
+
+/* Línea divisoria sutil entre título y firma, sin tocar el HTML.
+   No es un destello ni lleva animación: acompaña al borde azul. */
+.formacion__instructor::before {
+  content: '';
+  display: block;
+  width: clamp(60px, 12vw, 106px);
+  height: 1px;
+  margin: 0 auto clamp(.8rem, 1.35vw, 1rem);
+  background: linear-gradient(90deg,
+    rgba(93, 142, 219, 0) 0%,
+    rgba(124, 174, 234, .58) 48%,
+    rgba(93, 142, 219, 0) 100%);
 }
 
 /* Desktop: solo un resplandor azul suave al pasar el cursor.
