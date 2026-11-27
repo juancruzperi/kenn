@@ -2144,14 +2144,14 @@ a {
   .historia-cta__prelude { margin-bottom: clamp(1.55rem, 3.3svh, 2.05rem); }
 
   .historia-cta__script {
-    font-size: clamp(1.2rem, 5.1vw, 1.35rem);
+    font-size: clamp(1.35rem, 5.8vw, 1.55rem);
     font-weight: 500;
     line-height: 1.25;
   }
 
   /* El texto de apoyo se lee unido al título, no como otra sección. */
   .historia-cta__intro {
-    font-size: clamp(1.05rem, 4.8vw, 1.2rem);
+    font-size: clamp(1.2rem, 5.4vw, 1.4rem);
     line-height: 1.35;
     margin-bottom: clamp(.2rem, .65svh, .45rem);
   }
