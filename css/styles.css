@@ -3015,7 +3015,7 @@ body::before {
   background-repeat: no-repeat;
   opacity: .70;
   transform: translate3d(-3%, -.7%, 0) scale(1.08);
-  animation: kenn-humo-flotar 18s ease-in-out infinite alternate;
+  animation: kenn-humo-flotar 15s ease-in-out infinite alternate;
 }
 
 @keyframes kenn-humo-flotar {
