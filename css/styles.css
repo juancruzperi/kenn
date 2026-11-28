@@ -2997,10 +2997,10 @@ a {
   .kenn-navigation-fade { transition: none; }
 }
 
-/* FONDO AMBIENTAL · HUMO AZUL SUAVIZADO
-   Restauramos la imagen original de Kenn pero con una presencia menor:
-   opacidad .70 (antes .92). Movimiento muy lento y continuo.
-   El fondo permanece detrás del contenido sin afectar ScrollTrigger. */
+/* FONDO AMBIENTAL · HUMO AZUL EN MOVIMIENTO SUAVE
+   Misma imagen y opacidad aprobadas (.70). Un solo plano animado
+   con transform: sin descargar más recursos ni ejecutar JavaScript.
+   El movimiento es lento pero perceptible y no afecta ScrollTrigger. */
 body::before {
   content: '';
   position: fixed;
@@ -3014,13 +3014,14 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   opacity: .70;
-  transform: translate3d(-1.4%, -.7%, 0) scale(1.07);
-  animation: kenn-humo-flotar 38s ease-in-out infinite alternate;
+  transform: translate3d(-3%, -.7%, 0) scale(1.08);
+  animation: kenn-humo-flotar 22s ease-in-out infinite alternate;
 }
 
 @keyframes kenn-humo-flotar {
-  from { transform: translate3d(-1.4%, -.7%, 0) scale(1.07); }
-  to   { transform: translate3d(1.4%, 1%, 0) scale(1.12); }
+  0%   { transform: translate3d(-3%, -.7%, 0) scale(1.08); }
+  50%  { transform: translate3d(0%, 1.2%, 0) scale(1.10); }
+  100% { transform: translate3d(3%, -1%, 0) scale(1.08); }
 }
 
 /* El resto de la página se dibuja por encima, manteniendo intacta
